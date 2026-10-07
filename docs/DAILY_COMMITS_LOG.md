@@ -294,3 +294,9 @@
 - **Action:** Implemented discuss ticket offline caching with ankit
 - **Files touched:** client/src/pages/MyPassesPage.tsx
 
+### Day 50 (Sprint Day 50) — cache recent ticket passes in local storage for offline use
+- **Timestamp:** `2026-10-07T15:14:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented cache recent ticket passes in local storage for offline use
+- **Files touched:** client/src/pages/MyPassesPage.tsx
+
