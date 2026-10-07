@@ -440,3 +440,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** docs/pbl-reports/TEAM_WORKFLOW_GUIDE.md
 
+### Day 89 — Day 89: document strictly 12-week project reports submission
+- **Timestamp:** `2026-10-07T20:00:20+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** docs/pbl-reports/WEEKLY_PROJECT_REPORTS.md
+
