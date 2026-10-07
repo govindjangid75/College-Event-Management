@@ -114,3 +114,9 @@
 - **Action:** Implemented add search box to filter clubs by name
 - **Files touched:** client/src/pages/ClubsPage.tsx
 
+### Day 20 (Sprint Day 20) — review club pages layout with club leads
+- **Timestamp:** `2026-10-07T11:34:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented review club pages layout with club leads
+- **Files touched:** client/src/pages/ClubDetailPage.tsx
+
