@@ -80,3 +80,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** docs/SRS.md
 
+### Day 17 — Day 17: document ticketing and capacity lock workflow in srs
+- **Timestamp:** `2026-10-07T11:12:20+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** docs/SRS.md
+
