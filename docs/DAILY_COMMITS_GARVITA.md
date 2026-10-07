@@ -198,3 +198,9 @@
 - **Action:** Implemented implement super admin audit controller with immutable log events
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/SuperAdminAuditController.java
 
+### Day 34 (Sprint Day 34) — design club ledger entry model for dedicated upi treasury
+- **Timestamp:** `2026-10-07T13:17:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented design club ledger entry model for dedicated upi treasury
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/ClubLedgerEntry.java
+
