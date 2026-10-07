@@ -336,3 +336,9 @@
 - **Action:** Implemented create ai chat message dto with prompt and context parameters
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/AiChatDto.java
 
+### Day 57 (Sprint Day 57) — create ai event draft proposal dto for automated scheduling
+- **Timestamp:** `2026-10-07T16:05:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create ai event draft proposal dto for automated scheduling
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/AiEventDraftDto.java
+
