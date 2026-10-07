@@ -342,3 +342,9 @@
 - **Action:** Implemented create ai event draft proposal dto for automated scheduling
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/AiEventDraftDto.java
 
+### Day 58 (Sprint Day 58) — build ai service implementing concierge chatbot rag logic
+- **Timestamp:** `2026-10-07T16:13:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented build ai service implementing concierge chatbot rag logic
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/AiService.java
+
