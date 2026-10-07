@@ -18,3 +18,9 @@
 - **Action:** Implemented create base project package structure and cors filter configuration
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/CampusSphereApplication.java, server/src/main/java/com/aryacollege/campussphere/config/CorsConfig.java
 
+### Day 4 (Sprint Day 4) — setup gradle build configuration and dependencies
+- **Timestamp:** `2026-10-07T09:37:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented setup gradle build configuration and dependencies
+- **Files touched:** server/build.gradle, server/settings.gradle
+
