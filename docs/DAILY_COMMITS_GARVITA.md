@@ -252,3 +252,9 @@
 - **Action:** Implemented build verified feedback service calculating average ratings
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/FeedbackService.java
 
+### Day 43 (Sprint Day 43) — create feedback submission dto with 5 factor score metrics
+- **Timestamp:** `2026-10-07T14:23:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create feedback submission dto with 5 factor score metrics
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/FeedbackSubmissionDto.java
+
