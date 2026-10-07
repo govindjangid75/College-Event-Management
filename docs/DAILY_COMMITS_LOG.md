@@ -240,3 +240,9 @@
 - **Action:** Implemented prefetch next qr token before 30s window expires
 - **Files touched:** client/src/pages/MyPassesPage.tsx
 
+### Day 41 (Sprint Day 41) — fix timer drift when tab is in background
+- **Timestamp:** `2026-10-07T14:08:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented fix timer drift when tab is in background
+- **Files touched:** client/src/pages/MyPassesPage.tsx
+
