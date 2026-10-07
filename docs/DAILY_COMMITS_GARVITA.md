@@ -66,3 +66,9 @@
 - **Action:** Implemented implement student registration service layer
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
 
+### Day 12 (Sprint Day 12) — build registration rest controller endpoint
+- **Timestamp:** `2026-10-07T10:35:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented build registration rest controller endpoint
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/RegistrationController.java
+
