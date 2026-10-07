@@ -35,3 +35,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/.oxlintrc.json, .gitignore
 
+### Day 8 — Day 8: design admin application shell and role switcher component
+- **Timestamp:** `2026-10-07T10:06:20+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** client/src/components/RoleSwitcherBar.tsx
+
