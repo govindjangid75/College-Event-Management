@@ -300,3 +300,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/CertificateService.java
 
+### Day 61 — Day 61: embed public verification qr code inside pdf vector banner
+- **Timestamp:** `2026-10-07T16:35:00+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/CertificateService.java
+
