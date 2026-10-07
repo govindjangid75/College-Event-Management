@@ -15,3 +15,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** docs/ERD.md
 
+### Day 4 — Day 4: configure mongodb atlas 3 node replica set connection string
+- **Timestamp:** `2026-10-07T09:37:00+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/resources/application.properties
+
