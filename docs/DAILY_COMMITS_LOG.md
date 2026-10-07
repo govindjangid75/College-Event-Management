@@ -360,3 +360,9 @@
 - **Action:** Implemented show verified attendee checkmark on event reviews
 - **Files touched:** client/src/components/EventFeedbackModal.tsx
 
+### Day 61 (Sprint Day 61) — test unauthorized review blocking with fake account
+- **Timestamp:** `2026-10-07T16:35:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented test unauthorized review blocking with fake account
+- **Files touched:** client/src/components/EventFeedbackModal.tsx
+
