@@ -120,3 +120,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/src/components/CreateEventModal.tsx
 
+### Day 25 — Day 25: integrate venue conflict buffer check warnings in wizard
+- **Timestamp:** `2026-10-07T12:11:00+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** client/src/components/CreateEventModal.tsx
+
