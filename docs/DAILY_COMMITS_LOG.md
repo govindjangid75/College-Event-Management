@@ -180,3 +180,9 @@
 - **Action:** Implemented add hackathon team creation step with random passcode
 - **Files touched:** client/src/components/EventRegistrationModal.tsx
 
+### Day 31 (Sprint Day 31) — add join team dialog with squad passcode input
+- **Timestamp:** `2026-10-07T12:55:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented add join team dialog with squad passcode input
+- **Files touched:** client/src/components/EventRegistrationModal.tsx
+
