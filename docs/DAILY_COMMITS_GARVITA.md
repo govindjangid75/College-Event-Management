@@ -216,3 +216,9 @@
 - **Action:** Implemented design event registration model with ticket hash and squad codes
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Registration.java
 
+### Day 37 (Sprint Day 37) — implement registration repository with compound attendee queries
+- **Timestamp:** `2026-10-07T13:39:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented implement registration repository with compound attendee queries
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/RegistrationRepository.java
+
