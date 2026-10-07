@@ -140,3 +140,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/VerifiedFeedbackRepository.java
 
+### Day 29 — Day 29: build attendance gated feedback service enforcing checks
+- **Timestamp:** `2026-10-07T12:40:20+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/FeedbackService.java
+
