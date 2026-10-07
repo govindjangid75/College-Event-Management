@@ -372,3 +372,9 @@
 - **Action:** Implemented optimize venue clash calculation adding 30-min buffer window
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/VenueClashEngineService.java
 
+### Day 63 (Sprint Day 63) — add logic to return past events in concluded events archive
+- **Timestamp:** `2026-10-07T16:49:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented add logic to return past events in concluded events archive
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/EventService.java
+
