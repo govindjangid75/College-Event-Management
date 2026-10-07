@@ -210,3 +210,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/StudentSuggestionRepository.java
 
+### Day 43 — Day 43: create suggestion submission and kanban status update dtos
+- **Timestamp:** `2026-10-07T14:23:00+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/SuggestionSubmissionDto.java, server/src/main/java/com/aryacollege/campussphere/dto/KanbanStatusUpdateDto.java
+
