@@ -12,3 +12,9 @@
 - **Action:** Implemented configure application.properties with mongodb connection string
 - **Files touched:** server/src/main/resources/application.properties, docs/ERD.md
 
+### Day 3 (Sprint Day 3) — create base project package structure and cors filter configuration
+- **Timestamp:** `2026-10-07T09:29:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create base project package structure and cors filter configuration
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/CampusSphereApplication.java, server/src/main/java/com/aryacollege/campussphere/config/CorsConfig.java
+
