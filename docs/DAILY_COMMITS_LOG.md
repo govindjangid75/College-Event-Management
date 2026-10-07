@@ -150,3 +150,9 @@
 - **Action:** Implemented grey out past events and show registration closed badge
 - **Files touched:** client/src/pages/EventsPage.tsx
 
+### Day 26 (Sprint Day 26) — test event filter combinations and search query debounce
+- **Timestamp:** `2026-10-07T12:18:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented test event filter combinations and search query debounce
+- **Files touched:** client/src/pages/EventsPage.tsx
+
