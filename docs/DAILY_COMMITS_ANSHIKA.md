@@ -55,3 +55,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/DatabaseSeederService.java
 
+### Day 12 — Day 12: seed 6 rtu venues and 12 official arya college events
+- **Timestamp:** `2026-10-07T10:35:40+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/DatabaseSeederService.java
+
