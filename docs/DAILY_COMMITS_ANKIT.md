@@ -50,3 +50,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/src/components/ProtectedRoute.tsx
 
+### Day 11 — Day 11: build role based protected routes guard utility
+- **Timestamp:** `2026-10-07T10:28:20+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** client/src/components/ProtectedRoute.tsx
+
