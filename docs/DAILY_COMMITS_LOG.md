@@ -516,3 +516,9 @@
 - **Action:** Implemented redesign homepage into student command dashboard after login
 - **Files touched:** client/src/pages/HomePage.tsx, docs/DEPLOYMENT_GUIDE.md
 
+### Day 87 (Sprint Day 87) — audit accessibility, keyboard navigation and lighthouse performance
+- **Timestamp:** `2026-10-07T19:45:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented audit accessibility, keyboard navigation and lighthouse performance
+- **Files touched:** client/src/index.css, docs/ERD.md
+
