@@ -335,3 +335,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/AiChatDto.java, server/src/main/java/com/aryacollege/campussphere/dto/AiEventDraftDto.java
 
+### Day 68 — Day 68: implement campus concierge chatbot backend service with rag
+- **Timestamp:** `2026-10-07T17:26:20+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/AiService.java
+
