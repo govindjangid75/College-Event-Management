@@ -12,3 +12,9 @@
 - **Action:** Implemented draft abstract document and list of 15 student clubs
 - **Files touched:** docs/README.md, docs/DEVELOPMENT_ROADMAP.md
 
+### Day 3 (Sprint Day 3) — setup tailwind css and custom emerald color palette
+- **Timestamp:** `2026-10-07T09:29:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented setup tailwind css and custom emerald color palette
+- **Files touched:** client/src/index.css, client/src/App.css
+
