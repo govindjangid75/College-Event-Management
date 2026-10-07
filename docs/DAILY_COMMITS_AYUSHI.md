@@ -90,3 +90,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** docs/SRS.md
 
+### Day 19 — Day 19: design isolated club ledger entry data model
+- **Timestamp:** `2026-10-07T11:27:00+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/ClubLedgerEntry.java
+
