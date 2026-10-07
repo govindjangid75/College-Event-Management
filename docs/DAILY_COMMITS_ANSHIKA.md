@@ -60,3 +60,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/DatabaseSeederService.java
 
+### Day 13 — Day 13: create compound unique indexes on registrations and venues
+- **Timestamp:** `2026-10-07T10:43:00+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/RegistrationRepository.java
+
