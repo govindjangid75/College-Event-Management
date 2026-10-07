@@ -444,3 +444,9 @@
 - **Action:** Implemented test chatbot responses for event schedule queries
 - **Files touched:** client/src/components/CampusConciergeChat.tsx
 
+### Day 75 (Sprint Day 75) — render markdown and links in chatbot replies
+- **Timestamp:** `2026-10-07T18:17:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented render markdown and links in chatbot replies
+- **Files touched:** client/src/components/CampusConciergeChat.tsx, client/scripts/testPhase1.js
+
