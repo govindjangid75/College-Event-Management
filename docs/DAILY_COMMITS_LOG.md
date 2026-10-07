@@ -540,3 +540,9 @@
 - **Action:** Implemented test role switcher between student, club lead and dean
 - **Files touched:** client/src/components/RoleSwitcherBar.tsx, client/src/pages/SuperAdminPage.tsx
 
+### Day 91 (Sprint Day 91) — write student user guide documentation with screenshots
+- **Timestamp:** `2026-10-07T20:15:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented write student user guide documentation with screenshots
+- **Files touched:** docs/pbl-reports/TEAM_WORKFLOW_GUIDE.md
+
