@@ -5,3 +5,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** docs/ERD.md
 
+### Day 2 — Day 2: design entity relationship diagram and mongodb schemas
+- **Timestamp:** `2026-10-07T09:22:20+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** docs/ERD.md
+
