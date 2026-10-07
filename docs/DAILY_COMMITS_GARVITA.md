@@ -84,3 +84,9 @@
 - **Action:** Implemented document auth and registration apis in api specification
 - **Files touched:** docs/API_SPECIFICATION.md
 
+### Day 15 (Sprint Day 15) — design club entity model with category, lead and budget fields
+- **Timestamp:** `2026-10-07T10:57:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented design club entity model with category, lead and budget fields
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Club.java
+
