@@ -95,3 +95,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** docs/TRD.md
 
+### Day 20 — Day 20: document admin console wireframes in technical requirements
+- **Timestamp:** `2026-10-07T11:34:20+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** docs/TRD.md
+
