@@ -435,3 +435,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** docs/pbl-reports/TEAM_WORKFLOW_GUIDE.md
 
+### Day 88 — Day 88: document team guide workflow in pbl report directory
+- **Timestamp:** `2026-10-07T19:53:00+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** docs/pbl-reports/TEAM_WORKFLOW_GUIDE.md
+
