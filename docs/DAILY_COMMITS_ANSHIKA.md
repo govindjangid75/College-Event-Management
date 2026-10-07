@@ -435,3 +435,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** docs/pbl-reports/WEEKLY_PROJECT_REPORTS.md
 
+### Day 88 — Day 88: document strictly 12-week project reports submission
+- **Timestamp:** `2026-10-07T19:53:00+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** docs/pbl-reports/WEEKLY_PROJECT_REPORTS.md
+
