@@ -60,3 +60,9 @@
 - **Action:** Implemented implement standardized api response payload dto
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/ApiResponse.java
 
+### Day 11 (Sprint Day 11) — implement student registration service layer
+- **Timestamp:** `2026-10-07T10:28:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented implement student registration service layer
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
+
