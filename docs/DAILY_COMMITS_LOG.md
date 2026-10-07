@@ -30,3 +30,9 @@
 - **Action:** Implemented discuss requirements with team and review wireframes
 - **Files touched:** docs/PRD.md
 
+### Day 6 (Sprint Day 6) — draft student dashboard wireframes on figma
+- **Timestamp:** `2026-10-07T09:51:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented draft student dashboard wireframes on figma
+- **Files touched:** docs/TRD.md
+
