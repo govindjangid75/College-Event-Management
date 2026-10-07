@@ -170,3 +170,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/RegistrationController.java
 
+### Day 35 — Day 35: implement razorpay order creation endpoint for event passes
+- **Timestamp:** `2026-10-07T13:24:20+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/RegistrationController.java
+
