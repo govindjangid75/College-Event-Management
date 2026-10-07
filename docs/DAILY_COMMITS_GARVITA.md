@@ -288,3 +288,9 @@
 - **Action:** Implemented create suggestion submission dto with title and description
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/SuggestionSubmissionDto.java
 
+### Day 49 (Sprint Day 49) — create kanban status update dto for student suggestions
+- **Timestamp:** `2026-10-07T15:07:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create kanban status update dto for student suggestions
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/KanbanStatusUpdateDto.java
+
