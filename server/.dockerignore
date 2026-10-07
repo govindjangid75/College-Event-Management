@@ -1,0 +1,13 @@
+target/
+.mvn/
+mvnw
+mvnw.cmd
+.git/
+.gitignore
+.gitattributes
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.DS_Store

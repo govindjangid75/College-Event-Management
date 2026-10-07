@@ -310,3 +310,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/.dockerignore
 
+### Day 63 — Day 63: author multi stage server dockerfile with eclipse temurin jdk
+- **Timestamp:** `2026-10-07T16:49:40+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** server/Dockerfile, server/.dockerignore
+
