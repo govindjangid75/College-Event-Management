@@ -156,3 +156,9 @@
 - **Action:** Implemented test event filter combinations and search query debounce
 - **Files touched:** client/src/pages/EventsPage.tsx
 
+### Day 27 (Sprint Day 27) — improve event card layout on mobile screens
+- **Timestamp:** `2026-10-07T12:25:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented improve event card layout on mobile screens
+- **Files touched:** client/src/index.css
+
