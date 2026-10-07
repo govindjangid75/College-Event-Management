@@ -350,3 +350,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** .github/workflows/ci-cd.yml
 
+### Day 71 — Day 71: add automated typecheck lint and container build steps to ci
+- **Timestamp:** `2026-10-07T17:48:20+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** .github/workflows/ci-cd.yml
+
