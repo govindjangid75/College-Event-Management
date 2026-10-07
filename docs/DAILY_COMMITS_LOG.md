@@ -474,3 +474,9 @@
 - **Action:** Implemented add pulsing neon beacon pins on buildings with active events
 - **Files touched:** client/src/components/Campus3DExplorer.tsx, client/nginx.conf
 
+### Day 80 (Sprint Day 80) — smooth camera zoom when clicking a building to open event drawer
+- **Timestamp:** `2026-10-07T18:54:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented smooth camera zoom when clicking a building to open event drawer
+- **Files touched:** client/src/components/Campus3DExplorer.tsx, docker-compose.yml, docker-compose.prod.yml, .env.example
+
