@@ -276,3 +276,9 @@
 - **Action:** Implemented add error handling and retry button for failed payments
 - **Files touched:** client/src/pages/MyPassesPage.tsx
 
+### Day 47 (Sprint Day 47) — test payment flow with razorpay test upi id
+- **Timestamp:** `2026-10-07T14:52:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented test payment flow with razorpay test upi id
+- **Files touched:** client/src/pages/MyPassesPage.tsx
+
