@@ -450,3 +450,9 @@
 - **Action:** Implemented render markdown and links in chatbot replies
 - **Files touched:** client/src/components/CampusConciergeChat.tsx, client/scripts/testPhase1.js
 
+### Day 76 (Sprint Day 76) — add direct register button inside chatbot event recommendations
+- **Timestamp:** `2026-10-07T18:25:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented add direct register button inside chatbot event recommendations
+- **Files touched:** client/src/components/CampusConciergeChat.tsx, client/scripts/testPhase2.js
+
