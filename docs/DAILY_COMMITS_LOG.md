@@ -132,3 +132,9 @@
 - **Action:** Implemented create events explorer page with search and category tags
 - **Files touched:** client/src/pages/EventsPage.tsx
 
+### Day 23 (Sprint Day 23) — add upcoming and past event filter pills
+- **Timestamp:** `2026-10-07T11:56:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented add upcoming and past event filter pills
+- **Files touched:** client/src/pages/EventsPage.tsx
+
