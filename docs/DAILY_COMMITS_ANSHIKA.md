@@ -120,3 +120,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/VerifiedFeedback.java
 
+### Day 25 — Day 25: design verified feedback model with 4 strict prerequisites
+- **Timestamp:** `2026-10-07T12:11:00+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/VerifiedFeedback.java
+
