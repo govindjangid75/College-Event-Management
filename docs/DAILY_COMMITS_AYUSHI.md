@@ -30,3 +30,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Registration.java
 
+### Day 7 — Day 7: design solo and team registration data models
+- **Timestamp:** `2026-10-07T09:59:00+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Registration.java
+
