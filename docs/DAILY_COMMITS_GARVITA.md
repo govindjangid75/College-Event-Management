@@ -24,3 +24,9 @@
 - **Action:** Implemented setup gradle build configuration and dependencies
 - **Files touched:** server/build.gradle, server/settings.gradle
 
+### Day 5 (Sprint Day 5) — setup junit 5 backend test scaffold
+- **Timestamp:** `2026-10-07T09:44:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented setup junit 5 backend test scaffold
+- **Files touched:** server/src/test/java/com/aryacollege/campussphere/CampusSphereApplicationTests.java
+
