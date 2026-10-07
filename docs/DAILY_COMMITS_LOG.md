@@ -336,3 +336,9 @@
 - **Action:** Implemented create verified feedback modal with 5 star ratings
 - **Files touched:** client/src/components/EventFeedbackModal.tsx
 
+### Day 57 (Sprint Day 57) — block feedback form if attendance is not verified
+- **Timestamp:** `2026-10-07T16:05:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented block feedback form if attendance is not verified
+- **Files touched:** client/src/components/EventFeedbackModal.tsx
+
