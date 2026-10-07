@@ -258,3 +258,9 @@
 - **Action:** Implemented create feedback submission dto with 5 factor score metrics
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/FeedbackSubmissionDto.java
 
+### Day 44 (Sprint Day 44) — create event feedback summary dto with star distribution
+- **Timestamp:** `2026-10-07T14:30:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create event feedback summary dto with star distribution
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/EventFeedbackSummaryDto.java
+
