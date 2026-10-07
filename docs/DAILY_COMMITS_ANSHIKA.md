@@ -170,3 +170,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/FeedbackSubmissionDto.java, server/src/main/java/com/aryacollege/campussphere/dto/EventFeedbackSummaryDto.java
 
+### Day 35 — Day 35: build feedback rest controller endpoints for event reviews
+- **Timestamp:** `2026-10-07T13:24:20+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/FeedbackController.java
+
