@@ -84,3 +84,9 @@
 - **Action:** Implemented draw component hierarchy and data flow diagram
 - **Files touched:** client/src/services/api.ts, client/src/types/index.ts
 
+### Day 15 (Sprint Day 15) — create clubs list page with category filter pills
+- **Timestamp:** `2026-10-07T10:57:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented create clubs list page with category filter pills
+- **Files touched:** client/src/pages/ClubsPage.tsx
+
