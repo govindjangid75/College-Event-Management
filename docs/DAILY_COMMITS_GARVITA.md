@@ -276,3 +276,9 @@
 - **Action:** Implemented design student suggestion model with kanban status lifecycle
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/StudentSuggestion.java
 
+### Day 47 (Sprint Day 47) — implement student suggestion repository with upvote sorting
+- **Timestamp:** `2026-10-07T14:52:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented implement student suggestion repository with upvote sorting
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/StudentSuggestionRepository.java
+
