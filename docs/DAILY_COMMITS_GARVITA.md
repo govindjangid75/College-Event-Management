@@ -450,3 +450,9 @@
 - **Action:** Implemented add gradlew unix script and gradlew.bat windows launcher
 - **Files touched:** server/gradlew, server/gradlew.bat
 
+### Day 76 (Sprint Day 76) — configure server gitattributes for crlf text handling
+- **Timestamp:** `2026-10-07T18:25:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented configure server gitattributes for crlf text handling
+- **Files touched:** server/.gitattributes
+
