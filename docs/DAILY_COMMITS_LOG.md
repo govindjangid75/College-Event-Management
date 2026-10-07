@@ -138,3 +138,9 @@
 - **Action:** Implemented add upcoming and past event filter pills
 - **Files touched:** client/src/pages/EventsPage.tsx
 
+### Day 24 (Sprint Day 24) — create event card component with live seat counter
+- **Timestamp:** `2026-10-07T12:03:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented create event card component with live seat counter
+- **Files touched:** client/src/pages/EventsPage.tsx
+
