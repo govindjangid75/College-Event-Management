@@ -42,3 +42,9 @@
 - **Action:** Implemented write frontend requirements in srs doc
 - **Files touched:** docs/SRS.md
 
+### Day 8 (Sprint Day 8) — setup react router routes and main layout shell
+- **Timestamp:** `2026-10-07T10:06:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented setup react router routes and main layout shell
+- **Files touched:** client/src/main.tsx, client/src/App.tsx, client/src/vite-env.d.ts
+
