@@ -354,3 +354,9 @@
 - **Action:** Implemented build ai rest controller endpoints for campus concierge
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/AiController.java
 
+### Day 60 (Sprint Day 60) — design payout settlement request model for club treasury
+- **Timestamp:** `2026-10-07T16:27:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented design payout settlement request model for club treasury
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/PayoutSettlementRequest.java
+
