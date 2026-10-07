@@ -160,3 +160,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/FeedbackSubmissionDto.java, server/src/main/java/com/aryacollege/campussphere/dto/EventFeedbackSummaryDto.java
 
+### Day 33 — Day 33: create feedback submission and summary dtos
+- **Timestamp:** `2026-10-07T13:09:40+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/FeedbackSubmissionDto.java, server/src/main/java/com/aryacollege/campussphere/dto/EventFeedbackSummaryDto.java
+
