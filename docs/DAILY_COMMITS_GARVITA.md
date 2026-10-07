@@ -312,3 +312,9 @@
 - **Action:** Implemented build certificate service with automated seal generation
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/CertificateService.java
 
+### Day 53 (Sprint Day 53) — build certificate rest controller with public verify endpoint
+- **Timestamp:** `2026-10-07T15:36:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented build certificate rest controller with public verify endpoint
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/CertificateController.java
+
