@@ -384,3 +384,9 @@
 - **Action:** Implemented build aicte 100 points progress meter bar
 - **Files touched:** client/src/pages/StudentProfilePage.tsx
 
+### Day 65 (Sprint Day 65) — create certificate wallet card view with qr seals
+- **Timestamp:** `2026-10-07T17:04:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented create certificate wallet card view with qr seals
+- **Files touched:** client/src/pages/CertificatesPage.tsx
+
