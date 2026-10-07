@@ -486,3 +486,9 @@
 - **Action:** Implemented optimize 3d textures and capped pixel ratio for mobile 60fps
 - **Files touched:** client/src/components/Campus3DExplorer.tsx, .github/workflows/ci-cd.yml
 
+### Day 82 (Sprint Day 82) — add 2d fallback map toggle if webgl is not supported
+- **Timestamp:** `2026-10-07T19:09:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented add 2d fallback map toggle if webgl is not supported
+- **Files touched:** client/src/components/Campus3DExplorer.tsx, client/.oxlintrc.json
+
