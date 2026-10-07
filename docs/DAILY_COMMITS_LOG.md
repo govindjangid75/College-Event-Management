@@ -72,3 +72,9 @@
 - **Action:** Implemented build navbar with theme toggle and user role badge
 - **Files touched:** client/src/context/ThemeContext.tsx, client/src/components/Navbar.tsx
 
+### Day 13 (Sprint Day 13) — test login redirect and route protection
+- **Timestamp:** `2026-10-07T10:43:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented test login redirect and route protection
+- **Files touched:** client/src/components/ProtectedRoute.tsx, client/src/components/RoleSwitcherBar.tsx
+
