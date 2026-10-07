@@ -300,3 +300,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/Dockerfile, client/nginx.conf
 
+### Day 61 — Day 61: configure client dockerignore file to exclude node modules
+- **Timestamp:** `2026-10-07T16:35:00+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** client/.dockerignore
+
