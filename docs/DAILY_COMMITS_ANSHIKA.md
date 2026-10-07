@@ -235,3 +235,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Certificate.java
 
+### Day 48 — Day 48: implement certificate repository with student roll no queries
+- **Timestamp:** `2026-10-07T14:59:40+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/CertificateRepository.java
+
