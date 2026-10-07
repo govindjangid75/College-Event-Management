@@ -175,3 +175,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/FeedbackController.java
 
+### Day 36 — Day 36: build feedback rest controller endpoints for event reviews
+- **Timestamp:** `2026-10-07T13:31:40+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/FeedbackController.java
+
