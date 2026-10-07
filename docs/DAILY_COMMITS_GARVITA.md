@@ -144,3 +144,9 @@
 - **Action:** Implemented build institutional 30-minute venue buffer conflict engine service
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/VenueClashEngineService.java
 
+### Day 25 (Sprint Day 25) — create venue clash check input dto with date range fields
+- **Timestamp:** `2026-10-07T12:11:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create venue clash check input dto with date range fields
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/VenueClashCheckDto.java
+
