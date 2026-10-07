@@ -306,3 +306,9 @@
 - **Action:** Implemented implement certificate repository with student id queries
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/CertificateRepository.java
 
+### Day 52 (Sprint Day 52) — build certificate service with automated seal generation
+- **Timestamp:** `2026-10-07T15:29:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented build certificate service with automated seal generation
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/CertificateService.java
+
