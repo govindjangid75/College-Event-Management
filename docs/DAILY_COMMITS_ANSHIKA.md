@@ -360,3 +360,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/AiController.java
 
+### Day 73 — Day 73: segregate completed past events from upcoming active fests
+- **Timestamp:** `2026-10-07T18:03:00+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/EventService.java
+
