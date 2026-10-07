@@ -546,3 +546,9 @@
 - **Action:** Implemented write student user guide documentation with screenshots
 - **Files touched:** docs/pbl-reports/TEAM_WORKFLOW_GUIDE.md
 
+### Day 92 (Sprint Day 92) — record project walkthrough demo video for final viva
+- **Timestamp:** `2026-10-07T20:22:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented record project walkthrough demo video for final viva
+- **Files touched:** docs/pbl-reports/WEEKLY_PROJECT_REPORTS.md
+
