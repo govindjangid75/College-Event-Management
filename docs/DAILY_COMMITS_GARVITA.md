@@ -432,3 +432,9 @@
 - **Action:** Implemented add dockerignore file excluding maven wrapper and target
 - **Files touched:** server/.dockerignore
 
+### Day 73 (Sprint Day 73) — configure gradle wrapper properties for reproducible builds
+- **Timestamp:** `2026-10-07T18:03:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented configure gradle wrapper properties for reproducible builds
+- **Files touched:** server/gradle/wrapper/gradle-wrapper.properties
+
