@@ -282,3 +282,9 @@
 - **Action:** Implemented implement student suggestion repository with upvote sorting
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/StudentSuggestionRepository.java
 
+### Day 48 (Sprint Day 48) — create suggestion submission dto with title and description
+- **Timestamp:** `2026-10-07T14:59:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create suggestion submission dto with title and description
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/SuggestionSubmissionDto.java
+
