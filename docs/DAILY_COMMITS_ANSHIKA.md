@@ -195,3 +195,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/StudentSuggestion.java
 
+### Day 40 — Day 40: implement student suggestion repository with upvote sorting
+- **Timestamp:** `2026-10-07T14:01:00+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/StudentSuggestionRepository.java
+
