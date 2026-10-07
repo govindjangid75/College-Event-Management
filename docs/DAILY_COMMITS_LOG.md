@@ -456,3 +456,9 @@
 - **Action:** Implemented add direct register button inside chatbot event recommendations
 - **Files touched:** client/src/components/CampusConciergeChat.tsx, client/scripts/testPhase2.js
 
+### Day 77 (Sprint Day 77) — setup three.js and react-three-fiber for 3d campus map
+- **Timestamp:** `2026-10-07T18:32:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented setup three.js and react-three-fiber for 3d campus map
+- **Files touched:** client/src/components/Campus3DExplorer.tsx, client/scripts/testPhase3.js
+
