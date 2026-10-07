@@ -504,3 +504,9 @@
 - **Action:** Implemented document developmental roadmap milestones across 12 weeks
 - **Files touched:** docs/DEVELOPMENT_ROADMAP.md
 
+### Day 85 (Sprint Day 85) — update mongodb connection pooling properties for production
+- **Timestamp:** `2026-10-07T19:31:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented update mongodb connection pooling properties for production
+- **Files touched:** server/src/main/resources/application.properties
+
