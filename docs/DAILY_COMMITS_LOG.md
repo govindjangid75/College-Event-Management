@@ -120,3 +120,9 @@
 - **Action:** Implemented review club pages layout with club leads
 - **Files touched:** client/src/pages/ClubDetailPage.tsx
 
+### Day 21 (Sprint Day 21) — design events explorer wireframe and filters
+- **Timestamp:** `2026-10-07T11:41:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented design events explorer wireframe and filters
+- **Files touched:** client/src/index.css
+
