@@ -80,3 +80,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/src/pages/ClubAdminPage.tsx
 
+### Day 17 — Day 17: add read only treasury sub ledger balance card for club leads
+- **Timestamp:** `2026-10-07T11:12:20+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** client/src/pages/ClubAdminPage.tsx
+
