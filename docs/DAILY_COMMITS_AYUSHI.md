@@ -140,3 +140,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
 
+### Day 29 — Day 29: document financial treasury sub ledger rules in api spec
+- **Timestamp:** `2026-10-07T12:40:20+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** docs/API_SPECIFICATION.md
+
