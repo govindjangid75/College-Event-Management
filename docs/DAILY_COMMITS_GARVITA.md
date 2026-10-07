@@ -444,3 +444,9 @@
 - **Action:** Implemented add gradle wrapper jar archive for gradle build runner
 - **Files touched:** server/gradle/wrapper/gradle-wrapper.jar
 
+### Day 75 (Sprint Day 75) — add gradlew unix script and gradlew.bat windows launcher
+- **Timestamp:** `2026-10-07T18:17:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented add gradlew unix script and gradlew.bat windows launcher
+- **Files touched:** server/gradlew, server/gradlew.bat
+
