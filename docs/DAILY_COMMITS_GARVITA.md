@@ -510,3 +510,9 @@
 - **Action:** Implemented update mongodb connection pooling properties for production
 - **Files touched:** server/src/main/resources/application.properties
 
+### Day 86 (Sprint Day 86) — add spring boot integration test verifying app context loads
+- **Timestamp:** `2026-10-07T19:38:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented add spring boot integration test verifying app context loads
+- **Files touched:** server/src/test/java/com/aryacollege/campussphere/CampusSphereApplicationTests.java
+
