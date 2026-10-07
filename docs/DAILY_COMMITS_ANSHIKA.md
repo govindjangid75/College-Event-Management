@@ -310,3 +310,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** docs/AICTE_ACTIVITY_POINTS_SPEC.md
 
+### Day 63 — Day 63: document aicte 100 activity points calculation rules in spec
+- **Timestamp:** `2026-10-07T16:49:40+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** docs/AICTE_ACTIVITY_POINTS_SPEC.md
+
