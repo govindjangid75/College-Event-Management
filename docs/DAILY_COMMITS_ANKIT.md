@@ -125,3 +125,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/src/components/CreateEventModal.tsx
 
+### Day 26 — Day 26: add budget breakdown and ticket tier inputs in creation modal
+- **Timestamp:** `2026-10-07T12:18:20+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** client/src/components/CreateEventModal.tsx
+
