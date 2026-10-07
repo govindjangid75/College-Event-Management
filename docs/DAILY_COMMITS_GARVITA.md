@@ -300,3 +300,9 @@
 - **Action:** Implemented design digital certificate model with sha256 digital seals
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Certificate.java
 
+### Day 51 (Sprint Day 51) — implement certificate repository with student id queries
+- **Timestamp:** `2026-10-07T15:21:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented implement certificate repository with student id queries
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/CertificateRepository.java
+
