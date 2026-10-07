@@ -25,3 +25,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/resources/application.properties, docs/SECURITY_ARCHITECTURE.md
 
+### Day 6 — Day 6: design solo and team registration data models
+- **Timestamp:** `2026-10-07T09:51:40+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Registration.java
+
