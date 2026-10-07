@@ -228,3 +228,9 @@
 - **Action:** Implemented add holographic canvas watermark to defeat screenshots
 - **Files touched:** client/src/pages/MyPassesPage.tsx
 
+### Day 39 (Sprint Day 39) — use screen wakelock api while displaying pass at gate
+- **Timestamp:** `2026-10-07T13:53:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented use screen wakelock api while displaying pass at gate
+- **Files touched:** client/src/pages/MyPassesPage.tsx
+
