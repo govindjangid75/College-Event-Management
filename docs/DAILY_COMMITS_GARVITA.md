@@ -150,3 +150,9 @@
 - **Action:** Implemented create venue clash check input dto with date range fields
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/VenueClashCheckDto.java
 
+### Day 26 (Sprint Day 26) — create venue clash result dto with conflict details
+- **Timestamp:** `2026-10-07T12:18:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create venue clash result dto with conflict details
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/VenueClashResultDto.java
+
