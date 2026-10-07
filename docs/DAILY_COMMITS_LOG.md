@@ -402,3 +402,9 @@
 - **Action:** Implemented add one-click share to linkedin button for certificates
 - **Files touched:** client/src/pages/CertificatesPage.tsx
 
+### Day 68 (Sprint Day 68) — test public certificate verification with sample cert id
+- **Timestamp:** `2026-10-07T17:26:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented test public certificate verification with sample cert id
+- **Files touched:** client/src/pages/CertificateVerifyPage.tsx
+
