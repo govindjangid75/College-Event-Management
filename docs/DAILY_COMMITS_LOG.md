@@ -78,3 +78,9 @@
 - **Action:** Implemented test login redirect and route protection
 - **Files touched:** client/src/components/ProtectedRoute.tsx, client/src/components/RoleSwitcherBar.tsx
 
+### Day 14 (Sprint Day 14) — draw component hierarchy and data flow diagram
+- **Timestamp:** `2026-10-07T10:50:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented draw component hierarchy and data flow diagram
+- **Files touched:** client/src/services/api.ts, client/src/types/index.ts
+
