@@ -144,3 +144,9 @@
 - **Action:** Implemented create event card component with live seat counter
 - **Files touched:** client/src/pages/EventsPage.tsx
 
+### Day 25 (Sprint Day 25) — grey out past events and show registration closed badge
+- **Timestamp:** `2026-10-07T12:11:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented grey out past events and show registration closed badge
+- **Files touched:** client/src/pages/EventsPage.tsx
+
