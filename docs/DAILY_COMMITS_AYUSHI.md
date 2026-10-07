@@ -445,3 +445,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** docs/pbl-reports/WEEKLY_PROJECT_REPORTS.md
 
+### Day 90 — Day 90: document strictly 12-week project reports submission
+- **Timestamp:** `2026-10-07T20:07:40+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** docs/pbl-reports/WEEKLY_PROJECT_REPORTS.md
+
