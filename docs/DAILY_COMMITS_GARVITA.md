@@ -174,3 +174,9 @@
 - **Action:** Implemented implement event repository with queries for upcoming fests
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/EventRepository.java
 
+### Day 30 (Sprint Day 30) — create event proposal dto with budget and venue breakdown
+- **Timestamp:** `2026-10-07T12:47:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create event proposal dto with budget and venue breakdown
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/EventProposalDto.java
+
