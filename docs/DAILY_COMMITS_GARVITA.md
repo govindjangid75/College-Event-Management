@@ -72,3 +72,9 @@
 - **Action:** Implemented build registration rest controller endpoint
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/RegistrationController.java
 
+### Day 13 (Sprint Day 13) — add registration request payload dto with validation rules
+- **Timestamp:** `2026-10-07T10:43:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented add registration request payload dto with validation rules
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/RegistrationRequestDto.java
+
