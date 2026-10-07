@@ -38,5 +38,8 @@ Thumbs.db
 
 
 
-# Backend maintained separately by backend team
-/server/
+
+
+
+# Frontend maintained separately by frontend team
+/client/
