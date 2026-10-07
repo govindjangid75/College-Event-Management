@@ -360,3 +360,9 @@
 - **Action:** Implemented design payout settlement request model for club treasury
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/PayoutSettlementRequest.java
 
+### Day 61 (Sprint Day 61) — implement payout request repository with pending status filter
+- **Timestamp:** `2026-10-07T16:35:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented implement payout request repository with pending status filter
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/PayoutRequestRepository.java
+
