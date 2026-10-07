@@ -70,3 +70,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/src/pages/ClubAdminPage.tsx
 
+### Day 15 — Day 15: implement club events list view in club admin dashboard
+- **Timestamp:** `2026-10-07T10:57:40+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** client/src/pages/ClubAdminPage.tsx
+
