@@ -120,3 +120,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/PayoutSettlementRequest.java
 
+### Day 25 — Day 25: implement payout request repository with pending status filter
+- **Timestamp:** `2026-10-07T12:11:00+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/PayoutRequestRepository.java
+
