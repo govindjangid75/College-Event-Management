@@ -35,3 +35,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Registration.java
 
+### Day 8 — Day 8: implement registration repository with compound attendee queries
+- **Timestamp:** `2026-10-07T10:06:20+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/RegistrationRepository.java
+
