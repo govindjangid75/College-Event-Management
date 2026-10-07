@@ -168,3 +168,9 @@
 - **Action:** Implemented design event entity model with date, venue, capacity and price
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Event.java
 
+### Day 29 (Sprint Day 29) — implement event repository with queries for upcoming fests
+- **Timestamp:** `2026-10-07T12:40:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented implement event repository with queries for upcoming fests
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/EventRepository.java
+
