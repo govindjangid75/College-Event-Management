@@ -480,3 +480,9 @@
 - **Action:** Implemented smooth camera zoom when clicking a building to open event drawer
 - **Files touched:** client/src/components/Campus3DExplorer.tsx, docker-compose.yml, docker-compose.prod.yml, .env.example
 
+### Day 81 (Sprint Day 81) — optimize 3d textures and capped pixel ratio for mobile 60fps
+- **Timestamp:** `2026-10-07T19:01:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented optimize 3d textures and capped pixel ratio for mobile 60fps
+- **Files touched:** client/src/components/Campus3DExplorer.tsx, .github/workflows/ci-cd.yml
+
