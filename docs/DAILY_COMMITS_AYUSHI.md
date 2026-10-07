@@ -320,3 +320,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/CertificateService.java
 
+### Day 65 — Day 65: optimize pdf generation memory buffers for concurrent requests
+- **Timestamp:** `2026-10-07T17:04:20+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/CertificateService.java
+
