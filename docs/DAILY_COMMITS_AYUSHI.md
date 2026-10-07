@@ -75,3 +75,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/RegistrationController.java
 
+### Day 16 — Day 16: document ticketing and capacity lock workflow in srs
+- **Timestamp:** `2026-10-07T11:05:00+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** docs/SRS.md
+
