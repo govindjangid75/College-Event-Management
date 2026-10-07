@@ -250,3 +250,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/CertificateRepository.java
 
+### Day 51 — Day 51: build certificate service with automated tamper proof seal generation
+- **Timestamp:** `2026-10-07T15:21:40+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/CertificateService.java
+
