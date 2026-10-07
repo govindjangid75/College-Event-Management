@@ -222,3 +222,9 @@
 - **Action:** Implemented add svg circular countdown ring for qr timer
 - **Files touched:** client/src/pages/MyPassesPage.tsx
 
+### Day 38 (Sprint Day 38) — add holographic canvas watermark to defeat screenshots
+- **Timestamp:** `2026-10-07T13:46:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented add holographic canvas watermark to defeat screenshots
+- **Files touched:** client/src/pages/MyPassesPage.tsx
+
