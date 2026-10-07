@@ -210,3 +210,9 @@
 - **Action:** Implemented implement club ledger repository with audit tracking
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/ClubLedgerRepository.java
 
+### Day 36 (Sprint Day 36) — design event registration model with ticket hash and squad codes
+- **Timestamp:** `2026-10-07T13:31:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented design event registration model with ticket hash and squad codes
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Registration.java
+
