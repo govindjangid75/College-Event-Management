@@ -350,3 +350,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/test/java/com/aryacollege/campussphere/CampusSphereApplicationTests.java
 
+### Day 71 — Day 71: verify zero overbooking under flash registration traffic
+- **Timestamp:** `2026-10-07T17:48:20+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/test/java/com/aryacollege/campussphere/CampusSphereApplicationTests.java
+
