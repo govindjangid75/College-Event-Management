@@ -360,3 +360,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/resources/application.properties
 
+### Day 73 — Day 73: conduct database connection pool stress test on mongodb atlas
+- **Timestamp:** `2026-10-07T18:03:00+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/resources/application.properties
+
