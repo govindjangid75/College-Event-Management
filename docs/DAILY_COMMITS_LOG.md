@@ -192,3 +192,9 @@
 - **Action:** Implemented display team members list in registration modal
 - **Files touched:** client/src/components/EventRegistrationModal.tsx
 
+### Day 33 (Sprint Day 33) — handle sold out state and waitlist notification toast
+- **Timestamp:** `2026-10-07T13:09:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented handle sold out state and waitlist notification toast
+- **Files touched:** client/src/components/EventRegistrationModal.tsx
+
