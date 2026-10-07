@@ -375,3 +375,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
 
+### Day 76 — Day 76: add club treasury settlement review endpoint for deans
+- **Timestamp:** `2026-10-07T18:25:00+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/RegistrationController.java
+
