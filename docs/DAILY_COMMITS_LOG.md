@@ -462,3 +462,9 @@
 - **Action:** Implemented setup three.js and react-three-fiber for 3d campus map
 - **Files touched:** client/src/components/Campus3DExplorer.tsx, client/scripts/testPhase3.js
 
+### Day 78 (Sprint Day 78) — add 3d models for auditorium, turing lab and central lawn
+- **Timestamp:** `2026-10-07T18:39:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented add 3d models for auditorium, turing lab and central lawn
+- **Files touched:** client/src/components/Campus3DExplorer.tsx, client/Dockerfile, client/.dockerignore
+
