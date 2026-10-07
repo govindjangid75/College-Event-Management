@@ -330,3 +330,9 @@
 - **Action:** Implemented document aicte 100 activity points calculation rules
 - **Files touched:** docs/AICTE_ACTIVITY_POINTS_SPEC.md
 
+### Day 56 (Sprint Day 56) — create ai chat message dto with prompt and context parameters
+- **Timestamp:** `2026-10-07T15:58:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create ai chat message dto with prompt and context parameters
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/AiChatDto.java
+
