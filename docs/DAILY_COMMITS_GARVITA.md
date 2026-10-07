@@ -78,3 +78,9 @@
 - **Action:** Implemented add registration request payload dto with validation rules
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/RegistrationRequestDto.java
 
+### Day 14 (Sprint Day 14) — document auth and registration apis in api specification
+- **Timestamp:** `2026-10-07T10:50:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented document auth and registration apis in api specification
+- **Files touched:** docs/API_SPECIFICATION.md
+
