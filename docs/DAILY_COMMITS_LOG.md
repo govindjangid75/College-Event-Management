@@ -408,3 +408,9 @@
 - **Action:** Implemented test public certificate verification with sample cert id
 - **Files touched:** client/src/pages/CertificateVerifyPage.tsx
 
+### Day 69 (Sprint Day 69) — add printable preview for aicte activity transcript
+- **Timestamp:** `2026-10-07T17:33:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented add printable preview for aicte activity transcript
+- **Files touched:** client/src/pages/StudentProfilePage.tsx
+
