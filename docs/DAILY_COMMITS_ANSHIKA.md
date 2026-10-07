@@ -230,3 +230,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Certificate.java
 
+### Day 47 — Day 47: design digital certificate data model with sha256 digital seals
+- **Timestamp:** `2026-10-07T14:52:20+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Certificate.java
+
