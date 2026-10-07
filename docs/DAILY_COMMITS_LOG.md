@@ -498,3 +498,9 @@
 - **Action:** Implemented verify 3d campus bundle size stays under 1.8mb
 - **Files touched:** client/src/components/Campus3DExplorer.tsx
 
+### Day 84 (Sprint Day 84) — full end to end test: registration to payment to qr scan
+- **Timestamp:** `2026-10-07T19:23:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented full end to end test: registration to payment to qr scan
+- **Files touched:** client/src/pages/MyPassesPage.tsx, docs/API_SPECIFICATION.md
+
