@@ -48,3 +48,9 @@
 - **Action:** Implemented implement user model with roles for student, club admin and dean
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/User.java
 
+### Day 9 (Sprint Day 9) — create user repository with mongo queries for email and roll no
+- **Timestamp:** `2026-10-07T10:13:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create user repository with mongo queries for email and roll no
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/UserRepository.java
+
