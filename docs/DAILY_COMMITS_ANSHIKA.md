@@ -40,3 +40,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/DatabaseSeederService.java
 
+### Day 9 — Day 9: implement database seeder service for 15 collegiate societies
+- **Timestamp:** `2026-10-07T10:13:40+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/DatabaseSeederService.java
+
