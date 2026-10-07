@@ -250,3 +250,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
 
+### Day 51 — Day 51: add qr token expiry validation in gate attendance verification
+- **Timestamp:** `2026-10-07T15:21:40+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
+
