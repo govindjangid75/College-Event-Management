@@ -30,3 +30,9 @@
 - **Action:** Implemented setup junit 5 backend test scaffold
 - **Files touched:** server/src/test/java/com/aryacollege/campussphere/CampusSphereApplicationTests.java
 
+### Day 6 (Sprint Day 6) — write backend requirements in srs doc
+- **Timestamp:** `2026-10-07T09:51:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented write backend requirements in srs doc
+- **Files touched:** docs/SRS.md
+
