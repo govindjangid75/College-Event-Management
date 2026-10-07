@@ -396,3 +396,9 @@
 - **Action:** Implemented create public certificate verification page
 - **Files touched:** client/src/pages/CertificateVerifyPage.tsx
 
+### Day 67 (Sprint Day 67) — add one-click share to linkedin button for certificates
+- **Timestamp:** `2026-10-07T17:19:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented add one-click share to linkedin button for certificates
+- **Files touched:** client/src/pages/CertificatesPage.tsx
+
