@@ -90,3 +90,9 @@
 - **Action:** Implemented create clubs list page with category filter pills
 - **Files touched:** client/src/pages/ClubsPage.tsx
 
+### Day 16 (Sprint Day 16) — create club detail page with hod info and lead roster
+- **Timestamp:** `2026-10-07T11:05:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented create club detail page with hod info and lead roster
+- **Files touched:** client/src/pages/ClubDetailPage.tsx
+
