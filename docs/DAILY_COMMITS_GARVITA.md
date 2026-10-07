@@ -264,3 +264,9 @@
 - **Action:** Implemented create event feedback summary dto with star distribution
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/EventFeedbackSummaryDto.java
 
+### Day 45 (Sprint Day 45) — build feedback rest controller endpoints for reviews
+- **Timestamp:** `2026-10-07T14:37:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented build feedback rest controller endpoints for reviews
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/FeedbackController.java
+
