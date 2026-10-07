@@ -156,3 +156,9 @@
 - **Action:** Implemented create venue clash result dto with conflict details
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/VenueClashResultDto.java
 
+### Day 27 (Sprint Day 27) — build venue rest controller listing available college halls
+- **Timestamp:** `2026-10-07T12:25:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented build venue rest controller listing available college halls
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/VenueController.java
+
