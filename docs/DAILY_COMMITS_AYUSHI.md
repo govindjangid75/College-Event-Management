@@ -405,3 +405,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** docs/SECURITY_ARCHITECTURE.md
 
+### Day 82 — Day 82: document ticketing rate limiting and anti fraud checks
+- **Timestamp:** `2026-10-07T19:09:00+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** docs/SECURITY_ARCHITECTURE.md
+
