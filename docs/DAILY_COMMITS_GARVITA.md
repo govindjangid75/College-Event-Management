@@ -546,3 +546,9 @@
 - **Action:** Implemented document team guide workflow in pbl report directory
 - **Files touched:** docs/pbl-reports/TEAM_WORKFLOW_GUIDE.md
 
+### Day 92 (Sprint Day 92) — document strictly 12-week project reports submission
+- **Timestamp:** `2026-10-07T20:22:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented document strictly 12-week project reports submission
+- **Files touched:** docs/pbl-reports/WEEKLY_PROJECT_REPORTS.md
+
