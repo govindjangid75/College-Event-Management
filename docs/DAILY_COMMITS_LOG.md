@@ -36,3 +36,9 @@
 - **Action:** Implemented draft student dashboard wireframes on figma
 - **Files touched:** docs/TRD.md
 
+### Day 7 (Sprint Day 7) — write frontend requirements in srs doc
+- **Timestamp:** `2026-10-07T09:59:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented write frontend requirements in srs doc
+- **Files touched:** docs/SRS.md
+
