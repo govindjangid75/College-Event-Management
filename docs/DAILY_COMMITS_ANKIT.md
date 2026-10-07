@@ -135,3 +135,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/src/components/CreateEventModal.tsx
 
+### Day 28 — Day 28: test event wizard payload submission with backend api
+- **Timestamp:** `2026-10-07T12:33:00+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** client/src/components/CreateEventModal.tsx
+
