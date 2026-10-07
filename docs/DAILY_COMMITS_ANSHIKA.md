@@ -75,3 +75,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/GateVerificationRequestDto.java, server/src/main/java/com/aryacollege/campussphere/dto/GateVerificationResultDto.java
 
+### Day 16 — Day 16: create gate verification request and result dtos
+- **Timestamp:** `2026-10-07T11:05:00+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/GateVerificationRequestDto.java, server/src/main/java/com/aryacollege/campussphere/dto/GateVerificationResultDto.java
+
