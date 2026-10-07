@@ -96,3 +96,9 @@
 - **Action:** Implemented create club detail page with hod info and lead roster
 - **Files touched:** client/src/pages/ClubDetailPage.tsx
 
+### Day 17 (Sprint Day 17) — add tanstack query caching for club api calls
+- **Timestamp:** `2026-10-07T11:12:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented add tanstack query caching for club api calls
+- **Files touched:** client/src/context/ClubContext.tsx
+
