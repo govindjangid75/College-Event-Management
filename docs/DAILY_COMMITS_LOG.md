@@ -60,3 +60,9 @@
 - **Action:** Implemented add login page with roll no and email support
 - **Files touched:** client/src/pages/LoginPage.tsx
 
+### Day 11 (Sprint Day 11) — setup auth context and jwt token handling in memory
+- **Timestamp:** `2026-10-07T10:28:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented setup auth context and jwt token handling in memory
+- **Files touched:** client/src/context/AuthContext.tsx
+
