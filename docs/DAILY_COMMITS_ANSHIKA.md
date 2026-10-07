@@ -430,3 +430,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** docs/pbl-reports/TEAM_WORKFLOW_GUIDE.md
 
+### Day 87 — Day 87: document strictly 12-week project reports submission
+- **Timestamp:** `2026-10-07T19:45:40+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** docs/pbl-reports/WEEKLY_PROJECT_REPORTS.md
+
