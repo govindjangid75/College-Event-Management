@@ -430,3 +430,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** reeports/CampusSphere_Group_Project_Report.pdf
 
+### Day 87 — Day 87: document team guide workflow in pbl report directory
+- **Timestamp:** `2026-10-07T19:45:40+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** docs/pbl-reports/TEAM_WORKFLOW_GUIDE.md
+
