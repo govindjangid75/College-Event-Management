@@ -162,3 +162,9 @@
 - **Action:** Implemented build venue rest controller listing available college halls
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/VenueController.java
 
+### Day 28 (Sprint Day 28) — design event entity model with date, venue, capacity and price
+- **Timestamp:** `2026-10-07T12:33:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented design event entity model with date, venue, capacity and price
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Event.java
+
