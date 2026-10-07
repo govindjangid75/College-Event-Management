@@ -540,3 +540,9 @@
 - **Action:** Implemented add group project report documentation pdf
 - **Files touched:** reeports/CampusSphere_Group_Project_Report.pdf
 
+### Day 91 (Sprint Day 91) — document team guide workflow in pbl report directory
+- **Timestamp:** `2026-10-07T20:15:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented document team guide workflow in pbl report directory
+- **Files touched:** docs/pbl-reports/TEAM_WORKFLOW_GUIDE.md
+
