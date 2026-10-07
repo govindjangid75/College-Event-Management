@@ -108,3 +108,9 @@
 - **Action:** Implemented build club rest controller with category filter endpoint
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/ClubController.java
 
+### Day 19 (Sprint Day 19) — create club application model for collegiate societies
+- **Timestamp:** `2026-10-07T11:27:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create club application model for collegiate societies
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/ClubApplication.java
+
