@@ -50,3 +50,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
 
+### Day 11 — Day 11: implement atomic capacity lock logic using mongo inc operator
+- **Timestamp:** `2026-10-07T10:28:20+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
+
