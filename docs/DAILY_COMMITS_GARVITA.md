@@ -102,3 +102,9 @@
 - **Action:** Implemented create club service layer with get all and get by id methods
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/ClubService.java
 
+### Day 18 (Sprint Day 18) — build club rest controller with category filter endpoint
+- **Timestamp:** `2026-10-07T11:19:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented build club rest controller with category filter endpoint
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/ClubController.java
+
