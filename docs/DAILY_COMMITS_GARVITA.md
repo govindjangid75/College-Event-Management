@@ -132,3 +132,9 @@
 - **Action:** Implemented design venue model with name, capacity and location coordinates
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Venue.java
 
+### Day 23 (Sprint Day 23) — create venue repository with active status filtering
+- **Timestamp:** `2026-10-07T11:56:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create venue repository with active status filtering
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/VenueRepository.java
+
