@@ -70,3 +70,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/RegistrationController.java
 
+### Day 15 — Day 15: build registration controller endpoint for solo event passes
+- **Timestamp:** `2026-10-07T10:57:40+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/RegistrationController.java
+
