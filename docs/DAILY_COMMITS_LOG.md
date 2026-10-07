@@ -534,3 +534,9 @@
 - **Action:** Implemented strictly disable register button on concluded events in ui
 - **Files touched:** client/src/pages/EventsPage.tsx, client/src/pages/ClubAdminPage.tsx
 
+### Day 90 (Sprint Day 90) — test role switcher between student, club lead and dean
+- **Timestamp:** `2026-10-07T20:07:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented test role switcher between student, club lead and dean
+- **Files touched:** client/src/components/RoleSwitcherBar.tsx, client/src/pages/SuperAdminPage.tsx
+
