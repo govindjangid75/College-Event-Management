@@ -210,3 +210,9 @@
 - **Action:** Implemented create my passes dashboard layout
 - **Files touched:** client/src/pages/MyPassesPage.tsx
 
+### Day 36 (Sprint Day 36) — implement 30-second rolling dynamic qr pass
+- **Timestamp:** `2026-10-07T13:31:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented implement 30-second rolling dynamic qr pass
+- **Files touched:** client/src/pages/MyPassesPage.tsx
+
