@@ -48,3 +48,9 @@
 - **Action:** Implemented setup react router routes and main layout shell
 - **Files touched:** client/src/main.tsx, client/src/App.tsx, client/src/vite-env.d.ts
 
+### Day 9 (Sprint Day 9) — create student registration form with roll no check
+- **Timestamp:** `2026-10-07T10:13:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented create student registration form with roll no check
+- **Files touched:** client/src/pages/RegisterPage.tsx
+
