@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # ============================================================================
+  # Spring Boot Java 21 Backend Microservice
+  # ============================================================================
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: campussphere-server
+    restart: unless-stopped
+    ports:
+      - "${SERVER_PORT:-8080}:8080"
+    environment:
+      - SERVER_PORT=8080
+      - MONGODB_URI=${MONGODB_URI:-mongodb+srv://chamanjangid999_db_user:DEpTcEkSxzmvVijK@event-management.o8uyxsv.mongodb.net/campussphere?retryWrites=true&w=majority&appName=event-management}
+      - MONGODB_DATABASE=${MONGODB_DATABASE:-campussphere}
+      - VENUE_SETUP_BUFFER=${VENUE_SETUP_BUFFER:-30}
+      - VENUE_CLEANUP_BUFFER=${VENUE_CLEANUP_BUFFER:-30}
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE:-prod}
+      - RAZORPAY_KEY_ID=${RAZORPAY_KEY_ID:-rzp_test_campussphere}
+      - RAZORPAY_KEY_SECRET=${RAZORPAY_KEY_SECRET:-rzp_sec_campussphere}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    networks:
+      - campussphere-net
+
+  # ============================================================================
+  # React 19 Frontend + Nginx Reverse Proxy
+  # ============================================================================
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: campussphere-client
+    restart: unless-stopped
+    ports:
+      - "${CLIENT_PORT:-80}:80"
+    depends_on:
+      server:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - campussphere-net
+
+networks:
+  campussphere-net:
+    driver: bridge
+    name: campussphere-network
