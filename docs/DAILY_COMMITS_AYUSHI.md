@@ -100,3 +100,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/ClubLedgerEntry.java
 
+### Day 21 — Day 21: implement club ledger repository with audit tracking queries
+- **Timestamp:** `2026-10-07T11:41:40+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/ClubLedgerRepository.java
+
