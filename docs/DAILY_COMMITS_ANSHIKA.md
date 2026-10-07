@@ -425,3 +425,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** docs/pbl-reports/TEAM_WORKFLOW_GUIDE.md
 
+### Day 86 — Day 86: document team guide workflow in pbl report directory
+- **Timestamp:** `2026-10-07T19:38:20+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** docs/pbl-reports/TEAM_WORKFLOW_GUIDE.md
+
