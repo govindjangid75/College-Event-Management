@@ -66,3 +66,9 @@
 - **Action:** Implemented setup auth context and jwt token handling in memory
 - **Files touched:** client/src/context/AuthContext.tsx
 
+### Day 12 (Sprint Day 12) — build navbar with theme toggle and user role badge
+- **Timestamp:** `2026-10-07T10:35:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented build navbar with theme toggle and user role badge
+- **Files touched:** client/src/context/ThemeContext.tsx, client/src/components/Navbar.tsx
+
