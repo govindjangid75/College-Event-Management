@@ -325,3 +325,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/CertificateService.java
 
+### Day 66 — Day 66: test certificate pdf download endpoint with sample data
+- **Timestamp:** `2026-10-07T17:11:40+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/CertificateController.java
+
