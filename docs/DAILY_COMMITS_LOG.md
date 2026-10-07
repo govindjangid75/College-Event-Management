@@ -234,3 +234,9 @@
 - **Action:** Implemented use screen wakelock api while displaying pass at gate
 - **Files touched:** client/src/pages/MyPassesPage.tsx
 
+### Day 40 (Sprint Day 40) — prefetch next qr token before 30s window expires
+- **Timestamp:** `2026-10-07T14:01:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented prefetch next qr token before 30s window expires
+- **Files touched:** client/src/pages/MyPassesPage.tsx
+
