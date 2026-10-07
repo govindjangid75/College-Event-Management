@@ -6,3 +6,9 @@
 - **Action:** Implemented initial project setup with vite, react and typescript scaffold
 - **Files touched:** client/package.json, client/index.html, client/vite.config.ts, client/tsconfig.json, client/tsconfig.app.json, client/tsconfig.node.json, client/README.md, .gitignore
 
+### Day 2 (Sprint Day 2) — draft abstract document and list of 15 student clubs
+- **Timestamp:** `2026-10-07T09:22:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented draft abstract document and list of 15 student clubs
+- **Files touched:** docs/README.md, docs/DEVELOPMENT_ROADMAP.md
+
