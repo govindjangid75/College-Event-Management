@@ -102,3 +102,9 @@
 - **Action:** Implemented add tanstack query caching for club api calls
 - **Files touched:** client/src/context/ClubContext.tsx
 
+### Day 18 (Sprint Day 18) — style club cards with hover effects and society badges
+- **Timestamp:** `2026-10-07T11:19:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented style club cards with hover effects and society badges
+- **Files touched:** client/src/data/seedData.ts
+
