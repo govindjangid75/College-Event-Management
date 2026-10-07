@@ -384,3 +384,9 @@
 - **Action:** Implemented strictly disallow registration on concluded past events
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
 
+### Day 65 (Sprint Day 65) — implement digital certificate wallet fetching logic
+- **Timestamp:** `2026-10-07T17:04:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented implement digital certificate wallet fetching logic
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/CertificateService.java
+
