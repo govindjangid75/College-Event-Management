@@ -504,3 +504,9 @@
 - **Action:** Implemented full end to end test: registration to payment to qr scan
 - **Files touched:** client/src/pages/MyPassesPage.tsx, docs/API_SPECIFICATION.md
 
+### Day 85 (Sprint Day 85) — fix dark mode contrast on comparison cards
+- **Timestamp:** `2026-10-07T19:31:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented fix dark mode contrast on comparison cards
+- **Files touched:** client/src/index.css, docs/SECURITY_ARCHITECTURE.md
+
