@@ -186,3 +186,9 @@
 - **Action:** Implemented add join team dialog with squad passcode input
 - **Files touched:** client/src/components/EventRegistrationModal.tsx
 
+### Day 32 (Sprint Day 32) — display team members list in registration modal
+- **Timestamp:** `2026-10-07T13:02:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented display team members list in registration modal
+- **Files touched:** client/src/components/EventRegistrationModal.tsx
+
