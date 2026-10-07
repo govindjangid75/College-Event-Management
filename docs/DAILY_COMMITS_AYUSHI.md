@@ -280,3 +280,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** docs/TRD.md
 
+### Day 57 — Day 57: integrate itext 8 vector pdf generator dependency in maven
+- **Timestamp:** `2026-10-07T16:05:40+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/pom.xml
+
