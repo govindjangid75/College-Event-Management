@@ -1,0 +1,45 @@
+# Environment variables and secrets
+.env
+*.env.local
+
+# Dependency directories
+node_modules/
+client/node_modules/
+
+# Production build outputs
+dist/
+client/dist/
+target/
+server/target/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDE & Editor artifacts
+.idea/
+.vscode/
+*.iml
+*.sublime-project
+*.sublime-workspace
+.classpath
+.project
+.settings/
+
+
+
+
+
+
+
+
+
+
+# Frontend maintained separately by frontend team
+/client/

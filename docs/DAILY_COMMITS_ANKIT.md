@@ -25,3 +25,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** docker-compose.yml, .env.example
 
+### Day 6 — Day 6: setup eslint prettier and dev container configs
+- **Timestamp:** `2026-10-07T09:51:40+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** client/.oxlintrc.json, .gitignore
+
