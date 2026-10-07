@@ -54,3 +54,9 @@
 - **Action:** Implemented create user repository with mongo queries for email and roll no
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/UserRepository.java
 
+### Day 10 (Sprint Day 10) — implement standardized api response payload dto
+- **Timestamp:** `2026-10-07T10:21:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented implement standardized api response payload dto
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/ApiResponse.java
+
