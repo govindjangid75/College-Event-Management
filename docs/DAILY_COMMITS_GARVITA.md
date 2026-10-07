@@ -498,3 +498,9 @@
 - **Action:** Implemented document backend deployment guide and runbook run steps
 - **Files touched:** docs/DEPLOYMENT_GUIDE.md
 
+### Day 84 (Sprint Day 84) — document developmental roadmap milestones across 12 weeks
+- **Timestamp:** `2026-10-07T19:23:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented document developmental roadmap milestones across 12 weeks
+- **Files touched:** docs/DEVELOPMENT_ROADMAP.md
+
