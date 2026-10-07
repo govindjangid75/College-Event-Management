@@ -375,3 +375,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/EventService.java
 
+### Day 76 — Day 76: strictly disallow registration on concluded past events
+- **Timestamp:** `2026-10-07T18:25:00+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
+
