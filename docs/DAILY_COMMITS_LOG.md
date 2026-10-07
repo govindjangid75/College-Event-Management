@@ -390,3 +390,9 @@
 - **Action:** Implemented create certificate wallet card view with qr seals
 - **Files touched:** client/src/pages/CertificatesPage.tsx
 
+### Day 66 (Sprint Day 66) — create public certificate verification page
+- **Timestamp:** `2026-10-07T17:11:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented create public certificate verification page
+- **Files touched:** client/src/pages/CertificateVerifyPage.tsx
+
