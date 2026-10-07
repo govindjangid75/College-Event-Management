@@ -325,3 +325,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/AiChatDto.java, server/src/main/java/com/aryacollege/campussphere/dto/AiEventDraftDto.java
 
+### Day 66 — Day 66: design ai chat and event proposal draft dtos
+- **Timestamp:** `2026-10-07T17:11:40+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/AiChatDto.java, server/src/main/java/com/aryacollege/campussphere/dto/AiEventDraftDto.java
+
