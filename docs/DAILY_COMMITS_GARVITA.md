@@ -222,3 +222,9 @@
 - **Action:** Implemented implement registration repository with compound attendee queries
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/RegistrationRepository.java
 
+### Day 38 (Sprint Day 38) — create gate verification request dto with qr token payload
+- **Timestamp:** `2026-10-07T13:46:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create gate verification request dto with qr token payload
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/GateVerificationRequestDto.java
+
