@@ -225,3 +225,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/SuggestionSubmissionDto.java, server/src/main/java/com/aryacollege/campussphere/dto/KanbanStatusUpdateDto.java
 
+### Day 46 — Day 46: design digital certificate data model with sha256 digital seals
+- **Timestamp:** `2026-10-07T14:45:00+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Certificate.java
+
