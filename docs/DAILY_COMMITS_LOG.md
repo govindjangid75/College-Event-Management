@@ -468,3 +468,9 @@
 - **Action:** Implemented add 3d models for auditorium, turing lab and central lawn
 - **Files touched:** client/src/components/Campus3DExplorer.tsx, client/Dockerfile, client/.dockerignore
 
+### Day 79 (Sprint Day 79) — add pulsing neon beacon pins on buildings with active events
+- **Timestamp:** `2026-10-07T18:47:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented add pulsing neon beacon pins on buildings with active events
+- **Files touched:** client/src/components/Campus3DExplorer.tsx, client/nginx.conf
+
