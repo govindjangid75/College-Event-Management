@@ -115,3 +115,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/PayoutSettlementRequest.java
 
+### Day 24 — Day 24: implement payout settlement request model for club treasury
+- **Timestamp:** `2026-10-07T12:03:40+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/PayoutSettlementRequest.java
+
