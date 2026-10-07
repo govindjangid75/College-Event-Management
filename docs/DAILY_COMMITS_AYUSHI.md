@@ -150,3 +150,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** docs/API_SPECIFICATION.md
 
+### Day 31 — Day 31: integrate razorpay client sdk dependency in pom xml
+- **Timestamp:** `2026-10-07T12:55:00+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/pom.xml
+
