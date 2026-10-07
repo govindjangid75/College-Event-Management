@@ -295,3 +295,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/Dockerfile, client/nginx.conf
 
+### Day 60 — Day 60: author multi stage client dockerfile with nginx alpine base
+- **Timestamp:** `2026-10-07T16:27:40+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** client/Dockerfile, client/nginx.conf
+
