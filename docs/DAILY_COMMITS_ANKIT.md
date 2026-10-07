@@ -20,3 +20,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** docker-compose.yml, .env.example
 
+### Day 5 — Day 5: configure root docker compose for local development
+- **Timestamp:** `2026-10-07T09:44:20+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** docker-compose.yml, .env.example
+
