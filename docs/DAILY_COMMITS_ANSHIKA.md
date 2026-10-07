@@ -305,3 +305,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/AicteTranscriptDto.java
 
+### Day 62 — Day 62: document aicte 100 activity points calculation rules in spec
+- **Timestamp:** `2026-10-07T16:42:20+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** docs/AICTE_ACTIVITY_POINTS_SPEC.md
+
