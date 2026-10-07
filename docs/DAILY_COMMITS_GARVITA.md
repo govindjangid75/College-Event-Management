@@ -294,3 +294,9 @@
 - **Action:** Implemented create kanban status update dto for student suggestions
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/KanbanStatusUpdateDto.java
 
+### Day 50 (Sprint Day 50) — design digital certificate model with sha256 digital seals
+- **Timestamp:** `2026-10-07T15:14:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented design digital certificate model with sha256 digital seals
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Certificate.java
+
