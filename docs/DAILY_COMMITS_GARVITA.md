@@ -396,3 +396,9 @@
 - **Action:** Implemented implement hybrid event recommender algorithm using cosine similarity
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/AiService.java
 
+### Day 67 (Sprint Day 67) — add club lead member list querying with coordinator badge
+- **Timestamp:** `2026-10-07T17:19:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented add club lead member list querying with coordinator badge
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/ClubService.java
+
