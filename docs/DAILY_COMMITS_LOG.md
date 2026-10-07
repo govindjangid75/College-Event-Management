@@ -162,3 +162,9 @@
 - **Action:** Implemented improve event card layout on mobile screens
 - **Files touched:** client/src/index.css
 
+### Day 28 (Sprint Day 28) — design event registration modal popup
+- **Timestamp:** `2026-10-07T12:33:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented design event registration modal popup
+- **Files touched:** client/src/components/EventRegistrationModal.tsx
+
