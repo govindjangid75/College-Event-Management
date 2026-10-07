@@ -114,3 +114,9 @@
 - **Action:** Implemented create club application model for collegiate societies
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/ClubApplication.java
 
+### Day 20 (Sprint Day 20) — implement club application repository for pending submissions
+- **Timestamp:** `2026-10-07T11:34:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented implement club application repository for pending submissions
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/ClubApplicationRepository.java
+
