@@ -54,3 +54,9 @@
 - **Action:** Implemented create student registration form with roll no check
 - **Files touched:** client/src/pages/RegisterPage.tsx
 
+### Day 10 (Sprint Day 10) — add login page with roll no and email support
+- **Timestamp:** `2026-10-07T10:21:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented add login page with roll no and email support
+- **Files touched:** client/src/pages/LoginPage.tsx
+
