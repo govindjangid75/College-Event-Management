@@ -245,3 +245,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/src/pages/ClubAdminPage.tsx
 
+### Day 50 — Day 50: test qr scanner camera feed across android and ios devices
+- **Timestamp:** `2026-10-07T15:14:20+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** client/src/pages/ClubAdminPage.tsx
+
