@@ -408,3 +408,9 @@
 - **Action:** Implemented add immutable dean audit override capability with mandatory remarks
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/SuperAdminAuditController.java
 
+### Day 69 (Sprint Day 69) — add event capacity meter and live seat counter logic
+- **Timestamp:** `2026-10-07T17:33:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented add event capacity meter and live seat counter logic
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/EventController.java
+
