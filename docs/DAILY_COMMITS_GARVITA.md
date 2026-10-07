@@ -474,3 +474,9 @@
 - **Action:** Implemented add sample environment configuration file
 - **Files touched:** .env.example
 
+### Day 80 (Sprint Day 80) — configure github actions automated test and build workflow
+- **Timestamp:** `2026-10-07T18:54:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented configure github actions automated test and build workflow
+- **Files touched:** .github/workflows/ci-cd.yml
+
