@@ -216,3 +216,9 @@
 - **Action:** Implemented implement 30-second rolling dynamic qr pass
 - **Files touched:** client/src/pages/MyPassesPage.tsx
 
+### Day 37 (Sprint Day 37) — add svg circular countdown ring for qr timer
+- **Timestamp:** `2026-10-07T13:39:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented add svg circular countdown ring for qr timer
+- **Files touched:** client/src/pages/MyPassesPage.tsx
+
