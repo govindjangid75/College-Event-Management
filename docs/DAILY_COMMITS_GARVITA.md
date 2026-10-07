@@ -246,3 +246,9 @@
 - **Action:** Implemented implement verified feedback repository with event index
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/VerifiedFeedbackRepository.java
 
+### Day 42 (Sprint Day 42) — build verified feedback service calculating average ratings
+- **Timestamp:** `2026-10-07T14:15:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented build verified feedback service calculating average ratings
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/FeedbackService.java
+
