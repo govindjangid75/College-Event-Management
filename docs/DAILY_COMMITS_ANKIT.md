@@ -15,3 +15,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/package.json, docker-compose.yml
 
+### Day 4 — Day 4: configure root docker compose for local development
+- **Timestamp:** `2026-10-07T09:37:00+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** docker-compose.yml, .env.example
+
