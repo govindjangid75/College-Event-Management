@@ -528,3 +528,9 @@
 - **Action:** Implemented team meeting with guide to review all 13 modules
 - **Files touched:** client/src/components/RoleSwitcherBar.tsx, client/src/components/CreateEventModal.tsx
 
+### Day 89 (Sprint Day 89) — strictly disable register button on concluded events in ui
+- **Timestamp:** `2026-10-07T20:00:20+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented strictly disable register button on concluded events in ui
+- **Files touched:** client/src/pages/EventsPage.tsx, client/src/pages/ClubAdminPage.tsx
+
