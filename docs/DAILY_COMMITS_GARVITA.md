@@ -204,3 +204,9 @@
 - **Action:** Implemented design club ledger entry model for dedicated upi treasury
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/ClubLedgerEntry.java
 
+### Day 35 (Sprint Day 35) — implement club ledger repository with audit tracking
+- **Timestamp:** `2026-10-07T13:24:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented implement club ledger repository with audit tracking
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/ClubLedgerRepository.java
+
