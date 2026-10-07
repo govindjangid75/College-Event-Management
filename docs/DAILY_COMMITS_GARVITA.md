@@ -90,3 +90,9 @@
 - **Action:** Implemented design club entity model with category, lead and budget fields
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Club.java
 
+### Day 16 (Sprint Day 16) — implement club repository with mongo queries by category
+- **Timestamp:** `2026-10-07T11:05:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented implement club repository with mongo queries by category
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/ClubRepository.java
+
