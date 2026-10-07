@@ -492,3 +492,9 @@
 - **Action:** Implemented document technical requirements and system boundaries in trd
 - **Files touched:** docs/TRD.md
 
+### Day 83 (Sprint Day 83) — document backend deployment guide and runbook run steps
+- **Timestamp:** `2026-10-07T19:16:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented document backend deployment guide and runbook run steps
+- **Files touched:** docs/DEPLOYMENT_GUIDE.md
+
