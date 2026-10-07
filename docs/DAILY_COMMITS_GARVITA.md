@@ -180,3 +180,9 @@
 - **Action:** Implemented create event proposal dto with budget and venue breakdown
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/EventProposalDto.java
 
+### Day 31 (Sprint Day 31) — build event proposal submission and approval service
+- **Timestamp:** `2026-10-07T12:55:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented build event proposal submission and approval service
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/EventService.java
+
