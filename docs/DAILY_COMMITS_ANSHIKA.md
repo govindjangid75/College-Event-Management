@@ -105,3 +105,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
 
+### Day 22 — Day 22: add duplicate ticket detection emitting immediate red warning
+- **Timestamp:** `2026-10-07T11:49:00+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
+
