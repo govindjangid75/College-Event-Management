@@ -252,3 +252,9 @@
 - **Action:** Implemented integrate razorpay checkout script on frontend
 - **Files touched:** client/src/pages/MyPassesPage.tsx
 
+### Day 43 (Sprint Day 43) — build checkout modal with upi and card options
+- **Timestamp:** `2026-10-07T14:23:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented build checkout modal with upi and card options
+- **Files touched:** client/src/pages/MyPassesPage.tsx
+
