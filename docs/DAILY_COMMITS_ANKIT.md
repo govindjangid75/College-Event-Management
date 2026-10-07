@@ -235,3 +235,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/src/pages/ClubAdminPage.tsx
 
+### Day 48 — Day 48: implement indexeddb local queue for sub second offline check ins
+- **Timestamp:** `2026-10-07T14:59:40+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** client/src/pages/ClubAdminPage.tsx
+
