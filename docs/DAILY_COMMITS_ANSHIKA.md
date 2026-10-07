@@ -320,3 +320,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** docs/AICTE_ACTIVITY_POINTS_SPEC.md
 
+### Day 65 — Day 65: design ai chat and event proposal draft dtos
+- **Timestamp:** `2026-10-07T17:04:20+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/AiChatDto.java, server/src/main/java/com/aryacollege/campussphere/dto/AiEventDraftDto.java
+
