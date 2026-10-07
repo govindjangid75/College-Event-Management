@@ -36,3 +36,9 @@
 - **Action:** Implemented write backend requirements in srs doc
 - **Files touched:** docs/SRS.md
 
+### Day 7 (Sprint Day 7) — document security architecture and stride threat model
+- **Timestamp:** `2026-10-07T09:59:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented document security architecture and stride threat model
+- **Files touched:** docs/SECURITY_ARCHITECTURE.md
+
