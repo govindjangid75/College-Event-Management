@@ -270,3 +270,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/CertificateController.java
 
+### Day 55 — Day 55: build certificate rest controller with public verify api endpoint
+- **Timestamp:** `2026-10-07T15:51:00+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/CertificateController.java
+
