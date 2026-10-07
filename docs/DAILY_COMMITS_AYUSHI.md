@@ -145,3 +145,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** docs/API_SPECIFICATION.md
 
+### Day 30 — Day 30: document financial treasury sub ledger rules in api spec
+- **Timestamp:** `2026-10-07T12:47:40+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** docs/API_SPECIFICATION.md
+
