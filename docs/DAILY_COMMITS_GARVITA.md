@@ -420,3 +420,9 @@
 - **Action:** Implemented update cors configuration bean allowing vite dev server
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/config/CorsConfig.java
 
+### Day 71 (Sprint Day 71) — create multi-stage dockerfile for spring boot container
+- **Timestamp:** `2026-10-07T17:48:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create multi-stage dockerfile for spring boot container
+- **Files touched:** server/Dockerfile
+
