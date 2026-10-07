@@ -198,3 +198,9 @@
 - **Action:** Implemented handle sold out state and waitlist notification toast
 - **Files touched:** client/src/components/EventRegistrationModal.tsx
 
+### Day 34 (Sprint Day 34) — test registration validation on mobile screens
+- **Timestamp:** `2026-10-07T13:17:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented test registration validation on mobile screens
+- **Files touched:** client/src/components/EventRegistrationModal.tsx
+
