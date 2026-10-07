@@ -55,3 +55,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/src/components/ProtectedRoute.tsx
 
+### Day 12 — Day 12: design club admin console layout with active member count
+- **Timestamp:** `2026-10-07T10:35:40+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** client/src/pages/ClubAdminPage.tsx
+
