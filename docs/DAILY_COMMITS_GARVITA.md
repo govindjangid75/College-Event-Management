@@ -516,3 +516,9 @@
 - **Action:** Implemented add spring boot integration test verifying app context loads
 - **Files touched:** server/src/test/java/com/aryacollege/campussphere/CampusSphereApplicationTests.java
 
+### Day 87 (Sprint Day 87) — seed demo events with official arya college data
+- **Timestamp:** `2026-10-07T19:45:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented seed demo events with official arya college data
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/DatabaseSeederService.java
+
