@@ -55,3 +55,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
 
+### Day 12 — Day 12: build registration request payload validation dto
+- **Timestamp:** `2026-10-07T10:35:40+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/RegistrationRequestDto.java
+
