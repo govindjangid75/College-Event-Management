@@ -42,3 +42,9 @@
 - **Action:** Implemented document security architecture and stride threat model
 - **Files touched:** docs/SECURITY_ARCHITECTURE.md
 
+### Day 8 (Sprint Day 8) — implement user model with roles for student, club admin and dean
+- **Timestamp:** `2026-10-07T10:06:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented implement user model with roles for student, club admin and dean
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/User.java
+
