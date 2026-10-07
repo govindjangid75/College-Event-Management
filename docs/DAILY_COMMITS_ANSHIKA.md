@@ -25,3 +25,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/resources/application.properties
 
+### Day 6 — Day 6: configure mongodb atlas 3 node replica set connection string
+- **Timestamp:** `2026-10-07T09:51:40+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/resources/application.properties
+
