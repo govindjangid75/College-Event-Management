@@ -378,3 +378,9 @@
 - **Action:** Implemented add logic to return past events in concluded events archive
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/EventService.java
 
+### Day 64 (Sprint Day 64) — strictly disallow registration on concluded past events
+- **Timestamp:** `2026-10-07T16:57:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented strictly disallow registration on concluded past events
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
+
