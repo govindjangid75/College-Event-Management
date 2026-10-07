@@ -290,3 +290,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/pom.xml
 
+### Day 59 — Day 59: implement server side verifiable certificate pdf template
+- **Timestamp:** `2026-10-07T16:20:20+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/CertificateService.java
+
