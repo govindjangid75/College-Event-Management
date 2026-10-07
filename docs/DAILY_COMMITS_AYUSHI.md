@@ -165,3 +165,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/pom.xml
 
+### Day 34 — Day 34: implement razorpay order creation endpoint for event passes
+- **Timestamp:** `2026-10-07T13:17:00+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/RegistrationController.java
+
