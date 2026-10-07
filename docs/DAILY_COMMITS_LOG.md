@@ -354,3 +354,9 @@
 - **Action:** Implemented implement optimistic upvoting for student suggestions
 - **Files touched:** client/src/components/StudentSuggestionModal.tsx
 
+### Day 60 (Sprint Day 60) — show verified attendee checkmark on event reviews
+- **Timestamp:** `2026-10-07T16:27:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented show verified attendee checkmark on event reviews
+- **Files touched:** client/src/components/EventFeedbackModal.tsx
+
