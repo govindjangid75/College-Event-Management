@@ -18,3 +18,9 @@
 - **Action:** Implemented setup tailwind css and custom emerald color palette
 - **Files touched:** client/src/index.css, client/src/App.css
 
+### Day 4 (Sprint Day 4) — create basic button and card ui components
+- **Timestamp:** `2026-10-07T09:37:00+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented create basic button and card ui components
+- **Files touched:** client/src/assets/hero.png, client/src/assets/react.svg, client/src/assets/vite.svg, client/public/favicon.svg
+
