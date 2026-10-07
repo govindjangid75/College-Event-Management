@@ -186,3 +186,9 @@
 - **Action:** Implemented build event proposal submission and approval service
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/EventService.java
 
+### Day 32 (Sprint Day 32) — build event rest controller with search and category filters
+- **Timestamp:** `2026-10-07T13:02:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented build event rest controller with search and category filters
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/EventController.java
+
