@@ -20,3 +20,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/resources/application.properties, docs/SECURITY_ARCHITECTURE.md
 
+### Day 5 — Day 5: configure razorpay test key and secret in properties
+- **Timestamp:** `2026-10-07T09:44:20+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/resources/application.properties, docs/SECURITY_ARCHITECTURE.md
+
