@@ -426,3 +426,9 @@
 - **Action:** Implemented create multi-stage dockerfile for spring boot container
 - **Files touched:** server/Dockerfile
 
+### Day 72 (Sprint Day 72) — add dockerignore file excluding maven wrapper and target
+- **Timestamp:** `2026-10-07T17:55:40+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented add dockerignore file excluding maven wrapper and target
+- **Files touched:** server/.dockerignore
+
