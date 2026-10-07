@@ -522,3 +522,9 @@
 - **Action:** Implemented seed demo events with official arya college data
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/DatabaseSeederService.java
 
+### Day 88 (Sprint Day 88) — add attendance verification guard before review submission
+- **Timestamp:** `2026-10-07T19:53:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented add attendance verification guard before review submission
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/FeedbackService.java
+
