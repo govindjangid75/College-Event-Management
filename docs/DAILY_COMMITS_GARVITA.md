@@ -414,3 +414,9 @@
 - **Action:** Implemented add event capacity meter and live seat counter logic
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/controller/EventController.java
 
+### Day 70 (Sprint Day 70) — update cors configuration bean allowing vite dev server
+- **Timestamp:** `2026-10-07T17:41:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented update cors configuration bean allowing vite dev server
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/config/CorsConfig.java
+
