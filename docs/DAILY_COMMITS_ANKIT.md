@@ -40,3 +40,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/src/components/RoleSwitcherBar.tsx
 
+### Day 9 — Day 9: design admin application shell and role switcher component
+- **Timestamp:** `2026-10-07T10:13:40+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** client/src/components/RoleSwitcherBar.tsx
+
