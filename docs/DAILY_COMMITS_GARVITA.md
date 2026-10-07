@@ -240,3 +240,9 @@
 - **Action:** Implemented design verified feedback model enforcing 4 strict prerequisites
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/VerifiedFeedback.java
 
+### Day 41 (Sprint Day 41) — implement verified feedback repository with event index
+- **Timestamp:** `2026-10-07T14:08:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented implement verified feedback repository with event index
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/VerifiedFeedbackRepository.java
+
