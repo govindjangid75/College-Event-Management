@@ -96,3 +96,9 @@
 - **Action:** Implemented implement club repository with mongo queries by category
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/repository/ClubRepository.java
 
+### Day 17 (Sprint Day 17) — create club service layer with get all and get by id methods
+- **Timestamp:** `2026-10-07T11:12:20+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented create club service layer with get all and get by id methods
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/ClubService.java
+
