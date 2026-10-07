@@ -30,3 +30,8 @@
 - **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
 - **Files touched:** client/.oxlintrc.json, .gitignore
 
+### Day 7 — Day 7: setup eslint prettier and dev container configs
+- **Timestamp:** `2026-10-07T09:59:00+05:30`
+- **Contributor:** ankitydv5105-lang (ankitydv5105@gmail.com)
+- **Files touched:** client/.oxlintrc.json, .gitignore
+
