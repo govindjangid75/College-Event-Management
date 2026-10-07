@@ -126,3 +126,9 @@
 - **Action:** Implemented implement database seeder service for 15 collegiate societies
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/DatabaseSeederService.java
 
+### Day 22 (Sprint Day 22) — design venue model with name, capacity and location coordinates
+- **Timestamp:** `2026-10-07T11:49:00+05:30`
+- **Lead:** Garvita Jain (Backend Lead)
+- **Action:** Implemented design venue model with name, capacity and location coordinates
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/Venue.java
+
