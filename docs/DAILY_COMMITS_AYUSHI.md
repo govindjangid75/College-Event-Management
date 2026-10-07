@@ -135,3 +135,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
 
+### Day 28 — Day 28: build automatic ticket payment fee credit to club ledger
+- **Timestamp:** `2026-10-07T12:33:00+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/RegistrationService.java
+
