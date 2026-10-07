@@ -246,3 +246,9 @@
 - **Action:** Implemented fix timer drift when tab is in background
 - **Files touched:** client/src/pages/MyPassesPage.tsx
 
+### Day 42 (Sprint Day 42) — integrate razorpay checkout script on frontend
+- **Timestamp:** `2026-10-07T14:15:40+05:30`
+- **Lead:** Govind Jangid (Frontend Lead)
+- **Action:** Implemented integrate razorpay checkout script on frontend
+- **Files touched:** client/src/pages/MyPassesPage.tsx
+
