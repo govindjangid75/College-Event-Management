@@ -295,3 +295,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/CertificateService.java
 
+### Day 60 — Day 60: create aicte transcript dto with category breakdown points
+- **Timestamp:** `2026-10-07T16:27:40+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/dto/AicteTranscriptDto.java
+
