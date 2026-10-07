@@ -340,3 +340,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/test/java/com/aryacollege/campussphere/CampusSphereApplicationTests.java
 
+### Day 69 — Day 69: add high load concurrency tests simulating 300 simultaneous flash bookings
+- **Timestamp:** `2026-10-07T17:33:40+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/test/java/com/aryacollege/campussphere/CampusSphereApplicationTests.java
+
