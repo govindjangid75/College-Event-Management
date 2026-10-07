@@ -95,3 +95,8 @@
 - **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/ClubLedgerEntry.java
 
+### Day 20 — Day 20: design isolated club ledger entry data model
+- **Timestamp:** `2026-10-07T11:34:20+05:30`
+- **Contributor:** Ayushigarg03 (ayushigarg0304@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/model/ClubLedgerEntry.java
+
