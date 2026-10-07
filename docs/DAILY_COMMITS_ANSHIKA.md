@@ -370,3 +370,8 @@
 - **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
 - **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/EventService.java
 
+### Day 75 — Day 75: segregate completed past events from upcoming active fests
+- **Timestamp:** `2026-10-07T18:17:40+05:30`
+- **Contributor:** AnshikaP0841 (anshikapathak0802@gmail.com)
+- **Files touched:** server/src/main/java/com/aryacollege/campussphere/service/EventService.java
+
