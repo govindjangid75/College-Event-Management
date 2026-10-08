@@ -20,185 +20,258 @@ CampusSphere utilizes a hybrid document-modeling strategy optimized for high-rea
 
 ```mermaid
 erDiagram
-    USER ||--o{ REGISTRATION : places
-    USER ||--o{ PAYMENT : makes
-    USER ||--o{ ATTENDANCE_RECORD : checks_in
-    USER ||--o{ EVENT_FEEDBACK : submits
-    USER ||--o{ SUGGESTION : authors
-    USER ||--o{ CERTIFICATE : receives
-    USER ||--o{ CLUB_MEMBER : coordinates
+    USER ||--o{ REGISTRATION : "places"
+    USER ||--o{ CERTIFICATE : "earns"
+    USER ||--o{ CLUB_APPLICATION : "submits"
+    USER ||--o{ STUDENT_SUGGESTION : "authors"
+    USER ||--o{ VERIFIED_FEEDBACK : "submits"
+    USER ||--o{ PAYOUT_SETTLEMENT_REQUEST : "requests"
 
-    CLUB ||--o{ EVENT : organizes
-    CLUB ||--o{ CLUB_LEDGER : owns_treasury
-    CLUB ||--o{ SUGGESTION : acts_on
-    CLUB ||--o{ CLUB_MEMBER : has_leads
+    CLUB ||--o{ EVENT : "organizes"
+    CLUB ||--o{ CLUB_LEDGER_ENTRY : "owns_balance"
+    CLUB ||--o{ PAYOUT_SETTLEMENT_REQUEST : "initiates"
+    CLUB ||--o{ CLUB_APPLICATION : "receives"
+    CLUB ||--o{ STUDENT_SUGGESTION : "acts_upon"
 
-    VENUE ||--o{ EVENT : hosts
+    VENUE ||--o{ EVENT : "hosts"
 
-    EVENT ||--o{ REGISTRATION : receives_bookings
-    EVENT ||--o{ PAYMENT : generates_revenue
-    EVENT ||--o{ ATTENDANCE_RECORD : verifies_presence
-    EVENT ||--o{ EVENT_FEEDBACK : receives_reviews
-    EVENT ||--o{ SUGGESTION : generates_ideas
-    EVENT ||--o{ CERTIFICATE : issues_credentials
+    EVENT ||--o{ REGISTRATION : "receives"
+    EVENT ||--o{ CERTIFICATE : "generates"
+    EVENT ||--o{ VERIFIED_FEEDBACK : "evaluated_by"
+    EVENT ||--o{ STUDENT_SUGGESTION : "inspires"
+    EVENT ||--o{ CLUB_LEDGER_ENTRY : "earns_revenue"
 
-    REGISTRATION ||--o| PAYMENT : settled_by
-    REGISTRATION ||--o| ATTENDANCE_RECORD : verified_at_gate
-    REGISTRATION ||--o| CERTIFICATE : unlocks
+    REGISTRATION ||--o| CERTIFICATE : "unlocks_after_checkin"
+    REGISTRATION ||--o| VERIFIED_FEEDBACK : "qualifies_access"
 
     USER {
-        ObjectId _id PK
-        string email UK
-        string password_hash
-        string role
+        string id PK
+        string email UK "Unique indexed"
         string name
-        string roll_no UK
+        string role "STUDENT | CLUB_ADMIN | SUPER_ADMIN"
+        string avatarUrl
+        string administeredClubId
+        string facultyDesignation
+        string rollNo "Unique sparse indexed"
         string department
         int semester
-        int activity_points_total
-        array interests
-        date created_at
+        int batch
+        string phone
+        list interests
+        int activityPointsTotal "Cumulative AICTE credits"
+        datetime createdAt
     }
 
     CLUB {
-        ObjectId _id PK
-        string slug UK
+        string id PK
+        string slug UK "Unique indexed"
         string name
-        string category
+        string category "Coding | Robotics | Cultural | etc"
+        string tagline
         string description
-        string logo_url
-        string faculty_coordinator
-        decimal total_revenue
-        decimal available_balance
-        string payout_upi_id
-        date created_at
+        string logoUrl
+        string bannerUrl
+        string facultyCoordinator
+        list studentLeads "User ID references"
+        double treasury_totalRevenue
+        double treasury_availableBalance
+        double treasury_pendingSettlement
+        string treasury_payoutUpiId
+        int memberCount
+        int eventsHostedCount
+        string recruitmentStatus
+        string meetingSchedule
+        datetime createdAt
     }
 
     VENUE {
-        ObjectId _id PK
-        string code UK
+        string id PK
+        string code UK "AUDI_1 | LAB_MAC | CS_SEMINAR"
         string name
-        int capacity
-        string location
-        array facilities
-        boolean is_active
+        int capacity "Seated capacity"
+        string location "Campus coordinates"
+        list facilities "AC, Projector, Sound, WiFi"
+        boolean active "Availability flag"
     }
 
     EVENT {
-        ObjectId _id PK
-        ObjectId club_id FK
-        ObjectId venue_id FK
-        string slug UK
+        string id PK
+        string slug UK "Unique indexed"
         string title
+        string clubId FK "Ref CLUB.id"
+        string clubName
+        string clubLogoUrl
         string category
-        array tags
-        datetime start_time
-        datetime end_time
-        string registration_type
-        boolean is_paid
-        decimal ticket_price
-        int max_capacity
-        int registered_count
-        int activity_points
-        string status
-        date created_at
+        list tags
+        string shortSummary
+        string descriptionMarkdown
+        string bannerImage
+        string venueId FK "Ref VENUE.id"
+        string venueName
+        datetime startTime
+        datetime endTime
+        datetime registrationDeadline
+        string registrationType "SOLO | TEAM"
+        int minTeamSize
+        int maxTeamSize
+        boolean isPaid
+        double ticketPrice
+        int maxCapacity
+        int registeredCount
+        int waitlistCount
+        int activityPointsAwarded "AICTE Points"
+        string status "DRAFT | PENDING_APPROVAL | APPROVED | LIVE | COMPLETED"
+        string approvedBy "Dean / Super Admin ID"
+        string approvalComments
+        datetime approvedAt
+        datetime createdAt
     }
 
     REGISTRATION {
-        ObjectId _id PK
-        ObjectId event_id FK
-        ObjectId user_id FK
-        ObjectId payment_id FK
-        string registration_type
-        string team_name
-        string team_code
-        string status
-        string ticket_number UK
-        string hmac_seed
-        boolean attendance_verified
-        datetime attendance_verified_at
-        date created_at
-    }
-
-    PAYMENT {
-        ObjectId _id PK
-        ObjectId registration_id FK
-        ObjectId event_id FK
-        ObjectId club_id FK
-        ObjectId payer_user_id FK
-        decimal amount_inr
-        decimal net_credited_to_club
-        string razorpay_order_id
-        string razorpay_payment_id UK
-        string status
-        date created_at
-    }
-
-    CLUB_LEDGER {
-        ObjectId _id PK
-        ObjectId club_id FK
-        ObjectId payment_id FK
-        ObjectId event_id FK
-        string transaction_type
-        decimal credit_amount
-        decimal debit_amount
-        decimal running_balance
-        string remarks
-        datetime timestamp
-    }
-
-    ATTENDANCE_RECORD {
-        ObjectId _id PK
-        ObjectId event_id FK
-        ObjectId user_id FK
-        ObjectId registration_id FK
-        ObjectId scanned_by_admin_id FK
-        string scan_method
-        datetime checked_in_at
-        string device_agent
-    }
-
-    EVENT_FEEDBACK {
-        ObjectId _id PK
-        ObjectId event_id FK
-        ObjectId user_id FK
-        int overall_rating
-        int content_depth
-        int organization
-        int speaker_quality
-        int venue_facilities
-        int value_for_time
-        string review_text
-        string sentiment_label
-        date created_at
-    }
-
-    SUGGESTION {
-        ObjectId _id PK
-        ObjectId event_id FK
-        ObjectId club_id FK
-        ObjectId author_user_id FK
-        string title
-        string description
-        int upvotes_count
-        string kanban_status
-        string club_action_response
-        date created_at
+        string id PK
+        string eventId FK "Ref EVENT.id"
+        string eventTitle
+        string clubId FK "Ref CLUB.id"
+        string clubName
+        string userId FK "Ref USER.id"
+        string userName
+        string userEmail
+        string userRollNo
+        string department
+        int semester
+        string registrationType "SOLO | TEAM"
+        string teamName
+        string teamPasscode "6-char join code"
+        list teamMembers
+        string ticketNumber UK "CS-TKT-XXXX-XXXX"
+        string hmacSecretSeed "TOTP Dynamic QR Key"
+        double ticketPrice
+        double amountPaid
+        string paymentId
+        string paymentStatus "FREE | PAID"
+        boolean attendanceVerified "Gate Check-in Flag"
+        datetime checkedInAt
+        string scannedByAdminId
+        boolean feedbackSubmitted
+        boolean certificateClaimed
+        int activityPointsAwarded
+        datetime createdAt
     }
 
     CERTIFICATE {
-        ObjectId _id PK
-        string certificate_id UK
-        string verification_hash UK
-        ObjectId event_id FK
-        ObjectId user_id FK
-        string student_name
-        string roll_no
-        string event_title
-        int activity_points
-        string pdf_download_url
-        string public_verify_url
-        datetime issued_at
+        string id PK
+        string certificateId UK "CS-ARYA-2026-XXXX"
+        string verificationHash UK "SHA-256 seal"
+        string eventId FK "Ref EVENT.id"
+        string eventTitle
+        string eventCategory
+        string clubId FK "Ref CLUB.id"
+        string organizingClub
+        string userId FK "Ref USER.id"
+        string studentName
+        string rollNo
+        string department
+        int semester
+        int activityPointsAwarded
+        string deanSignatory "Dean Authority"
+        string institution "Arya College of Eng & IT"
+        string publicVerifyUrl
+        datetime issuedAt
+    }
+
+    CLUB_LEDGER_ENTRY {
+        string id PK
+        string clubId FK "Ref CLUB.id"
+        string clubName
+        string eventId FK "Ref EVENT.id"
+        string eventTitle
+        string type "TICKET_SALE | PAYOUT_DISBURSEMENT | REFUND"
+        double creditAmount
+        double debitAmount
+        double gatewayFee
+        double netAmount
+        double runningBalance
+        string remarks
+        string referenceId
+        string status "SETTLED | PENDING"
+        datetime timestamp
+    }
+
+    PAYOUT_SETTLEMENT_REQUEST {
+        string id PK
+        string clubId FK "Ref CLUB.id"
+        string clubName
+        string requestedByUserId FK "Ref USER.id"
+        string requestedByUserName
+        double amount
+        string payoutUpiId
+        string status "PENDING | APPROVED | DISBURSED | REJECTED"
+        string referenceNumber
+        string deanApprovalStatus "PENDING | APPROVED"
+        datetime requestedAt
+        datetime disbursedAt
+    }
+
+    CLUB_APPLICATION {
+        string id PK
+        string clubId FK "Ref CLUB.id"
+        string clubName
+        string userId FK "Ref USER.id"
+        string userName
+        string userEmail
+        string userRollNo
+        string department
+        int semester
+        string statementOfPurpose
+        string preferredRole
+        string status "PENDING | ACCEPTED | REJECTED"
+        datetime appliedAt
+        datetime reviewedAt
+        string reviewerNotes
+    }
+
+    STUDENT_SUGGESTION {
+        string id PK
+        string eventId FK "Ref EVENT.id"
+        string eventTitle
+        string clubId FK "Ref CLUB.id"
+        string clubName
+        string authorUserId FK "Ref USER.id"
+        string authorName
+        string authorRollNo
+        string title
+        string description
+        int upvotesCount
+        list upvotedByUserIds
+        string kanbanStatus "SUBMITTED | UNDER_REVIEW | PLANNED | IMPLEMENTED"
+        string respondedByAdminId
+        string respondedByAdminName
+        string clubActionResponseText
+        string proofImageUrl
+        datetime resolvedAt
+        datetime createdAt
+    }
+
+    VERIFIED_FEEDBACK {
+        string id PK
+        string eventId FK "Ref EVENT.id"
+        string eventTitle
+        string clubId FK "Ref CLUB.id"
+        string clubName
+        string userId FK "Ref USER.id"
+        string userName
+        string userRollNo
+        string department
+        int contentDepth "1-5 Stars"
+        int organization "1-5 Stars"
+        int speakerQuality "1-5 Stars"
+        int venueFacilities "1-5 Stars"
+        int valueForTime "1-5 Stars"
+        double averageRating
+        string reviewText
+        string sentiment "POSITIVE | NEUTRAL | NEGATIVE"
+        boolean anonymous
+        datetime createdAt
     }
 ```
 

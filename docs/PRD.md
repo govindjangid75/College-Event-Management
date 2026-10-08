@@ -96,6 +96,74 @@ CampusSphere consolidates these disconnected steps into a single authenticated p
 +--------------------+------------------------------------+-----------------------------------------------+
 ```
 
+### 3.1 End-to-End Product Workflow Diagram
+
+```mermaid
+flowchart TD
+    subgraph Discovery_Phase ["1. Discovery & Exploration"]
+        A[Student Explores Event Catalog] --> B[Interactive 3D Digital Twin of ACEIT Campus]
+        B --> C[AI Concierge Recommends Events by Branch/Interest]
+    end
+
+    subgraph Registration_Phase ["2. Booking & Split Treasury"]
+        C --> D{Select Booking Mode}
+        D -->|Solo| E[Solo Registration Form]
+        D -->|Team| F[Team Registration with 6-char Invite Code]
+        E --> G[Razorpay Checkout]
+        F --> G
+        G --> H[Instant Ticket Issuance + Club Treasury Auto-Credit]
+    end
+
+    subgraph Gate_Phase ["3. Anti-Screenshot Gate Verification"]
+        H --> I[Dynamic Rolling QR Pass: 30s HMAC Token]
+        I --> J[Gate Coordinator Scans with HTML5 Camera Scanner]
+        J --> K{Verification Engine}
+        K -->|Fresh Token & First Scan| L[Green Check: Access Granted + Attendance Marked]
+        K -->|Expired Token / Screenshot| M[Red Alert: Replay / Fake Pass Rejected]
+        K -->|Duplicate Ticket| N[Red Alert: Already Scanned Proxy Rejected]
+    end
+
+    subgraph Post_Event_Phase ["4. Accreditation & Feedback Loop"]
+        L --> O[Unlock 5-Dimension Feedback & Review]
+        O --> P[Student Submits Review + Upvotes Suggestions]
+        P --> Q[Cryptographic SHA-256 Certificate Generated]
+        Q --> R[Dean Signatory + Verified LinkedIn Badge]
+        R --> S[AICTE Activity Points Credited to Student Profile]
+        P --> T[Club Kanban Board: You Said, We Did]
+    end
+```
+
+### 3.2 Product Module Hierarchy & Architecture
+
+```mermaid
+mindmap
+  root((CampusSphere))
+    Identity & Governance
+      Role-Based Access (Student / Club Admin / Dean)
+      University Roll Number Validation
+      JWT Authentication with Refresh Tokens
+    Event & Venue Engine
+      Event Lifecycle (Draft -> Approval -> Live)
+      Venue Clash Detector (30-min Setup Buffer)
+      Team & Solo Registration Locks
+    Finances & Split Treasury
+      Razorpay Payment Gateway
+      Club-Dedicated Sub-Ledgers
+      Dean Payout Authorization
+    Anti-Fraud Gate Operations
+      Dynamic 30-sec Rolling QR (HMAC-SHA256)
+      Single-Scan Attendance Enforcement
+      Hardware & Device Auditing
+    Accreditation & Quality Loop
+      5-Dimension Attendance-Gated Reviews
+      AICTE / RTU Activity Points Transcript
+      Cryptographic PDF Certificate Seal
+      You Said We Did Kanban Loop
+    Smart Innovation
+      Three.js 3D Campus Digital Twin
+      AI Event Agenda & Concierge Copilot
+```
+
 ---
 
 ## 4. Master Club Directory (Arya College 15 Clubs)

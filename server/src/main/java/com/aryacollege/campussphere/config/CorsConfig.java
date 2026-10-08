@@ -22,7 +22,10 @@ public class CorsConfig {
             "http://localhost:5173", 
             "http://localhost:3000", 
             "http://127.0.0.1:5173",
-            "http://localhost:4173"
+            "http://localhost:4173",
+            "https://*.vercel.app",
+            "https://*.onrender.com",
+            "*"
         ));
         config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Authorization", "X-Requested-With"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));

@@ -19,7 +19,8 @@ import {
   AiChatResponse
 } from '../types';
 
-const API_BASE = '/api';
+const envApiUrl = import.meta.env.VITE_API_URL as string | undefined;
+const API_BASE = envApiUrl ? `${envApiUrl.replace(/\/$/, '')}/api` : '/api';
 
 export interface VenueClashResult {
   clash: boolean;
