@@ -116,14 +116,27 @@ public class CertificateService {
      * Official AICTE / RTU Activity Points Transcript Generation.
      */
     public AicteTranscriptDto getUserAicteTranscript(String userId) {
+        return getUserAicteTranscript(userId, null, null, null, null, null);
+    }
+
+    public AicteTranscriptDto getUserAicteTranscript(String userId, String studentName, String rollNo, String department, Integer semester, Integer batchParam) {
         List<Certificate> certs = certificateRepository.findByUserIdOrderByIssuedAtDesc(userId);
 
         Optional<User> userOpt = userRepository.findById(userId);
-        String name = userOpt.map(User::getName).orElse("Govind Jangid");
-        String roll = userOpt.map(User::getRollNo).filter(r -> r != null && !r.isBlank()).orElse("22EACIT089");
-        String dept = userOpt.map(User::getDepartment).filter(d -> d != null && !d.isBlank()).orElse("Computer Science & Engineering");
-        int sem = userOpt.map(User::getSemester).filter(s -> s > 0).orElse(6);
-        int batch = userOpt.map(User::getBatch).filter(b -> b > 0).orElse(2026);
+        String name = (studentName != null && !studentName.isBlank()) ? studentName
+                : userOpt.map(User::getName).orElseGet(() -> !certs.isEmpty() && certs.get(0).getStudentName() != null ? certs.get(0).getStudentName() : "Student");
+
+        String roll = (rollNo != null && !rollNo.isBlank()) ? rollNo
+                : userOpt.map(User::getRollNo).filter(r -> !r.isBlank()).orElseGet(() -> !certs.isEmpty() && certs.get(0).getRollNo() != null ? certs.get(0).getRollNo() : "N/A");
+
+        String dept = (department != null && !department.isBlank()) ? department
+                : userOpt.map(User::getDepartment).filter(d -> !d.isBlank()).orElseGet(() -> !certs.isEmpty() && certs.get(0).getDepartment() != null ? certs.get(0).getDepartment() : "Computer Science & Engineering");
+
+        int sem = (semester != null && semester > 0) ? semester
+                : userOpt.map(User::getSemester).filter(s -> s > 0).orElseGet(() -> !certs.isEmpty() && certs.get(0).getSemester() > 0 ? certs.get(0).getSemester() : 4);
+
+        int batch = (batchParam != null && batchParam > 0) ? batchParam
+                : userOpt.map(User::getBatch).filter(b -> b > 0).orElse(2026);
 
         int totalPts = 0;
         Map<String, Integer> categoryMap = new HashMap<>();
@@ -135,10 +148,13 @@ public class CertificateService {
             categoryMap.put(cat, categoryMap.getOrDefault(cat, 0) + pts);
         }
 
-        // Add pre-existing base points if newly initialized
-        if (totalPts == 0) {
-            totalPts = userOpt.map(User::getActivityPointsTotal).filter(p -> p > 0).orElse(45);
-            categoryMap.put("Hackathons & Technical", totalPts);
+        // Only include pre-existing base points if the user explicitly has points in MongoDB
+        if (totalPts == 0 && userOpt.isPresent()) {
+            int dbPts = userOpt.get().getActivityPointsTotal();
+            if (dbPts > 0) {
+                totalPts = dbPts;
+                categoryMap.put("Technical & Innovation", dbPts);
+            }
         }
 
         boolean honors = totalPts >= 100;

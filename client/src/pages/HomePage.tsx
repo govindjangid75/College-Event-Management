@@ -66,7 +66,7 @@ export const HomePage: React.FC = () => {
   });
 
   const studentProfile = currentUser?.studentProfile;
-  const currentPoints = studentProfile?.activityPointsTotal || 45;
+  const currentPoints = studentProfile?.activityPointsTotal ?? 0;
   const targetPoints = 100;
   const progressPercent = Math.min(100, Math.round((currentPoints / targetPoints) * 100));
 

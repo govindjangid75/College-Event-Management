@@ -35,7 +35,7 @@ import { AicteTranscript, Registration } from '../types';
 import { Link } from 'react-router-dom';
 
 export const StudentProfilePage: React.FC = () => {
-  const { currentUser, isStudent, isClubAdmin, isSuperAdmin } = useAuth();
+  const { currentUser, isStudent, isClubAdmin, isSuperAdmin, updateActivityPoints } = useAuth();
   const { clubs } = useClub();
   const { isDark } = useTheme();
 
@@ -54,11 +54,20 @@ export const StudentProfilePage: React.FC = () => {
     try {
       setLoading(true);
       const [trans, passes] = await Promise.all([
-        fetchAicteTranscript(currentUser.id).catch(() => null),
+        fetchAicteTranscript(currentUser.id, {
+          name: currentUser.name,
+          rollNo: currentUser.studentProfile?.rollNo,
+          department: currentUser.studentProfile?.department,
+          semester: currentUser.studentProfile?.semester,
+          batch: currentUser.studentProfile?.batch,
+        }).catch(() => null),
         fetchUserPasses(currentUser.id).catch(() => [])
       ]);
       setTranscript(trans);
       setUserPasses(passes);
+      if (trans && typeof trans.totalActivityPointsEarned === 'number') {
+        updateActivityPoints(trans.totalActivityPointsEarned);
+      }
     } catch (err) {
       console.error('Failed to load student transcript data:', err);
     } finally {
@@ -73,7 +82,7 @@ export const StudentProfilePage: React.FC = () => {
   }, [currentUser?.id, isStudent]);
 
   const profile = currentUser?.studentProfile;
-  const currentPoints = transcript?.totalActivityPointsEarned || profile?.activityPointsTotal || 45;
+  const currentPoints = transcript?.totalActivityPointsEarned ?? profile?.activityPointsTotal ?? 0;
   const targetPoints = transcript?.requiredHonorsPoints || 100;
   const progressPercent = Math.min(100, Math.round((currentPoints / targetPoints) * 100));
 
@@ -787,35 +796,37 @@ export const StudentProfilePage: React.FC = () => {
             Domain Point Breakdown (MongoDB Atlas):
           </h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '10px 14px',
-                background: isDark ? 'rgba(255, 255, 255, 0.03)' : 'var(--paper2)',
+            {transcript?.categoryPointsBreakdown && Object.keys(transcript.categoryPointsBreakdown).length > 0 ? (
+              Object.entries(transcript.categoryPointsBreakdown).map(([category, pts]) => (
+                <div
+                  key={category}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '10px 14px',
+                    background: isDark ? 'rgba(255, 255, 255, 0.03)' : 'var(--paper2)',
+                    borderRadius: '10px',
+                    border: `1px solid ${isDark ? 'rgba(255, 255, 255, 0.05)' : 'var(--line)'}`
+                  }}
+                >
+                  <span style={{ fontSize: '0.85rem', color: 'var(--text-primary)' }}>{category}</span>
+                  <strong style={{ color: 'var(--acid)' }}>{pts} Points</strong>
+                </div>
+              ))
+            ) : (
+              <div style={{
+                padding: '16px',
+                textAlign: 'center',
+                background: isDark ? 'rgba(255, 255, 255, 0.02)' : 'var(--paper2)',
                 borderRadius: '10px',
-                border: `1px solid ${isDark ? 'rgba(255, 255, 255, 0.05)' : 'var(--line)'}`
-              }}
-            >
-              <span style={{ fontSize: '0.85rem', color: 'var(--text-primary)' }}>Hackathons & Technical</span>
-              <strong style={{ color: 'var(--acid)' }}>25 Points</strong>
-            </div>
-
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '10px 14px',
-                background: isDark ? 'rgba(255, 255, 255, 0.03)' : 'var(--paper2)',
-                borderRadius: '10px',
-                border: `1px solid ${isDark ? 'rgba(255, 255, 255, 0.05)' : 'var(--line)'}`
-              }}
-            >
-              <span style={{ fontSize: '0.85rem', color: 'var(--text-primary)' }}>Cultural & Performing Arts</span>
-              <strong style={{ color: 'var(--acid)' }}>20 Points</strong>
-            </div>
+                border: `1px dashed ${isDark ? 'rgba(255, 255, 255, 0.08)' : 'var(--line)'}`,
+                color: 'var(--text-secondary)',
+                fontSize: '0.82rem'
+              }}>
+                No activity points earned yet across AICTE domains. Register and attend approved campus events to earn up to 100 points!
+              </div>
+            )}
           </div>
         </div>
 
@@ -1001,20 +1012,20 @@ export const StudentProfilePage: React.FC = () => {
             }}>
               <div>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Student Name:</span>
-                <div style={{ fontWeight: 800, color: 'var(--text-primary)' }}>{currentUser?.name || 'Govind Jangid'}</div>
+                <div style={{ fontWeight: 800, color: 'var(--text-primary)' }}>{currentUser?.name || transcript?.studentName || 'Student'}</div>
               </div>
               <div>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>RTU Roll Number:</span>
-                <div style={{ fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>{profile?.rollNo || '22EACIT089'}</div>
+                <div style={{ fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>{profile?.rollNo || transcript?.rollNo || 'N/A'}</div>
               </div>
               <div>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Department:</span>
-                <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{profile?.department || 'Computer Science & Engineering'}</div>
+                <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{profile?.department || transcript?.department || 'Engineering'}</div>
               </div>
               <div>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Honors Eligibility:</span>
                 <div style={{ fontWeight: 800, color: currentPoints >= 100 ? '#34d399' : 'var(--acid)' }}>
-                  {currentPoints >= 100 ? 'QUALIFIED FOR HONORS DEGREE ✓' : `${100 - currentPoints} PTS REMAINING`}
+                  {currentPoints >= 100 ? 'QUALIFIED FOR HONORS DEGREE ✓' : `${Math.max(0, 100 - currentPoints)} PTS REMAINING`}
                 </div>
               </div>
             </div>
@@ -1030,18 +1041,22 @@ export const StudentProfilePage: React.FC = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr style={{ borderBottom: `1px solid ${isDark ? '#141f1a' : 'var(--line)'}` }}>
-                  <td style={{ padding: '10px 8px' }}>Technical & Hackathons (SIH, CodeWars)</td>
-                  <td style={{ padding: '10px 8px', color: 'var(--text-secondary)' }}>40 Pts</td>
-                  <td style={{ padding: '10px 8px', fontWeight: 800, color: 'var(--acid)' }}>25 Pts</td>
-                  <td style={{ padding: '10px 8px', color: '#34d399' }}>Verified ✓</td>
-                </tr>
-                <tr style={{ borderBottom: `1px solid ${isDark ? '#141f1a' : 'var(--line)'}` }}>
-                  <td style={{ padding: '10px 8px' }}>Cultural & Creative Arts (Arya Ratan, Euphonious)</td>
-                  <td style={{ padding: '10px 8px', color: 'var(--text-secondary)' }}>30 Pts</td>
-                  <td style={{ padding: '10px 8px', fontWeight: 800, color: 'var(--acid)' }}>20 Pts</td>
-                  <td style={{ padding: '10px 8px', color: '#34d399' }}>Verified ✓</td>
-                </tr>
+                {transcript?.categoryPointsBreakdown && Object.keys(transcript.categoryPointsBreakdown).length > 0 ? (
+                  Object.entries(transcript.categoryPointsBreakdown).map(([cat, pts]) => (
+                    <tr key={cat} style={{ borderBottom: `1px solid ${isDark ? '#141f1a' : 'var(--line)'}` }}>
+                      <td style={{ padding: '10px 8px' }}>{cat}</td>
+                      <td style={{ padding: '10px 8px', color: 'var(--text-secondary)' }}>40 Pts</td>
+                      <td style={{ padding: '10px 8px', fontWeight: 800, color: 'var(--acid)' }}>{pts} Pts</td>
+                      <td style={{ padding: '10px 8px', color: '#34d399' }}>Verified ✓</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={4} style={{ padding: '24px 8px', textAlign: 'center', color: 'var(--muted)', fontSize: '0.85rem' }}>
+                      No verified activity records found yet. Points will appear here once certificates are claimed.
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
 

@@ -63,60 +63,10 @@ export const MyPassesPage: React.FC = () => {
     try {
       setLoading(true);
       const data = await fetchUserPasses(currentUser.id);
-      if (data && data.length > 0) {
-        setPasses(data);
-      } else {
-        // Fallback demo pass for Govind Jangid if new user has 0 registrations
-        const fallbackPass: Registration = {
-          id: 'reg_demo_01',
-          eventId: 'event_hack_01',
-          eventTitle: 'Arya National Hackathon 2026 (HackSphere)',
-          userId: currentUser.id,
-          userName: currentUser.name,
-          userRollNo: currentUser.studentProfile?.rollNo || '22EACIT089',
-          department: currentUser.studentProfile?.department || 'Computer Science & Engineering',
-          semester: currentUser.studentProfile?.semester || 6,
-          registrationType: 'TEAM',
-          teamName: 'CyberKnights ACEIT',
-          teamPasscode: 'SQUAD-8492',
-          ticketNumber: 'CS-2026-HACK-8492',
-          hmacSecretSeed: 'HMAC_SEED_ARYA_HACK_998',
-          ticketPrice: 150,
-          amountPaid: 150,
-          paymentId: 'pay_rzp_live_hack849210',
-          paymentStatus: 'PAID',
-          attendanceVerified: false,
-          activityPointsAwarded: 25,
-          createdAt: new Date().toISOString(),
-        };
-        setPasses([fallbackPass]);
-      }
+      setPasses(data || []);
     } catch (err) {
       console.error('Failed to load user passes from live backend:', err);
-      // Local fallback
-      const fallbackPass: Registration = {
-        id: 'reg_demo_01',
-        eventId: 'event_hack_01',
-        eventTitle: 'Arya National Hackathon 2026 (HackSphere)',
-        userId: currentUser.id,
-        userName: currentUser.name,
-        userRollNo: currentUser.studentProfile?.rollNo || '22EACIT089',
-        department: currentUser.studentProfile?.department || 'Computer Science & Engineering',
-        semester: currentUser.studentProfile?.semester || 6,
-        registrationType: 'TEAM',
-        teamName: 'CyberKnights ACEIT',
-        teamPasscode: 'SQUAD-8492',
-        ticketNumber: 'CS-2026-HACK-8492',
-        hmacSecretSeed: 'HMAC_SEED_ARYA_HACK_998',
-        ticketPrice: 150,
-        amountPaid: 150,
-        paymentId: 'pay_rzp_live_hack849210',
-        paymentStatus: 'PAID',
-        attendanceVerified: false,
-        activityPointsAwarded: 25,
-        createdAt: new Date().toISOString(),
-      };
-      setPasses([fallbackPass]);
+      setPasses([]);
     } finally {
       setLoading(false);
     }
@@ -210,8 +160,9 @@ export const MyPassesPage: React.FC = () => {
 
       {/* Pass Cards List */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-        {passes.map(reg => {
-          const ticketNum = reg.ticketNumber || reg.ticket?.ticketNumber || 'CS-2026-HACK-8492';
+        {passes.length > 0 ? (
+          passes.map(reg => {
+            const ticketNum = reg.ticketNumber || reg.ticket?.ticketNumber || 'CS-2026-PASS-001';
           const isVerified = reg.attendanceVerified;
 
           return (
@@ -464,7 +415,22 @@ export const MyPassesPage: React.FC = () => {
               </div>
             </div>
           );
-        })}
+        })
+      ) : (
+        <div className="glass-panel" style={{ padding: '48px 24px', textAlign: 'center', borderRadius: '24px' }}>
+          <Ticket size={48} style={{ color: 'var(--muted)', margin: '0 auto 16px', opacity: 0.7 }} />
+          <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '8px' }}>
+            No Active Passes Found
+          </h3>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', maxWidth: '440px', margin: '0 auto 24px', lineHeight: 1.5 }}>
+            You haven't registered for any campus events yet. Explore upcoming hackathons, tech talks, and cultural events to reserve your live QR pass.
+          </p>
+          <Link to="/events" className="btn-primary" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 22px', fontSize: '0.88rem' }}>
+            <span>Browse Events</span>
+            <ArrowRight size={16} />
+          </Link>
+        </div>
+      )}
       </div>
 
       {/* FEEDBACK MODAL */}

@@ -14,6 +14,7 @@ interface AuthContextType {
   logout: () => void;
   switchRole: (role: UserRole, clubSlug?: string) => void;
   switchClubAdmin: (clubSlug: string) => void;
+  updateActivityPoints: (points: number) => void;
   allClubAdmins: User[];
   isStudent: boolean;
   isClubAdmin: boolean;
@@ -182,6 +183,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const updateActivityPoints = (points: number) => {
+    setCurrentUser(prev => {
+      if (!prev || !prev.studentProfile) return prev;
+      const updated = {
+        ...prev,
+        studentProfile: {
+          ...prev.studentProfile,
+          activityPointsTotal: points,
+        },
+      };
+      try {
+        const dynamicUsers: User[] = JSON.parse(localStorage.getItem('campussphere_registered_users') || '[]');
+        const idx = dynamicUsers.findIndex(u => u.id === updated.id);
+        if (idx !== -1) {
+          dynamicUsers[idx] = updated;
+          localStorage.setItem('campussphere_registered_users', JSON.stringify(dynamicUsers));
+        }
+      } catch {
+        // ignore
+      }
+      return updated;
+    });
+  };
+
   const isStudent = currentUser?.role === 'STUDENT';
   const isClubAdmin = currentUser?.role === 'CLUB_ADMIN';
   const isSuperAdmin = currentUser?.role === 'SUPER_ADMIN';
@@ -197,6 +222,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         logout,
         switchRole,
         switchClubAdmin,
+        updateActivityPoints,
         allClubAdmins,
         isStudent,
         isClubAdmin,

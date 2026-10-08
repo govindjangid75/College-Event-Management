@@ -66,8 +66,14 @@ public class CertificateController {
      * Official Signed AICTE / RTU Activity Points Transcript.
      */
     @GetMapping("/transcript/{userId}")
-    public ResponseEntity<ApiResponse<AicteTranscriptDto>> getUserAicteTranscript(@PathVariable String userId) {
-        AicteTranscriptDto transcript = certificateService.getUserAicteTranscript(userId);
+    public ResponseEntity<ApiResponse<AicteTranscriptDto>> getUserAicteTranscript(
+            @PathVariable String userId,
+            @RequestParam(required = false) String studentName,
+            @RequestParam(required = false) String rollNo,
+            @RequestParam(required = false) String department,
+            @RequestParam(required = false) Integer semester,
+            @RequestParam(required = false) Integer batch) {
+        AicteTranscriptDto transcript = certificateService.getUserAicteTranscript(userId, studentName, rollNo, department, semester, batch);
         return ResponseEntity.ok(ApiResponse.ok("Official AICTE transcript generated", transcript));
     }
 }

@@ -461,8 +461,20 @@ export async function verifyCertificatePublic(certificateId: string): Promise<Ce
   return json.data;
 }
 
-export async function fetchAicteTranscript(userId: string): Promise<AicteTranscript> {
-  const res = await fetch(`${API_BASE}/certificates/transcript/${encodeURIComponent(userId)}`);
+export async function fetchAicteTranscript(
+  userId: string,
+  meta?: { name?: string; rollNo?: string; department?: string; semester?: number; batch?: number }
+): Promise<AicteTranscript> {
+  const query = new URLSearchParams();
+  if (meta?.name) query.set('studentName', meta.name);
+  if (meta?.rollNo) query.set('rollNo', meta.rollNo);
+  if (meta?.department) query.set('department', meta.department);
+  if (meta?.semester) query.set('semester', String(meta.semester));
+  if (meta?.batch) query.set('batch', String(meta.batch));
+
+  const qs = query.toString();
+  const url = `${API_BASE}/certificates/transcript/${encodeURIComponent(userId)}${qs ? `?${qs}` : ''}`;
+  const res = await fetch(url);
   if (!res.ok) throw new Error(`Failed to fetch AICTE transcript`);
   const json = await res.json();
   return json.data;
