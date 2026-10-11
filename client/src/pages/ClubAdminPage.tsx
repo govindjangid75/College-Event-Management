@@ -252,8 +252,15 @@ export const ClubAdminPage: React.FC = () => {
   };
 
   const handleScanGatePass = async (ticketNumToScan?: string) => {
-    const tNum = (ticketNumToScan || scanTicketInput).trim();
+    let tNum = (ticketNumToScan || scanTicketInput).trim();
     if (!tNum) return;
+
+    // Automatically parse if scanned/pasted raw rolling QR payload (CAMPUSSPHERE:ticketNum:token:ts)
+    if (tNum.includes('CAMPUSSPHERE:')) {
+      const parts = tNum.split(':');
+      if (parts[1]) tNum = parts[1].trim();
+    }
+
     setIsVerifyingTicket(true);
     setLastScanResult(null);
     try {
