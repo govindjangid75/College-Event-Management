@@ -67,10 +67,10 @@ export const CertificateVerifyPage: React.FC = () => {
       {loading ? (
         <div className="glass-panel" style={{ padding: '60px 20px', textAlign: 'center' }}>
           <RefreshCw size={36} color="#fbbf24" className="animate-spin" style={{ margin: '0 auto 16px' }} />
-          <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#f8fafc' }}>
+          <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)' }}>
             Validating Cryptographic Seal...
           </h3>
-          <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginTop: '6px' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginTop: '6px' }}>
             Querying Arya College Institutional Registry for Serial ID: <strong>{certificateId}</strong>
           </p>
         </div>
@@ -148,10 +148,10 @@ export const CertificateVerifyPage: React.FC = () => {
                     Institutional Ledger Registry
                   </span>
                 </div>
-                <h1 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#f8fafc', margin: '4px 0 0' }}>
+                <h1 style={{ fontSize: '1.5rem', fontWeight: 900, color: 'var(--text-primary)', margin: '4px 0 0' }}>
                   Authentic Arya College Credential
                 </h1>
-                <p style={{ color: '#cbd5e1', fontSize: '0.82rem', margin: '2px 0 0' }}>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', margin: '2px 0 0' }}>
                   Official AICTE-accredited activity points transcript document.
                 </p>
               </div>

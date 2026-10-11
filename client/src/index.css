@@ -122,6 +122,94 @@ button {
   cursor: pointer;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  transition: color 0.25s var(--ease);
+}
+
+/* ==============================================================================
+   UNIVERSAL THEME PANELS & INPUTS (LIGHT & DARK ACCORD)
+   ============================================================================== */
+.glass-panel {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  color: var(--text-primary);
+  transition: background-color 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+[data-theme="light"] .glass-panel {
+  background: #ffffff;
+  border-color: var(--line);
+  box-shadow: 0 4px 20px rgba(13, 20, 17, 0.05);
+}
+
+[data-theme="dark"] .glass-panel {
+  background: rgba(18, 30, 24, 0.85);
+  border-color: rgba(35, 52, 42, 0.85);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  color: var(--text-primary);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.2s, background-color 0.25s var(--ease);
+}
+
+[data-theme="light"] .glass-card {
+  background: #ffffff;
+  border-color: var(--line);
+  box-shadow: 0 4px 16px rgba(13, 20, 17, 0.05);
+}
+
+[data-theme="dark"] .glass-card {
+  background: #121e18;
+  border-color: #23342a;
+}
+
+.glass-card:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: 0 12px 36px rgba(16, 185, 129, 0.16);
+}
+
+.glass-input {
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-family: var(--font-main);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s, color 0.2s;
+}
+
+[data-theme="light"] .glass-input {
+  background: #ffffff;
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+[data-theme="dark"] .glass-input {
+  background: rgba(18, 30, 24, 0.9);
+  border-color: #23342a;
+  color: var(--text-primary);
+}
+
+.glass-input:focus {
+  border-color: var(--acid);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.glass-input::placeholder {
+  color: var(--text-muted);
+}
+
 /* ==============================================================================
    REFERENCE FX: NOISE OVERLAY, PROGRESS BAR & CURSOR
    ============================================================================== */

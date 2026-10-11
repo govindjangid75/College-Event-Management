@@ -272,11 +272,11 @@ export const CreateEventModal: React.FC<CreateEventModalProps> = ({
               <Sparkles size={20} />
             </div>
             <div>
-              <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+              <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                 Propose New Institutional Event
               </h2>
-              <p style={{ fontSize: '0.78rem', color: '#94a3b8', margin: '3px 0 0 0' }}>
-                Organized by <span style={{ color: '#818cf8', fontWeight: 700 }}>{clubName}</span> • Enforcing 30-min Venue Collision Buffers
+              <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', margin: '3px 0 0 0' }}>
+                Organized by <span style={{ color: 'var(--acid)', fontWeight: 700 }}>{clubName}</span> • Enforcing 30-min Venue Collision Buffers
               </p>
             </div>
           </div>

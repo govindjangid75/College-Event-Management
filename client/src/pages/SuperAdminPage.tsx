@@ -135,12 +135,12 @@ export const SuperAdminPage: React.FC = () => {
       }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.02em', margin: 0 }}>
+            <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0 }}>
               Dean Office & Central Governance Hub
             </h1>
             <span className="badge-role-admin">Super Admin</span>
           </div>
-          <p style={{ color: '#94a3b8', fontSize: '0.88rem', marginTop: '4px' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', marginTop: '4px' }}>
             Logged in as <strong>{currentUser?.name || 'Dr. R. K. Sharma'}</strong> ({currentUser?.facultyDesignation || 'Dean Academics & Student Welfare'}) • Live MongoDB Atlas
           </p>
         </div>
@@ -232,10 +232,10 @@ export const SuperAdminPage: React.FC = () => {
               <Sparkles size={20} />
             </div>
             <div>
-              <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+              <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                 Dean Event Sanction & Venue Clearance Queue ({pendingEvents.length} Pending)
               </h2>
-              <p style={{ fontSize: '0.82rem', color: '#94a3b8', marginTop: '2px' }}>
+              <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
                 Review proposals submitted by Arya College clubs. All bookings are pre-checked with 30-min setup & teardown buffer windows.
               </p>
             </div>
@@ -253,15 +253,15 @@ export const SuperAdminPage: React.FC = () => {
         </div>
 
         {loadingEvents ? (
-          <div style={{ textAlign: 'center', padding: '30px', color: '#94a3b8' }}>
+          <div style={{ textAlign: 'center', padding: '30px', color: 'var(--text-secondary)' }}>
             <RefreshCw size={24} className="animate-spin" style={{ margin: '0 auto 8px', color: '#6366f1' }} />
             <p style={{ fontSize: '0.85rem' }}>Fetching pending proposals from live MongoDB Atlas...</p>
           </div>
         ) : pendingEvents.length === 0 ? (
-          <div style={{ padding: '24px', textAlign: 'center', background: 'rgba(255, 255, 255, 0.02)', borderRadius: '12px', border: '1px dashed rgba(255, 255, 255, 0.1)' }}>
+          <div style={{ padding: '24px', textAlign: 'center', background: 'var(--bg-secondary)', borderRadius: '12px', border: '1px dashed var(--card-border)' }}>
             <CheckCircle2 size={32} color="#10b981" style={{ margin: '0 auto 8px' }} />
-            <p style={{ fontSize: '0.9rem', color: '#f8fafc', fontWeight: 700 }}>All Event Proposals Cleared!</p>
-            <p style={{ fontSize: '0.78rem', color: '#94a3b8' }}>There are currently no event bookings awaiting Dean sanction in MongoDB Atlas.</p>
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-primary)', fontWeight: 700 }}>All Event Proposals Cleared!</p>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>There are currently no event bookings awaiting Dean sanction in MongoDB Atlas.</p>
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -284,23 +284,23 @@ export const SuperAdminPage: React.FC = () => {
                         </span>
                       </div>
 
-                      <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: '4px 0 6px' }}>
+                      <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: '4px 0 6px' }}>
                         {evt.title}
                       </h3>
-                      <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: 1.5, marginBottom: '12px' }}>
+                      <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '12px' }}>
                         {evt.shortSummary}
                       </p>
 
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px', fontSize: '0.78rem' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#cbd5e1' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-secondary)' }}>
                           <MapPin size={14} color="#06b6d4" />
-                          <span>Venue: <strong style={{ color: '#ffffff' }}>{evt.venueName}</strong></span>
+                          <span>Venue: <strong style={{ color: 'var(--text-primary)' }}>{evt.venueName}</strong></span>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#cbd5e1' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-secondary)' }}>
                           <Clock size={14} color="#8b5cf6" />
                           <span>Slot: {startStr ? new Date(startStr).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' }) : 'TBD'} to {endStr ? new Date(endStr).toLocaleTimeString([], { timeStyle: 'short' }) : 'TBD'}</span>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#cbd5e1' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-secondary)' }}>
                           <Users size={14} color="#f59e0b" />
                           <span>Capacity: {evt.maxCapacity} ({evt.registrationType === 'TEAM' ? 'Team Mode' : 'Solo'})</span>
                         </div>
@@ -370,11 +370,11 @@ export const SuperAdminPage: React.FC = () => {
         <div className="glass-panel" style={{ padding: '28px', marginBottom: '32px', borderLeft: '4px solid #f59e0b' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
             <AlertTriangle size={22} color="#f59e0b" />
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
               Dean Payout Clearance Queue ({pendingPayouts.length} Action Required)
             </h2>
           </div>
-          <p style={{ fontSize: '0.85rem', color: '#94a3b8', marginBottom: '20px' }}>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '20px' }}>
             Club treasurers have requested fund disbursements. Dean approval triggers automated bank settlement to registered club UPI.
           </p>
 
@@ -391,8 +391,8 @@ export const SuperAdminPage: React.FC = () => {
                   <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#fbbf24', fontFamily: 'var(--font-mono)' }}>
                     ₹{req.amount.toLocaleString()}
                   </div>
-                  <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '2px' }}>
-                    Requested by <strong>{req.requestedByUserName}</strong> • Destination UPI: <strong style={{ color: '#e2e8f0' }}>{req.payoutUpiId}</strong>
+                  <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
+                    Requested by <strong>{req.requestedByUserName}</strong> • Destination UPI: <strong style={{ color: 'var(--text-primary)' }}>{req.payoutUpiId}</strong>
                   </div>
                 </div>
 
@@ -437,10 +437,10 @@ export const SuperAdminPage: React.FC = () => {
       <div className="glass-panel" style={{ padding: '28px', marginBottom: '32px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
               Master 15 Clubs Split-Accounting Audit Ledger
             </h2>
-            <p style={{ fontSize: '0.82rem', color: '#94a3b8', marginTop: '2px' }}>
+            <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
               Institutional financial overview certifying that all funds remain isolated per club chapter in MongoDB Atlas.
             </p>
           </div>
@@ -452,7 +452,7 @@ export const SuperAdminPage: React.FC = () => {
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)', color: '#94a3b8', textAlign: 'left', textTransform: 'uppercase', fontSize: '0.72rem', letterSpacing: '0.05em' }}>
+              <tr style={{ borderBottom: '1px solid var(--card-border)', color: 'var(--text-secondary)', textAlign: 'left', textTransform: 'uppercase', fontSize: '0.72rem', letterSpacing: '0.05em' }}>
                 <th style={{ padding: '12px 14px' }}>Club Name & Domain</th>
                 <th style={{ padding: '12px 14px' }}>Category</th>
                 <th style={{ padding: '12px 14px', textAlign: 'right' }}>Total Raised</th>
@@ -464,10 +464,10 @@ export const SuperAdminPage: React.FC = () => {
             </thead>
             <tbody>
               {stats.clubBreakdown.map((c) => (
-                <tr key={c.clubId} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.04)', color: '#f8fafc' }}>
+                <tr key={c.clubId} style={{ borderBottom: '1px solid var(--card-border)', color: 'var(--text-primary)' }}>
                   <td style={{ padding: '14px', fontWeight: 700 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <Link to={`/clubs/${c.clubSlug}`} style={{ color: '#f8fafc', textDecoration: 'none', transition: 'color 0.2s' }}>
+                      <Link to={`/clubs/${c.clubSlug}`} style={{ color: 'var(--text-primary)', textDecoration: 'none', transition: 'color 0.2s' }}>
                         {c.clubName}
                       </Link>
                     </div>

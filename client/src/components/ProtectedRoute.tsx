@@ -38,21 +38,21 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, allowe
           <ShieldAlert size={32} color="#f87171" />
         </div>
 
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#f8fafc', marginBottom: '8px' }}>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '8px' }}>
           Restricted Portal Access
         </h2>
 
-        <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: 1.5, marginBottom: '24px' }}>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.5, marginBottom: '24px' }}>
           This portal requires <strong>{allowedRoles.join(' or ')}</strong> privileges. 
           Your active session is currently logged in as <strong>{currentUser.name} ({currentUser.role})</strong>.
         </p>
 
         {/* Quick Role Switch Suggestion */}
         <div style={{
-          background: 'rgba(11, 19, 43, 0.6)',
+          background: 'var(--bg-secondary)',
           borderRadius: '12px',
           padding: '16px',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
+          border: '1px solid var(--card-border)',
           marginBottom: '20px',
           textAlign: 'left',
         }}>

@@ -81,35 +81,36 @@ export const EventsPage: React.FC = () => {
       {/* Page Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '32px' }}>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#06b6d4', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--acid)', fontSize: '0.85rem', fontWeight: 800, marginBottom: '6px', fontFamily: 'var(--font-mono)' }}>
             <Calendar size={18} />
             CAMPUS EVENT FEED & INSTITUTIONAL SCHEDULER (LIVE MONGODB ATLAS)
           </div>
-          <h1 style={{ fontSize: '2.2rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.02em', margin: 0 }}>
+          <h1 style={{ fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.03em', margin: 0, lineHeight: 1.15 }}>
             Explore Upcoming Campus Events
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: '0.95rem', marginTop: '6px' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginTop: '8px', maxWidth: '720px' }}>
             Register for technical sprints, hackathons, and earn verified AICTE Activity Points. All bookings enforce institutional 30-min setup and teardown buffers.
           </p>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
           {/* View Mode Toggle */}
-          <div style={{ display: 'flex', background: 'rgba(15, 23, 42, 0.8)', border: '1px solid rgba(255, 255, 255, 0.12)', borderRadius: '12px', padding: '3px' }}>
+          <div style={{ display: 'flex', background: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '10px', padding: '3px' }}>
             <button
               onClick={() => setViewMode('GRID')}
               style={{
                 padding: '7px 14px',
-                borderRadius: '9px',
+                borderRadius: '7px',
                 border: 'none',
-                background: viewMode === 'GRID' ? 'rgba(6, 182, 212, 0.25)' : 'transparent',
-                color: viewMode === 'GRID' ? '#38bdf8' : '#94a3b8',
+                background: viewMode === 'GRID' ? 'var(--acid)' : 'transparent',
+                color: viewMode === 'GRID' ? '#ffffff' : 'var(--text-secondary)',
                 fontSize: '0.8rem',
-                fontWeight: 600,
+                fontWeight: 700,
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px'
+                gap: '6px',
+                transition: 'all 0.15s ease'
               }}
             >
               <LayoutGrid size={15} />
@@ -119,16 +120,17 @@ export const EventsPage: React.FC = () => {
               onClick={() => setViewMode('3D')}
               style={{
                 padding: '7px 14px',
-                borderRadius: '9px',
+                borderRadius: '7px',
                 border: 'none',
-                background: viewMode === '3D' ? 'rgba(6, 182, 212, 0.25)' : 'transparent',
-                color: viewMode === '3D' ? '#38bdf8' : '#94a3b8',
+                background: viewMode === '3D' ? 'var(--acid)' : 'transparent',
+                color: viewMode === '3D' ? '#ffffff' : 'var(--text-secondary)',
                 fontSize: '0.8rem',
-                fontWeight: 600,
+                fontWeight: 700,
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px'
+                gap: '6px',
+                transition: 'all 0.15s ease'
               }}
             >
               <Compass size={15} />
@@ -140,7 +142,7 @@ export const EventsPage: React.FC = () => {
             onClick={loadEvents}
             disabled={loading}
             className="btn-secondary"
-            style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', padding: '10px 16px' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', padding: '9px 16px', borderRadius: '6px' }}
           >
             <RefreshCw size={15} className={loading ? 'animate-spin' : ''} />
             <span>Sync Live</span>
@@ -150,7 +152,7 @@ export const EventsPage: React.FC = () => {
             <button
               onClick={() => setIsModalOpen(true)}
               className="btn-primary"
-              style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', padding: '10px 20px' }}
+              style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', padding: '9px 20px', borderRadius: '6px' }}
             >
               <PlusCircle size={16} />
               <span>Propose Event</span>
@@ -160,10 +162,10 @@ export const EventsPage: React.FC = () => {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="glass-panel" style={{ padding: '20px', marginBottom: '32px', display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div className="glass-panel" style={{ padding: '18px 20px', marginBottom: '32px', display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center', justifyContent: 'space-between', borderRadius: '12px' }}>
         {/* Search Input */}
         <div style={{ position: 'relative', flex: '1', minWidth: '280px' }}>
-          <Search size={18} color="#94a3b8" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)' }} />
+          <Search size={18} color="var(--text-muted)" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)' }} />
           <input
             type="text"
             value={searchQuery}
@@ -175,15 +177,15 @@ export const EventsPage: React.FC = () => {
         </div>
 
         {/* Timeline Filter: Upcoming vs Concluded */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(255, 255, 255, 0.04)', padding: '4px', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'var(--bg-secondary)', padding: '4px', borderRadius: '10px', border: '1px solid var(--card-border)' }}>
           <button
             onClick={() => setTimelineFilter('UPCOMING')}
             style={{
               padding: '6px 14px',
-              borderRadius: '9px',
+              borderRadius: '7px',
               border: 'none',
               background: timelineFilter === 'UPCOMING' ? 'var(--acid)' : 'transparent',
-              color: timelineFilter === 'UPCOMING' ? '#000000' : '#94a3b8',
+              color: timelineFilter === 'UPCOMING' ? '#ffffff' : 'var(--text-secondary)',
               fontSize: '0.78rem',
               fontWeight: 800,
               cursor: 'pointer',
@@ -200,10 +202,10 @@ export const EventsPage: React.FC = () => {
             onClick={() => setTimelineFilter('ALL')}
             style={{
               padding: '6px 14px',
-              borderRadius: '9px',
+              borderRadius: '7px',
               border: 'none',
               background: timelineFilter === 'ALL' ? 'var(--acid)' : 'transparent',
-              color: timelineFilter === 'ALL' ? '#000000' : '#94a3b8',
+              color: timelineFilter === 'ALL' ? '#ffffff' : 'var(--text-secondary)',
               fontSize: '0.78rem',
               fontWeight: 800,
               cursor: 'pointer',
@@ -216,10 +218,10 @@ export const EventsPage: React.FC = () => {
             onClick={() => setTimelineFilter('PAST')}
             style={{
               padding: '6px 14px',
-              borderRadius: '9px',
+              borderRadius: '7px',
               border: 'none',
               background: timelineFilter === 'PAST' ? 'var(--acid)' : 'transparent',
-              color: timelineFilter === 'PAST' ? '#000000' : '#94a3b8',
+              color: timelineFilter === 'PAST' ? '#ffffff' : 'var(--text-secondary)',
               fontSize: '0.78rem',
               fontWeight: 800,
               cursor: 'pointer',
@@ -232,19 +234,19 @@ export const EventsPage: React.FC = () => {
 
         {/* Category Pills */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-          <Filter size={16} color="#94a3b8" />
+          <Filter size={16} color="var(--text-secondary)" />
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
               style={{
-                background: selectedCategory === cat ? 'rgba(6, 182, 212, 0.25)' : 'rgba(255, 255, 255, 0.04)',
-                border: selectedCategory === cat ? '1px solid #06b6d4' : '1px solid rgba(255, 255, 255, 0.1)',
-                color: selectedCategory === cat ? '#38bdf8' : '#94a3b8',
+                background: selectedCategory === cat ? 'var(--acid)' : 'var(--bg-secondary)',
+                border: selectedCategory === cat ? '1px solid var(--acid)' : '1px solid var(--card-border)',
+                color: selectedCategory === cat ? '#ffffff' : 'var(--text-secondary)',
                 padding: '6px 14px',
                 borderRadius: '20px',
                 fontSize: '0.82rem',
-                fontWeight: 600,
+                fontWeight: selectedCategory === cat ? 800 : 600,
                 cursor: 'pointer',
                 transition: 'all 0.15s',
               }}
@@ -266,9 +268,9 @@ export const EventsPage: React.FC = () => {
           <p style={{ fontSize: '0.95rem' }}>Loading events directly from live MongoDB Atlas...</p>
         </div>
       ) : filteredEvents.length === 0 ? (
-        <div className="glass-panel" style={{ textAlign: 'center', padding: '60px 20px', color: '#94a3b8' }}>
+        <div className="glass-panel" style={{ textAlign: 'center', padding: '60px 20px', color: 'var(--text-secondary)' }}>
           <Calendar size={40} style={{ margin: '0 auto 12px', opacity: 0.5 }} />
-          <h3 style={{ fontSize: '1.2rem', color: '#f8fafc', fontWeight: 700, marginBottom: '6px' }}>No Events Match Filter</h3>
+          <h3 style={{ fontSize: '1.2rem', color: 'var(--text-primary)', fontWeight: 700, marginBottom: '6px' }}>No Events Match Filter</h3>
           <p style={{ fontSize: '0.9rem' }}>Try clearing the search query or proposing a new event.</p>
         </div>
       ) : (
@@ -395,7 +397,8 @@ export const EventsPage: React.FC = () => {
                       <span key={t} style={{
                         fontSize: '0.7rem',
                         color: 'var(--text-secondary)',
-                        background: 'rgba(255, 255, 255, 0.05)',
+                        background: 'var(--bg-secondary)',
+                        border: '1px solid var(--card-border)',
                         padding: '2px 8px',
                         borderRadius: '4px',
                       }}>
@@ -408,16 +411,17 @@ export const EventsPage: React.FC = () => {
                   <div style={{
                     padding: '8px 12px',
                     borderRadius: '8px',
-                    background: 'rgba(99, 102, 241, 0.08)',
-                    border: '1px solid rgba(99, 102, 241, 0.2)',
+                    background: 'rgba(16, 185, 129, 0.08)',
+                    border: '1px solid rgba(16, 185, 129, 0.25)',
                     marginBottom: '16px',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '8px',
                     fontSize: '0.72rem',
-                    color: '#a5b4fc',
+                    color: 'var(--text-secondary)',
+                    fontWeight: 600,
                   }}>
-                    <ShieldCheck size={14} color="#818cf8" />
+                    <ShieldCheck size={14} color="var(--acid)" />
                     <span>30-min setup buffer & 30-min teardown buffer reserved in venue calendar</span>
                   </div>
 

@@ -108,10 +108,10 @@ export const CertificatesPage: React.FC = () => {
           <Award size={16} />
           CRYPTOGRAPHICALLY SEALED CREDENTIALS
         </div>
-        <h1 style={{ fontSize: '2.2rem', fontWeight: 900, color: '#f8fafc', letterSpacing: '-0.02em', margin: 0 }}>
+        <h1 style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0 }}>
           My Verifiable E-Certificates
         </h1>
-        <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginTop: '6px' }}>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '6px' }}>
           Official Arya College credentials tethered to gate-verified event attendance. Sealed with SHA-256 signatures for LinkedIn and RTU / AICTE transcript submissions.
         </p>
       </div>
@@ -172,17 +172,17 @@ export const CertificatesPage: React.FC = () => {
       {loading ? (
         <div className="glass-panel" style={{ padding: '60px 20px', textAlign: 'center' }}>
           <RefreshCw size={36} color="#fbbf24" className="animate-spin" style={{ margin: '0 auto 16px' }} />
-          <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#f8fafc' }}>
+          <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)' }}>
             Fetching Certificates from MongoDB Atlas...
           </h3>
         </div>
       ) : certificates.length === 0 ? (
         <div className="glass-panel" style={{ padding: '48px 32px', textAlign: 'center' }}>
-          <Award size={48} color="#64748b" style={{ margin: '0 auto 14px', opacity: 0.5 }} />
-          <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc' }}>
+          <Award size={48} color="var(--text-secondary)" style={{ margin: '0 auto 14px', opacity: 0.5 }} />
+          <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)' }}>
             No Certificates Issued Yet
           </h3>
-          <p style={{ color: '#94a3b8', fontSize: '0.88rem', maxWidth: '480px', margin: '8px auto 20px', lineHeight: 1.5 }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', maxWidth: '480px', margin: '8px auto 20px', lineHeight: 1.5 }}>
             Certificates are automatically unlocked after you register for an event and your Dynamic QR Pass is scanned and verified at the venue gate.
           </p>
           <Link to="/events" className="btn-primary" style={{ display: 'inline-flex', padding: '10px 20px', fontSize: '0.85rem', textDecoration: 'none' }}>
@@ -230,16 +230,16 @@ export const CertificatesPage: React.FC = () => {
                     <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: 800, background: 'rgba(16, 185, 129, 0.1)', padding: '2px 8px', borderRadius: '6px' }}>
                       +{cert.activityPointsAwarded} AICTE Activity Points
                     </span>
-                    <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
                       • {cert.organizingClub}
                     </span>
                   </div>
 
-                  <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: '2px 0 4px' }}>
+                  <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: '2px 0 4px' }}>
                     {cert.eventTitle}
                   </h2>
 
-                  <div style={{ fontSize: '0.82rem', color: '#94a3b8' }}>
+                  <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
                     Recipient: <strong>{cert.studentName}</strong> (Roll: {cert.rollNo})
                   </div>
 

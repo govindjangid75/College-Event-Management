@@ -233,10 +233,10 @@ export const EventRegistrationModal: React.FC<EventRegistrationModalProps> = ({
               <Ticket size={20} />
             </div>
             <div>
-              <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+              <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                 {confirmedRegistration ? 'Pass Issued & Confirmed' : 'Event Pass Registration'}
               </h2>
-              <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
                 {event.clubName} • Arya College of Engineering & IT
               </div>
             </div>
@@ -282,10 +282,10 @@ export const EventRegistrationModal: React.FC<EventRegistrationModalProps> = ({
                 <CheckCircle2 size={36} />
               </div>
 
-              <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#f8fafc', marginBottom: '6px' }}>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '6px' }}>
                 Registration Confirmed!
               </h3>
-              <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '24px' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '24px' }}>
                 Your ticket pass has been generated with a dynamic anti-screenshot HMAC token for gate entry.
               </p>
 
@@ -315,7 +315,7 @@ export const EventRegistrationModal: React.FC<EventRegistrationModalProps> = ({
                   </span>
                 </div>
 
-                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#f8fafc', marginBottom: '8px' }}>
+                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '8px' }}>
                   {confirmedRegistration.eventTitle}
                 </div>
 
@@ -388,10 +388,10 @@ export const EventRegistrationModal: React.FC<EventRegistrationModalProps> = ({
               }}>
                 <AlertCircle size={32} />
               </div>
-              <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#f8fafc', marginBottom: '8px' }}>
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '8px' }}>
                 Registrations Closed
               </h3>
-              <p style={{ color: '#94a3b8', fontSize: '0.9rem', maxWidth: '420px', margin: '0 auto 24px', lineHeight: 1.5 }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', maxWidth: '420px', margin: '0 auto 24px', lineHeight: 1.5 }}>
                 This event has already concluded on {startTimeStr ? new Date(startTimeStr).toLocaleDateString() : 'earlier dates'}. Entry pass booking and online registration are no longer accepted for concluded sessions.
               </p>
               <div style={{ display: 'flex', justifyContent: 'center', gap: '12px' }}>
@@ -411,8 +411,8 @@ export const EventRegistrationModal: React.FC<EventRegistrationModalProps> = ({
               <div style={{
                 padding: '14px 18px',
                 borderRadius: '14px',
-                background: 'rgba(255, 255, 255, 0.03)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
+                background: 'var(--bg-secondary)',
+                border: '1px solid var(--card-border)',
                 marginBottom: '20px',
                 display: 'flex',
                 alignItems: 'center',
@@ -421,10 +421,10 @@ export const EventRegistrationModal: React.FC<EventRegistrationModalProps> = ({
                 gap: '12px',
               }}>
                 <div>
-                  <div style={{ fontSize: '1rem', fontWeight: 800, color: '#f8fafc' }}>
+                  <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                     {event.title}
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.78rem', color: '#94a3b8', marginTop: '4px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.78rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
                     <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                       <Calendar size={13} color="#06b6d4" />
                       {event.startTime ? new Date(event.startTime).toLocaleDateString() : 'Upcoming'}
@@ -477,12 +477,12 @@ export const EventRegistrationModal: React.FC<EventRegistrationModalProps> = ({
 
               {/* Student Identity Card */}
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: '#cbd5e1', marginBottom: '8px' }}>
+                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '8px' }}>
                   Attendee Institutional Credentials
                 </label>
                 <div style={{
-                  background: 'rgba(15, 23, 42, 0.6)',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  background: 'var(--bg-secondary)',
+                  border: '1px solid var(--card-border)',
                   borderRadius: '12px',
                   padding: '14px 16px',
                   display: 'grid',
@@ -491,24 +491,24 @@ export const EventRegistrationModal: React.FC<EventRegistrationModalProps> = ({
                   fontSize: '0.82rem',
                 }}>
                   <div>
-                    <span style={{ color: '#64748b', fontSize: '0.72rem', display: 'block' }}>FULL NAME</span>
-                    <strong style={{ color: '#f8fafc' }}>{currentUser?.name || 'Govind Jangid'}</strong>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.72rem', display: 'block' }}>FULL NAME</span>
+                    <strong style={{ color: 'var(--text-primary)' }}>{currentUser?.name || 'Govind Jangid'}</strong>
                   </div>
                   <div>
-                    <span style={{ color: '#64748b', fontSize: '0.72rem', display: 'block' }}>UNIVERSITY ROLL NO</span>
-                    <strong style={{ color: '#38bdf8', fontFamily: 'var(--font-mono)' }}>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.72rem', display: 'block' }}>UNIVERSITY ROLL NO</span>
+                    <strong style={{ color: '#0284c7', fontFamily: 'var(--font-mono)' }}>
                       {currentUser?.studentProfile?.rollNo || '22EACIT089'}
                     </strong>
                   </div>
                   <div>
-                    <span style={{ color: '#64748b', fontSize: '0.72rem', display: 'block' }}>DEPARTMENT</span>
-                    <strong style={{ color: '#cbd5e1' }}>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.72rem', display: 'block' }}>DEPARTMENT</span>
+                    <strong style={{ color: 'var(--text-primary)' }}>
                       {currentUser?.studentProfile?.department || 'Computer Science & Engineering'}
                     </strong>
                   </div>
                   <div>
-                    <span style={{ color: '#64748b', fontSize: '0.72rem', display: 'block' }}>INSTITUTIONAL EMAIL</span>
-                    <strong style={{ color: '#cbd5e1' }}>{currentUser?.email || 'govind@aryacollege.in'}</strong>
+                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.72rem', display: 'block' }}>INSTITUTIONAL EMAIL</span>
+                    <strong style={{ color: 'var(--text-primary)' }}>{currentUser?.email || 'govind@aryacollege.in'}</strong>
                   </div>
                 </div>
               </div>

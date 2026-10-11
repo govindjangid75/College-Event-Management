@@ -86,22 +86,23 @@ export const MyPassesPage: React.FC = () => {
           display: 'inline-flex',
           alignItems: 'center',
           gap: '8px',
-          color: '#06b6d4',
+          color: 'var(--acid)',
           fontSize: '0.82rem',
-          fontWeight: 700,
+          fontWeight: 800,
           marginBottom: '8px',
-          background: 'rgba(6, 182, 212, 0.1)',
+          background: 'rgba(16, 185, 129, 0.1)',
           padding: '4px 12px',
           borderRadius: '20px',
-          border: '1px solid rgba(6, 182, 212, 0.25)',
+          border: '1px solid rgba(16, 185, 129, 0.25)',
+          fontFamily: 'var(--font-mono)'
         }}>
           <ShieldCheck size={16} />
           CRYPTOGRAPHIC ANTI-SCREENSHOT GATE PASS ENGINE
         </div>
-        <h1 style={{ fontSize: '2.3rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.02em', margin: 0 }}>
+        <h1 style={{ fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.03em', margin: 0 }}>
           My Verified Digital Passes
         </h1>
-        <p style={{ color: '#94a3b8', fontSize: '0.95rem', marginTop: '8px', maxWidth: '640px', margin: '8px auto 0' }}>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginTop: '8px', maxWidth: '640px', margin: '8px auto 0' }}>
           Rolling cryptographic passes for Arya College venue entry. To prevent WhatsApp screenshot proxy frauds, dynamic QR codes rotate every 30 seconds.
         </p>
       </div>
@@ -222,7 +223,7 @@ export const MyPassesPage: React.FC = () => {
                   </span>
                 </div>
 
-                <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#f8fafc', lineHeight: 1.3, marginBottom: '16px' }}>
+                <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1.3, marginBottom: '16px' }}>
                   {reg.eventTitle}
                 </h2>
 
@@ -231,36 +232,36 @@ export const MyPassesPage: React.FC = () => {
                   gridTemplateColumns: '1fr 1fr',
                   gap: '12px',
                   fontSize: '0.82rem',
-                  background: 'rgba(255, 255, 255, 0.02)',
+                  background: 'var(--bg-secondary)',
                   padding: '16px',
                   borderRadius: '12px',
-                  border: '1px solid rgba(255, 255, 255, 0.06)',
+                  border: '1px solid var(--card-border)',
                   marginBottom: '20px',
                 }}>
                   <div>
-                    <span style={{ color: '#64748b', fontSize: '0.7rem', display: 'block' }}>TICKET ID</span>
-                    <strong style={{ fontFamily: 'var(--font-mono)', color: '#38bdf8', fontSize: '0.95rem' }}>
+                    <span style={{ color: 'var(--text-muted)', fontSize: '0.7rem', display: 'block' }}>TICKET ID</span>
+                    <strong style={{ fontFamily: 'var(--font-mono)', color: 'var(--acid)', fontSize: '0.95rem' }}>
                       {ticketNum}
                     </strong>
                   </div>
 
                   <div>
-                    <span style={{ color: '#64748b', fontSize: '0.7rem', display: 'block' }}>STUDENT ATTENDEE</span>
-                    <strong style={{ color: '#f8fafc' }}>
+                    <span style={{ color: 'var(--text-muted)', fontSize: '0.7rem', display: 'block' }}>STUDENT ATTENDEE</span>
+                    <strong style={{ color: 'var(--text-primary)' }}>
                       {reg.userName}
                     </strong>
                   </div>
 
                   <div>
-                    <span style={{ color: '#64748b', fontSize: '0.7rem', display: 'block' }}>UNIVERSITY ROLL</span>
-                    <strong style={{ color: '#cbd5e1', fontFamily: 'var(--font-mono)' }}>
+                    <span style={{ color: 'var(--text-muted)', fontSize: '0.7rem', display: 'block' }}>UNIVERSITY ROLL</span>
+                    <strong style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>
                       {reg.userRollNo || currentUser?.studentProfile?.rollNo || '22EACIT089'}
                     </strong>
                   </div>
 
                   <div>
-                    <span style={{ color: '#64748b', fontSize: '0.7rem', display: 'block' }}>PARTICIPATION MODE</span>
-                    <strong style={{ color: '#a5b4fc' }}>
+                    <span style={{ color: 'var(--text-muted)', fontSize: '0.7rem', display: 'block' }}>PARTICIPATION MODE</span>
+                    <strong style={{ color: 'var(--text-primary)' }}>
                       {reg.registrationType} {reg.teamName ? `(${reg.teamName})` : ''}
                     </strong>
                   </div>
@@ -393,9 +394,9 @@ export const MyPassesPage: React.FC = () => {
 
                 {/* Countdown Timer with circular indicator */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                  <Clock size={16} color="#06b6d4" />
-                  <span style={{ fontSize: '0.88rem', fontWeight: 700, color: '#f8fafc' }}>
-                    Regenerating in <span style={{ color: '#06b6d4', fontFamily: 'var(--font-mono)' }}>{secondsRemaining}s</span>
+                  <Clock size={16} color="var(--acid)" />
+                  <span style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                    Regenerating in <span style={{ color: 'var(--acid)', fontFamily: 'var(--font-mono)' }}>{secondsRemaining}s</span>
                   </span>
                 </div>
 

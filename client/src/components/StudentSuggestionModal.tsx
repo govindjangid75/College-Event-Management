@@ -115,10 +115,10 @@ export const StudentSuggestionModal: React.FC<StudentSuggestionModalProps> = ({
               <Lightbulb size={20} />
             </div>
             <div>
-              <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: '#f8fafc' }}>
+              <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)' }}>
                 You Said, We Did — Propose Improvement
               </h3>
-              <p style={{ margin: '3px 0 0', fontSize: '0.78rem', color: '#94a3b8' }}>
+              <p style={{ margin: '3px 0 0', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
                 Direct feedback loop to <strong>{clubName}</strong> organizers
               </p>
             </div>

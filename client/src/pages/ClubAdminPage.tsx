@@ -445,7 +445,7 @@ export const ClubAdminPage: React.FC = () => {
           />
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-              <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.02em', margin: 0 }}>
+              <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0 }}>
                 {activeClub.name}
               </h1>
               <span className="badge-role-club">Organizer Console</span>
@@ -634,7 +634,7 @@ export const ClubAdminPage: React.FC = () => {
             marginBottom: '20px',
           }}>
             <div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                 Institutional Financial Ledger
               </h3>
               <p style={{ color: '#94a3b8', fontSize: '0.82rem', marginTop: '2px' }}>
@@ -708,7 +708,7 @@ export const ClubAdminPage: React.FC = () => {
                     const isCredit = entry.type === 'TICKET_SALE';
                     const isPayout = entry.type === 'PAYOUT_DISBURSEMENT';
                     return (
-                      <tr key={entry.id} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.04)', color: '#f8fafc' }}>
+                      <tr key={entry.id} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.04)', color: 'var(--text-primary)' }}>
                         <td style={{ padding: '14px', fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: '#38bdf8' }}>
                           {entry.referenceId || entry.id}
                         </td>
@@ -776,7 +776,7 @@ export const ClubAdminPage: React.FC = () => {
                 <Calendar size={16} />
                 <span>INSTITUTIONAL SCHEDULER & VENUE BUFFER ENGINE</span>
               </div>
-              <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                 {activeClub.name} Event Calendar (Live MongoDB Atlas)
               </h3>
               <p style={{ color: '#94a3b8', fontSize: '0.82rem', marginTop: '2px' }}>
@@ -814,7 +814,7 @@ export const ClubAdminPage: React.FC = () => {
           ) : clubEvents.length === 0 ? (
             <div style={{ padding: '40px 20px', textAlign: 'center', background: 'rgba(255, 255, 255, 0.02)', borderRadius: '12px', border: '1px dashed rgba(255, 255, 255, 0.1)' }}>
               <Calendar size={36} color="#6366f1" style={{ margin: '0 auto 10px', opacity: 0.6 }} />
-              <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#f8fafc', marginBottom: '6px' }}>No Events Scheduled Yet</h4>
+              <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '6px' }}>No Events Scheduled Yet</h4>
               <p style={{ fontSize: '0.85rem', color: '#94a3b8', maxWidth: '460px', margin: '0 auto 16px' }}>
                 This club does not have any active or proposed events in MongoDB Atlas. Propose a new workshop or hackathon to reserve college venues.
               </p>
@@ -854,7 +854,7 @@ export const ClubAdminPage: React.FC = () => {
                       </span>
                     </div>
 
-                    <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#f8fafc', margin: '0 0 6px', lineHeight: 1.3 }}>
+                    <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', margin: '0 0 6px', lineHeight: 1.3 }}>
                       {evt.title}
                     </h4>
                     <p style={{ fontSize: '0.82rem', color: '#94a3b8', lineHeight: 1.5, marginBottom: '14px', flex: 1 }}>
@@ -906,7 +906,7 @@ export const ClubAdminPage: React.FC = () => {
                   <QrCode size={16} />
                   LIVE GATE ACCESS CONTROL & ATTENDANCE ENGINE
                 </div>
-                <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+                <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                   Gate Scanner: {activeClub.name}
                 </h3>
                 <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginTop: '4px' }}>
@@ -975,7 +975,7 @@ export const ClubAdminPage: React.FC = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '24px', marginBottom: '28px' }}>
             {/* Scanner Box */}
             <div className="glass-panel" style={{ padding: '24px', textAlign: 'center' }}>
-              <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#f8fafc', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+              <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
                 <QrCode size={18} color="#06b6d4" />
                 Camera Viewfinder & Ticket Input
               </h4>
@@ -1058,7 +1058,7 @@ export const ClubAdminPage: React.FC = () => {
 
             {/* Real-time Verification Feedback Result */}
             <div className="glass-panel" style={{ padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-              <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#f8fafc', marginBottom: '16px' }}>
+              <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '16px' }}>
                 Gate Admission Decision
               </h4>
 
@@ -1207,7 +1207,7 @@ export const ClubAdminPage: React.FC = () => {
           <div className="glass-panel" style={{ padding: '24px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
               <div>
-                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+                <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                   Live Event Attendee Roster
                 </h4>
                 <p style={{ color: '#94a3b8', fontSize: '0.8rem', marginTop: '2px' }}>
@@ -1247,7 +1247,7 @@ export const ClubAdminPage: React.FC = () => {
                       const tNum = att.ticketNumber || att.ticket?.ticketNumber || 'CS-2026-XXXX';
                       return (
                         <tr key={att.id} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.04)' }}>
-                          <td style={{ padding: '12px', color: '#f8fafc', fontWeight: 700 }}>
+                          <td style={{ padding: '12px', color: 'var(--text-primary)', fontWeight: 700 }}>
                             {att.userName}
                             <div style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 400 }}>
                               {att.department || 'CSE'} • Sem {att.semester || 6}
@@ -1338,7 +1338,7 @@ export const ClubAdminPage: React.FC = () => {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <Star size={22} color="#f59e0b" fill="#f59e0b" />
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                     Attendance-Gated 5-Vector Event Analytics
                   </h3>
                 </div>
@@ -1501,7 +1501,7 @@ export const ClubAdminPage: React.FC = () => {
 
                 {/* Verified Reviews Stream */}
                 <div>
-                  <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#f8fafc', marginBottom: '14px' }}>
+                  <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '14px' }}>
                     Verified Attendee Reviews ({eventReviews.length})
                   </h4>
                   {eventReviews.length === 0 ? (
@@ -1526,7 +1526,7 @@ export const ClubAdminPage: React.FC = () => {
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                             <div>
                               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                <span style={{ fontWeight: 700, color: '#f8fafc', fontSize: '0.88rem' }}>{rev.studentName}</span>
+                                <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.88rem' }}>{rev.studentName}</span>
                                 <span style={{
                                   fontSize: '0.65rem',
                                   padding: '2px 6px',
@@ -1589,7 +1589,7 @@ export const ClubAdminPage: React.FC = () => {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <Lightbulb size={22} color="#fbbf24" />
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                     "You Said, We Did" Closed-Loop Action Kanban
                   </h3>
                 </div>
@@ -1709,7 +1709,7 @@ export const ClubAdminPage: React.FC = () => {
                             }}
                           >
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
-                              <h5 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f8fafc', margin: 0, lineHeight: 1.4 }}>
+                              <h5 style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0, lineHeight: 1.4 }}>
                                 {item.title}
                               </h5>
                               <span style={{
@@ -1817,7 +1817,7 @@ export const ClubAdminPage: React.FC = () => {
                 <span style={{ fontSize: '0.72rem', color: '#f59e0b', fontWeight: 700, textTransform: 'uppercase' }}>
                   Update Action Board Status
                 </span>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f8fafc', margin: '2px 0 0' }}>
+                <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)', margin: '2px 0 0' }}>
                   {selectedSuggestionForEdit.title}
                 </h4>
               </div>
@@ -1908,7 +1908,7 @@ export const ClubAdminPage: React.FC = () => {
         <div className="glass-panel" style={{ padding: '28px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
             <div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                 Spring 2026 Student Recruitment Queue
               </h3>
               <p style={{ color: '#94a3b8', fontSize: '0.82rem', marginTop: '2px' }}>
@@ -1930,7 +1930,7 @@ export const ClubAdminPage: React.FC = () => {
                 <div key={app.id} className="glass-card" style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
                   <div style={{ flex: 1, minWidth: '280px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
-                      <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+                      <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                         {app.userName}
                       </h4>
                       <span style={{ fontSize: '0.75rem', color: '#fbbf24', background: 'rgba(245, 158, 11, 0.1)', padding: '2px 8px', borderRadius: '4px', border: '1px solid rgba(245, 158, 11, 0.2)' }}>
@@ -1999,7 +1999,7 @@ export const ClubAdminPage: React.FC = () => {
         <div className="glass-panel" style={{ padding: '28px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
             <div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                 Executive Leadership & Coordinator Roster
               </h3>
               <p style={{ color: '#94a3b8', fontSize: '0.82rem', marginTop: '2px' }}>
@@ -2035,7 +2035,7 @@ export const ClubAdminPage: React.FC = () => {
                     {lead.charAt(0)}
                   </div>
                   <div>
-                    <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#f8fafc', margin: 0 }}>
+                    <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
                       {lead}
                     </h4>
                     <div style={{ fontSize: '0.75rem', color: '#fbbf24', marginTop: '2px' }}>
@@ -2053,7 +2053,7 @@ export const ClubAdminPage: React.FC = () => {
       {/* TAB 4: CLUB PROFILE & SETTINGS */}
       {activeTab === 'PROFILE' && (
         <div className="glass-panel" style={{ padding: '28px', maxWidth: '800px' }}>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', marginBottom: '4px' }}>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '4px' }}>
             Club Configuration & Institutional Settings
           </h3>
           <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '24px' }}>
@@ -2188,7 +2188,7 @@ export const ClubAdminPage: React.FC = () => {
             {payoutReceipt ? (
               <div style={{ textAlign: 'center' }}>
                 <CheckCircle2 size={54} color="#10b981" style={{ margin: '0 auto 16px' }} />
-                <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#f8fafc', marginBottom: '8px' }}>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '8px' }}>
                   Payout Request Submitted!
                 </h3>
                 <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '20px' }}>
@@ -2243,7 +2243,7 @@ export const ClubAdminPage: React.FC = () => {
               <form onSubmit={handleRequestPayout} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <Coins size={24} color="#f59e0b" />
-                  <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+                  <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                     Request Treasury Disbursement
                   </h3>
                 </div>
@@ -2354,7 +2354,7 @@ export const ClubAdminPage: React.FC = () => {
               <X size={20} />
             </button>
 
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#f8fafc', marginBottom: '6px' }}>
+            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '6px' }}>
               Appoint Club Coordinator
             </h3>
             <p style={{ color: '#94a3b8', fontSize: '0.82rem', marginBottom: '20px' }}>

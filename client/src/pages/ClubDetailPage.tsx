@@ -53,10 +53,10 @@ export const ClubDetailPage: React.FC = () => {
     return (
       <div style={{ maxWidth: '800px', margin: '80px auto', padding: '32px', textAlign: 'center' }} className="glass-panel">
         <AlertCircle size={48} color="#ef4444" style={{ margin: '0 auto 16px' }} />
-        <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc', marginBottom: '8px' }}>
+        <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '8px' }}>
           Club Not Found
         </h2>
-        <p style={{ color: '#94a3b8', marginBottom: '24px' }}>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>
           No registered Arya College club exists matching identifier "{slug}".
         </p>
         <Link to="/clubs" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
@@ -202,7 +202,7 @@ export const ClubDetailPage: React.FC = () => {
 
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-                  <h1 style={{ fontSize: '2.1rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.02em', margin: 0 }}>
+                  <h1 style={{ fontSize: '2.1rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0 }}>
                     {club.name}
                   </h1>
                   <span style={{
@@ -383,35 +383,35 @@ export const ClubDetailPage: React.FC = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '24px' }}>
           {/* Manifesto & Purpose */}
           <div className="glass-panel" style={{ padding: '28px' }}>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
               <Sparkles size={18} color="#06b6d4" />
               Club Mission & Domain Focus
             </h3>
-            <p style={{ color: '#cbd5e1', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '24px' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '24px' }}>
               {club.description}
             </p>
 
-            <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#f8fafc', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>
+            <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>
               Weekly Routine & Assembly Venue
             </h4>
             <div style={{
-              background: 'rgba(255, 255, 255, 0.03)',
+              background: 'var(--bg-secondary)',
               borderRadius: '12px',
               padding: '16px',
-              border: '1px solid rgba(255, 255, 255, 0.06)',
+              border: '1px solid var(--card-border)',
               display: 'flex',
               flexDirection: 'column',
               gap: '12px',
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#e2e8f0', fontSize: '0.88rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-primary)', fontSize: '0.88rem' }}>
                 <Clock size={16} color="var(--acid)" />
                 <span>Regular Meetup: <strong>Every Wednesday at 4:30 PM</strong></span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#e2e8f0', fontSize: '0.88rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-primary)', fontSize: '0.88rem' }}>
                 <MapPin size={16} color="#06b6d4" />
                 <span>Venue: <strong>Turing Advanced Computing Lab (Block B, 2nd Floor)</strong></span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#e2e8f0', fontSize: '0.88rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-primary)', fontSize: '0.88rem' }}>
                 <Award size={16} color="#10b981" />
                 <span>Eligible for: <strong>AICTE / RTU Activity Points (10-25 pts per event)</strong></span>
               </div>
@@ -422,7 +422,7 @@ export const ClubDetailPage: React.FC = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             {/* Faculty Card */}
             <div className="glass-panel" style={{ padding: '24px', borderLeft: '4px solid #06b6d4' }}>
-              <span style={{ fontSize: '0.75rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>
                 Faculty Coordinator & Mentor
               </span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '12px' }}>
@@ -435,17 +435,17 @@ export const ClubDetailPage: React.FC = () => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   border: '2px solid #06b6d4',
-                  color: '#f8fafc',
+                  color: '#ffffff',
                   fontWeight: 800,
                   fontSize: '1.2rem',
                 }}>
                   {club.facultyCoordinator.charAt(4) || 'F'}
                 </div>
                 <div>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+                  <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                     {club.facultyCoordinator}
                   </h4>
-                  <div style={{ fontSize: '0.82rem', color: '#38bdf8', marginTop: '2px' }}>
+                  <div style={{ fontSize: '0.82rem', color: '#0284c7', marginTop: '2px', fontWeight: 600 }}>
                     Institutional Mentor — Arya College of Engineering & IT
                   </div>
                 </div>
@@ -454,7 +454,7 @@ export const ClubDetailPage: React.FC = () => {
 
             {/* Official Social & Repository Links */}
             <div className="glass-panel" style={{ padding: '24px' }}>
-              <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#f8fafc', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '14px' }}>
+              <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '14px' }}>
                 Official Communication Channels
               </h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -468,9 +468,10 @@ export const ClubDetailPage: React.FC = () => {
                       alignItems: 'center',
                       justifyContent: 'space-between',
                       padding: '10px 14px',
-                      background: 'rgba(255, 255, 255, 0.03)',
+                      background: 'var(--bg-secondary)',
+                      border: '1px solid var(--card-border)',
                       borderRadius: '8px',
-                      color: '#f8fafc',
+                      color: 'var(--text-primary)',
                       textDecoration: 'none',
                       fontSize: '0.85rem',
                     }}
@@ -478,7 +479,7 @@ export const ClubDetailPage: React.FC = () => {
                     <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                       <Github size={16} /> GitHub Organization
                     </span>
-                    <ExternalLink size={14} color="#94a3b8" />
+                    <ExternalLink size={14} color="var(--text-secondary)" />
                   </a>
                 )}
 
@@ -492,9 +493,10 @@ export const ClubDetailPage: React.FC = () => {
                       alignItems: 'center',
                       justifyContent: 'space-between',
                       padding: '10px 14px',
-                      background: 'rgba(255, 255, 255, 0.03)',
+                      background: 'var(--bg-secondary)',
+                      border: '1px solid var(--card-border)',
                       borderRadius: '8px',
-                      color: '#f8fafc',
+                      color: 'var(--text-primary)',
                       textDecoration: 'none',
                       fontSize: '0.85rem',
                     }}
@@ -502,7 +504,7 @@ export const ClubDetailPage: React.FC = () => {
                     <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                       <Instagram size={16} color="#e1306c" /> Instagram Handle
                     </span>
-                    <ExternalLink size={14} color="#94a3b8" />
+                    <ExternalLink size={14} color="var(--text-secondary)" />
                   </a>
                 )}
 
@@ -516,9 +518,10 @@ export const ClubDetailPage: React.FC = () => {
                       alignItems: 'center',
                       justifyContent: 'space-between',
                       padding: '10px 14px',
-                      background: 'rgba(255, 255, 255, 0.03)',
+                      background: 'var(--bg-secondary)',
+                      border: '1px solid var(--card-border)',
                       borderRadius: '8px',
-                      color: '#f8fafc',
+                      color: 'var(--text-primary)',
                       textDecoration: 'none',
                       fontSize: '0.85rem',
                     }}
@@ -526,7 +529,7 @@ export const ClubDetailPage: React.FC = () => {
                     <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                       <Linkedin size={16} color="#0077b5" /> LinkedIn Page
                     </span>
-                    <ExternalLink size={14} color="#94a3b8" />
+                    <ExternalLink size={14} color="var(--text-secondary)" />
                   </a>
                 )}
 
@@ -535,15 +538,16 @@ export const ClubDetailPage: React.FC = () => {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: '10px 14px',
-                  background: 'rgba(255, 255, 255, 0.03)',
+                  background: 'var(--bg-secondary)',
+                  border: '1px solid var(--card-border)',
                   borderRadius: '8px',
-                  color: '#f8fafc',
+                  color: 'var(--text-primary)',
                   fontSize: '0.85rem',
                 }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <Mail size={16} color="var(--acid)" /> Official Email
                   </span>
-                  <span style={{ color: '#94a3b8', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>
+                  <span style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}>
                     {club.slug}@aryacollege.in
                   </span>
                 </div>
@@ -558,10 +562,10 @@ export const ClubDetailPage: React.FC = () => {
         <div className="glass-panel" style={{ padding: '28px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
             <div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                 Executive Student Board & Coordinators
               </h3>
-              <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginTop: '4px' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginTop: '4px' }}>
                 Elected coordinators driving student workshops, logistics, tech operations, and hackathons.
               </p>
             </div>
@@ -594,13 +598,13 @@ export const ClubDetailPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#f8fafc', margin: 0 }}>
+                  <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
                     {lead}
                   </h4>
                   <div style={{ fontSize: '0.78rem', color: 'var(--acid)', fontWeight: 600, marginTop: '2px' }}>
                     {idx === 0 ? 'Club President' : 'Executive Tech Lead'}
                   </div>
-                  <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '2px' }}>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
                     Computer Science & Engineering • 2026 Batch
                   </div>
                 </div>
@@ -624,13 +628,13 @@ export const ClubDetailPage: React.FC = () => {
                 A
               </div>
               <div>
-                <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#f8fafc', margin: 0 }}>
+                <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
                   Aarav Mathur
                 </h4>
-                <div style={{ fontSize: '0.78rem', color: '#38bdf8', fontWeight: 600, marginTop: '2px' }}>
+                <div style={{ fontSize: '0.78rem', color: '#0284c7', fontWeight: 600, marginTop: '2px' }}>
                   Event Operations Lead
                 </div>
-                <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '2px' }}>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
                   Information Technology • 2026 Batch
                 </div>
               </div>
@@ -652,13 +656,13 @@ export const ClubDetailPage: React.FC = () => {
                 K
               </div>
               <div>
-                <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#f8fafc', margin: 0 }}>
+                <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
                   Kavita Joshi
                 </h4>
-                <div style={{ fontSize: '0.78rem', color: '#34d399', fontWeight: 600, marginTop: '2px' }}>
+                <div style={{ fontSize: '0.78rem', color: '#059669', fontWeight: 600, marginTop: '2px' }}>
                   PR & Sponsorship Head
                 </div>
-                <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '2px' }}>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
                   Electronics & Comm • 2026 Batch
                 </div>
               </div>
@@ -672,11 +676,11 @@ export const ClubDetailPage: React.FC = () => {
         <div>
           {clubEvents.length === 0 ? (
             <div className="glass-panel" style={{ padding: '48px', textAlign: 'center' }}>
-              <Calendar size={40} color="#94a3b8" style={{ margin: '0 auto 12px' }} />
-              <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#f8fafc' }}>
+              <Calendar size={40} color="var(--text-secondary)" style={{ margin: '0 auto 12px' }} />
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                 No Active Events Scheduled
               </h3>
-              <p style={{ color: '#94a3b8', fontSize: '0.88rem', marginTop: '6px' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', marginTop: '6px' }}>
                 {club.name} is preparing new event proposals. Check back soon!
               </p>
             </div>
@@ -707,16 +711,16 @@ export const ClubDetailPage: React.FC = () => {
                   </div>
 
                   <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: '#38bdf8', marginBottom: '6px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: '#0284c7', marginBottom: '6px', fontWeight: 600 }}>
                       <Calendar size={13} />
                       {new Date(event.schedule.startTime).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </div>
 
-                    <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#f8fafc', marginBottom: '8px' }}>
+                    <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '8px' }}>
                       {event.title}
                     </h4>
 
-                    <p style={{ color: '#94a3b8', fontSize: '0.85rem', lineHeight: 1.5, marginBottom: '16px', flex: 1 }}>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: 1.5, marginBottom: '16px', flex: 1 }}>
                       {event.shortSummary}
                     </p>
 
@@ -724,12 +728,12 @@ export const ClubDetailPage: React.FC = () => {
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+                      borderTop: '1px solid var(--card-border)',
                       paddingTop: '14px',
                     }}>
                       <div>
-                        <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>Fee:</div>
-                        <div style={{ fontSize: '0.95rem', fontWeight: 800, color: event.ticketing.isPaid ? 'var(--acid)' : '#34d399', fontFamily: 'var(--font-mono)' }}>
+                        <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Fee:</div>
+                        <div style={{ fontSize: '0.95rem', fontWeight: 800, color: event.ticketing.isPaid ? 'var(--acid)' : '#059669', fontFamily: 'var(--font-mono)' }}>
                           {event.ticketing.isPaid ? `₹${event.ticketing.ticketPrice}` : 'Free Entry'}
                         </div>
                       </div>
@@ -762,12 +766,12 @@ export const ClubDetailPage: React.FC = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
                   Dedicated Club Treasury Transparency
                 </h3>
                 <span className="badge-status badge-status-approved">Audited Ledger</span>
               </div>
-              <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginTop: '4px' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginTop: '4px' }}>
                 Under CampusSphere institutional rules, this club's ticket collections remain strictly isolated in its dedicated treasury.
               </p>
             </div>
@@ -844,20 +848,20 @@ export const ClubDetailPage: React.FC = () => {
           padding: '20px',
         }}>
           <div className="glass-panel" style={{ maxWidth: '540px', width: '100%', padding: '32px', position: 'relative' }}>
-            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#f8fafc', marginBottom: '6px' }}>
+            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '6px' }}>
               Join {club.name}
             </h3>
-            <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '20px' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '20px' }}>
               Submit your formal application to the club executive board for Spring 2026.
             </p>
 
             {applicationSuccess ? (
               <div style={{ padding: '32px 16px', textAlign: 'center' }}>
                 <CheckCircle2 size={48} color="#10b981" style={{ margin: '0 auto 16px' }} />
-                <h4 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc', marginBottom: '8px' }}>
+                <h4 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '8px' }}>
                   Application Submitted Successfully!
                 </h4>
-                <p style={{ color: '#94a3b8', fontSize: '0.85rem' }}>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
                   The {club.name} board will review your application. Check back on your student portal for status updates.
                 </p>
               </div>

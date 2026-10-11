@@ -253,10 +253,10 @@ export const EventFeedbackModal: React.FC<EventFeedbackModalProps> = ({
                 <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>· {clubName}</span>
               )}
             </div>
-            <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.01em' }}>
+            <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
               {eventTitle}
             </h2>
-            <p style={{ margin: '4px 0 0', fontSize: '0.78rem', color: '#cbd5e1' }}>
+            <p style={{ margin: '4px 0 0', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
               Your feedback is cryptographically tethered to your verified gate admission and influences the club's AICTE accreditation score.
             </p>
           </div>

@@ -113,10 +113,10 @@ export const RegisterPage: React.FC = () => {
           }}>
             <Building2 size={30} color="#ffffff" />
           </div>
-          <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#f8fafc', letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
             Student Enrollment Registration
           </h1>
-          <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginTop: '6px' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '6px' }}>
             Arya College of Engineering & IT (ACEIT), Jaipur
           </p>
         </div>
@@ -159,7 +159,7 @@ export const RegisterPage: React.FC = () => {
             {/* Name, RTU Roll No, & Enrollment No */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '14px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '6px' }}>
                   Full Legal Name *
                 </label>
                 <input
@@ -173,7 +173,7 @@ export const RegisterPage: React.FC = () => {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '6px' }}>
                   RTU Roll Number *
                 </label>
                 <input
@@ -187,7 +187,7 @@ export const RegisterPage: React.FC = () => {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '6px' }}>
                   Enrollment Number
                 </label>
                 <input
@@ -203,7 +203,7 @@ export const RegisterPage: React.FC = () => {
             {/* Email & Password */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '6px' }}>
                   Institutional Email *
                 </label>
                 <input
@@ -217,7 +217,7 @@ export const RegisterPage: React.FC = () => {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '6px' }}>
                   Password *
                 </label>
                 <input
@@ -234,14 +234,13 @@ export const RegisterPage: React.FC = () => {
             {/* Department & Semester */}
             <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '16px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '6px' }}>
                   Engineering Department *
                 </label>
                 <select
                   value={department}
                   onChange={e => setDepartment(e.target.value)}
                   className="glass-input"
-                  style={{ background: '#0d1629' }}
                 >
                   {DEPARTMENTS.map(d => (
                     <option key={d} value={d}>{d}</option>
@@ -250,14 +249,13 @@ export const RegisterPage: React.FC = () => {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '6px' }}>
                   Semester *
                 </label>
                 <select
                   value={semester}
                   onChange={e => setSemester(Number(e.target.value))}
                   className="glass-input"
-                  style={{ background: '#0d1629' }}
                 >
                   {[1, 2, 3, 4, 5, 6, 7, 8].map(s => (
                     <option key={s} value={s}>Semester {s}</option>
