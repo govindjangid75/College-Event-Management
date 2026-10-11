@@ -338,7 +338,7 @@ export const Navbar: React.FC = () => {
                 }}
               >
                 <img
-                  src={currentUser.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100'}
+                  src={(!currentUser.avatarUrl || currentUser.avatarUrl.includes('dicebear')) ? '/avatars/govind.jpg' : currentUser.avatarUrl}
                   alt={currentUser.name}
                   style={{ width: '24px', height: '24px', objectFit: 'cover', border: `1px solid ${isDark ? '#393934' : 'var(--ink)'}` }}
                 />

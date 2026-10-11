@@ -21,7 +21,7 @@ export const SEED_USERS: User[] = [
     name: 'Govind Jangid',
     email: 'govind@aryacollege.in',
     role: 'STUDENT',
-    avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=250',
+    avatarUrl: '/avatars/govind.jpg',
     studentProfile: {
       rollNo: '22EACIT089',
       enrollmentNo: '22EAICSE089',

@@ -30,7 +30,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [currentUser, setCurrentUser] = useState<User | null>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY_USER);
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.avatarUrl?.includes('dicebear')) {
+          parsed.avatarUrl = '/avatars/govind.jpg';
+        }
+        return parsed;
+      }
     } catch (e) {
       console.error('Failed to parse cached user', e);
     }
@@ -120,7 +126,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       name: userData.name || 'New Student',
       email: userData.email || `student_${Date.now()}@aryacollege.in`,
       role: 'STUDENT',
-      avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${userData.name || 'student'}`,
+      avatarUrl: userData.avatarUrl || '/avatars/govind.jpg',
       studentProfile: {
         rollNo,
         enrollmentNo,

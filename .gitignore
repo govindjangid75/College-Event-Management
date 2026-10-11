@@ -32,12 +32,14 @@ Thumbs.db
 .project
 .settings/
 
-
-
-
-
-
-
-
-
-
+# PBL Reports and Temporary logs
+docs/pbl-reports/
+docs/DAILY_COMMITS_*.md
+*DAILY_WORK_LOG*.md
+*DAILY_WORK_LOGS*.md
+*WEEKLY_REPORT*.md
+*WEEKLY_REPORTS*.md
+*WEEKLY_PROJECT_REPORTS*.md
+*TEAM_WORKFLOW_GUIDE*.md
+*TEAM_WORK_GUIDE*.md
+*AICTE*.md
