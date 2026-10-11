@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import jsQR from 'jsqr';
 import { useAuth } from '../context/AuthContext';
 import { useClub } from '../context/ClubContext';
 import { 
@@ -41,7 +42,13 @@ import {
   ExternalLink,
   Bell,
   BookOpen,
-  Plus
+  Plus,
+  Camera,
+  CameraOff,
+  SwitchCamera,
+  Upload,
+  Volume2,
+  VolumeX
 } from 'lucide-react';
 import { 
   Event, 
@@ -106,6 +113,20 @@ export const ClubAdminPage: React.FC = () => {
   const [lastScanResult, setLastScanResult] = useState<GateVerificationResult | null>(null);
   const [attendeesList, setAttendeesList] = useState<Registration[]>([]);
   const [loadingAttendees, setLoadingAttendees] = useState<boolean>(false);
+
+  // Live Camera QR Scanner State & Refs
+  const [isCameraActive, setIsCameraActive] = useState<boolean>(false);
+  const [cameraFacingMode, setCameraFacingMode] = useState<'environment' | 'user'>('environment');
+  const [cameraError, setCameraError] = useState<string | null>(null);
+  const [isSoundEnabled, setIsSoundEnabled] = useState<boolean>(true);
+  const [lastScannedCode, setLastScannedCode] = useState<string | null>(null);
+  const [scanFlash, setScanFlash] = useState<boolean>(false);
+
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const mediaStreamRef = useRef<MediaStream | null>(null);
+  const scanLoopRef = useRef<number | null>(null);
+  const scanCooldownRef = useRef<boolean>(false);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Phase 5 Feedback & "You Said, We Did" Kanban State
   const [clubSuggestions, setClubSuggestions] = useState<StudentSuggestion[]>([]);
@@ -343,6 +364,207 @@ export const ClubAdminPage: React.FC = () => {
       setIsVerifyingTicket(false);
     }
   };
+
+  // Camera Audio Feedback (Web Audio API synthetic chime)
+  const playScanBeep = () => {
+    if (!isSoundEnabled) return;
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(1320, ctx.currentTime + 0.1);
+      gain.gain.setValueAtTime(0.2, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.18);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.2);
+    } catch {
+      // Audio autoplay policy fallback
+    }
+  };
+
+  // Stop camera stream & cancel animation frame
+  const stopCameraStream = () => {
+    if (scanLoopRef.current) {
+      cancelAnimationFrame(scanLoopRef.current);
+      scanLoopRef.current = null;
+    }
+    if (mediaStreamRef.current) {
+      mediaStreamRef.current.getTracks().forEach(track => {
+        try {
+          track.stop();
+        } catch {}
+      });
+      mediaStreamRef.current = null;
+    }
+    if (videoRef.current) {
+      videoRef.current.srcObject = null;
+    }
+    setIsCameraActive(false);
+  };
+
+  // Continuous QR detection loop using jsQR
+  const startScanningLoop = () => {
+    if (scanLoopRef.current) {
+      cancelAnimationFrame(scanLoopRef.current);
+    }
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+    const tick = () => {
+      const video = videoRef.current;
+      if (video && video.readyState === video.HAVE_ENOUGH_DATA) {
+        if (video.videoWidth > 0 && video.videoHeight > 0) {
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          if (ctx) {
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const code = jsQR(imageData.data, imageData.width, imageData.height, {
+              inversionAttempts: 'dontInvert',
+            });
+
+            if (code && code.data && !scanCooldownRef.current) {
+              const scannedRaw = code.data.trim();
+              scanCooldownRef.current = true;
+              setLastScannedCode(scannedRaw);
+              setScanFlash(true);
+              setTimeout(() => setScanFlash(false), 600);
+              playScanBeep();
+
+              // Parse ticket ID (handles raw ticket or CAMPUSSPHERE:ticket:...)
+              let ticketNum = scannedRaw;
+              if (ticketNum.includes('CAMPUSSPHERE:')) {
+                const parts = ticketNum.split(':');
+                if (parts[1]) ticketNum = parts[1].trim();
+              }
+              setScanTicketInput(ticketNum);
+              handleScanGatePass(ticketNum);
+
+              // 2.5s cooldown before scanning again
+              setTimeout(() => {
+                scanCooldownRef.current = false;
+              }, 2500);
+            }
+          }
+        }
+      }
+      scanLoopRef.current = requestAnimationFrame(tick);
+    };
+
+    scanLoopRef.current = requestAnimationFrame(tick);
+  };
+
+  // Request camera access and start video stream
+  const startCameraStream = async (facing: 'environment' | 'user' = cameraFacingMode) => {
+    setCameraError(null);
+    stopCameraStream();
+
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      setCameraError('Camera API is not supported on this browser or connection is not HTTPS/localhost.');
+      return;
+    }
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: facing,
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
+        },
+        audio: false,
+      });
+
+      mediaStreamRef.current = stream;
+      setIsCameraActive(true);
+
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        videoRef.current.setAttribute('playsinline', 'true');
+        videoRef.current.muted = true;
+        await videoRef.current.play().catch(() => {});
+        startScanningLoop();
+      }
+    } catch (err: any) {
+      console.error('Camera access error:', err);
+      setIsCameraActive(false);
+      if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+        setCameraError('Camera permission was denied. Please allow camera permissions in your browser URL settings to scan live tickets.');
+      } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+        setCameraError('No video camera detected on this system. You can upload an image of the QR code or enter ticket number manually.');
+      } else {
+        setCameraError(`Camera error: ${err.message || 'Unable to start camera'}`);
+      }
+    }
+  };
+
+  // Switch between Rear (environment) and Front (user) camera
+  const flipCamera = () => {
+    const nextMode = cameraFacingMode === 'environment' ? 'user' : 'environment';
+    setCameraFacingMode(nextMode);
+    if (isCameraActive) {
+      startCameraStream(nextMode);
+    }
+  };
+
+  // Fallback: decode QR code from an uploaded photo or screenshot
+  const handleUploadQrImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const c = document.createElement('canvas');
+        c.width = img.width;
+        c.height = img.height;
+        const ctx = c.getContext('2d', { willReadFrequently: true });
+        if (ctx) {
+          ctx.drawImage(img, 0, 0);
+          const imgData = ctx.getImageData(0, 0, c.width, c.height);
+          const code = jsQR(imgData.data, imgData.width, imgData.height);
+          if (code && code.data) {
+            playScanBeep();
+            setScanFlash(true);
+            setTimeout(() => setScanFlash(false), 600);
+            const scannedPayload = code.data.trim();
+            setLastScannedCode(scannedPayload);
+
+            let ticketNum = scannedPayload;
+            if (ticketNum.includes('CAMPUSSPHERE:')) {
+              const parts = ticketNum.split(':');
+              if (parts[1]) ticketNum = parts[1].trim();
+            }
+            setScanTicketInput(ticketNum);
+            handleScanGatePass(ticketNum);
+            showNotification(`QR Code Detected: ${ticketNum}`, 'success');
+          } else {
+            showNotification('No QR code detected in the uploaded image. Please ensure the QR is well-lit and clear.', 'error');
+          }
+        }
+      };
+      img.src = event.target?.result as string;
+    };
+    reader.readAsDataURL(file);
+    if (e.target) e.target.value = '';
+  };
+
+  // Auto shut-off camera when leaving the SCANNER tab to preserve privacy & battery
+  useEffect(() => {
+    if (activeTab !== 'SCANNER' && isCameraActive) {
+      stopCameraStream();
+    }
+    return () => {
+      stopCameraStream();
+    };
+  }, [activeTab]);
 
   // Club Isolation Check
   const isSuperAdmin = currentUser?.role === 'SUPER_ADMIN';
@@ -1763,43 +1985,310 @@ export const ClubAdminPage: React.FC = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '24px', marginBottom: '28px' }}>
             {/* Scanner Box */}
             <div className="glass-panel" style={{ padding: '24px', textAlign: 'center' }}>
-              <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                <QrCode size={18} color="#06b6d4" />
-                Camera Viewfinder & Ticket Input
-              </h4>
+              {/* Hidden file input for QR image upload fallback */}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleUploadQrImage}
+                style={{ display: 'none' }}
+              />
 
-              {/* Viewfinder Graphic with Laser Scan line */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
+                <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <QrCode size={18} color="#06b6d4" />
+                  Live Gate Camera & QR Scanner
+                </h4>
+                {isCameraActive ? (
+                  <span style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    fontSize: '0.72rem',
+                    fontWeight: 700,
+                    color: '#10b981',
+                    background: 'rgba(16, 185, 129, 0.12)',
+                    border: '1px solid rgba(16, 185, 129, 0.3)',
+                    padding: '3px 10px',
+                    borderRadius: '999px',
+                    letterSpacing: '0.5px'
+                  }}>
+                    <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#10b981', boxShadow: '0 0 8px #10b981' }} />
+                    LIVE CAMERA ACTIVE
+                  </span>
+                ) : (
+                  <span style={{
+                    fontSize: '0.72rem',
+                    fontWeight: 600,
+                    color: 'var(--text-muted)',
+                    background: 'var(--bg-secondary)',
+                    border: '1px solid var(--card-border)',
+                    padding: '3px 10px',
+                    borderRadius: '999px'
+                  }}>
+                    STANDBY
+                  </span>
+                )}
+              </div>
+
+              {/* Viewfinder Graphic / Real Live Video Stream */}
               <div style={{
-                width: '240px',
-                height: '240px',
-                margin: '0 auto 20px',
+                width: '100%',
+                maxWidth: '320px',
+                height: '280px',
+                margin: '0 auto 16px',
                 borderRadius: '20px',
-                background: 'rgba(15, 23, 42, 0.8)',
-                border: '2px solid rgba(6, 182, 212, 0.5)',
+                background: '#090d16',
+                border: isCameraActive ? '2px solid #06b6d4' : '2px solid rgba(148, 163, 184, 0.2)',
                 position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 overflow: 'hidden',
-                boxShadow: '0 0 30px rgba(6, 182, 212, 0.25)',
+                boxShadow: isCameraActive ? '0 0 35px rgba(6, 182, 212, 0.35)' : '0 8px 24px rgba(0, 0, 0, 0.2)',
+                transition: 'all 0.3s ease',
               }}>
-                <div style={{ position: 'absolute', top: '10px', left: '10px', width: '20px', height: '20px', borderTop: '3px solid #06b6d4', borderLeft: '3px solid #06b6d4' }} />
-                <div style={{ position: 'absolute', top: '10px', right: '10px', width: '20px', height: '20px', borderTop: '3px solid #06b6d4', borderRight: '3px solid #06b6d4' }} />
-                <div style={{ position: 'absolute', bottom: '10px', left: '10px', width: '20px', height: '20px', borderBottom: '3px solid #06b6d4', borderLeft: '3px solid #06b6d4' }} />
-                <div style={{ position: 'absolute', bottom: '10px', right: '10px', width: '20px', height: '20px', borderBottom: '3px solid #06b6d4', borderRight: '3px solid #06b6d4' }} />
+                {/* Always mounted video element for stream */}
+                <video
+                  ref={videoRef}
+                  playsInline
+                  autoPlay
+                  muted
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: isCameraActive ? 'block' : 'none',
+                    transform: cameraFacingMode === 'user' ? 'scaleX(-1)' : 'none',
+                  }}
+                />
 
-                <div style={{
-                  position: 'absolute',
-                  left: 0,
-                  right: 0,
-                  height: '2px',
-                  background: 'linear-gradient(90deg, transparent, #06b6d4, #ffffff, #06b6d4, transparent)',
-                  boxShadow: '0 0 12px #06b6d4',
-                  animation: 'scanLaser 2.2s ease-in-out infinite alternate',
-                }} />
+                {/* Camera Idle State Placeholder */}
+                {!isCameraActive && (
+                  <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+                    <div style={{
+                      width: '68px',
+                      height: '68px',
+                      borderRadius: '20px',
+                      background: 'rgba(6, 182, 212, 0.1)',
+                      border: '1px solid rgba(6, 182, 212, 0.25)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#06b6d4'
+                    }}>
+                      <Camera size={32} />
+                    </div>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                      Camera Scanner Ready
+                    </div>
+                    <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: 0, maxWidth: '240px', lineHeight: 1.4 }}>
+                      Access device camera to point & scan attendee QR codes in real time.
+                    </p>
+                    <button
+                      onClick={() => startCameraStream()}
+                      className="btn-primary"
+                      style={{
+                        marginTop: '6px',
+                        fontSize: '0.8rem',
+                        padding: '8px 16px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        boxShadow: '0 4px 14px rgba(16, 185, 129, 0.3)'
+                      }}
+                    >
+                      <Camera size={15} />
+                      <span>Turn On Camera</span>
+                    </button>
+                  </div>
+                )}
 
-                <QrCode size={90} color="rgba(6, 182, 212, 0.35)" />
+                {/* Viewfinder Target HUD Corners & Laser (when active) */}
+                {isCameraActive && (
+                  <>
+                    <div style={{ position: 'absolute', top: '12px', left: '12px', width: '24px', height: '24px', borderTop: '3px solid #06b6d4', borderLeft: '3px solid #06b6d4', pointerEvents: 'none' }} />
+                    <div style={{ position: 'absolute', top: '12px', right: '12px', width: '24px', height: '24px', borderTop: '3px solid #06b6d4', borderRight: '3px solid #06b6d4', pointerEvents: 'none' }} />
+                    <div style={{ position: 'absolute', bottom: '12px', left: '12px', width: '24px', height: '24px', borderBottom: '3px solid #06b6d4', borderLeft: '3px solid #06b6d4', pointerEvents: 'none' }} />
+                    <div style={{ position: 'absolute', bottom: '12px', right: '12px', width: '24px', height: '24px', borderBottom: '3px solid #06b6d4', borderRight: '3px solid #06b6d4', pointerEvents: 'none' }} />
+
+                    {/* Animated Scanning Laser Line */}
+                    <div style={{
+                      position: 'absolute',
+                      left: 0,
+                      right: 0,
+                      height: '2px',
+                      background: 'linear-gradient(90deg, transparent, #06b6d4, #ffffff, #06b6d4, transparent)',
+                      boxShadow: '0 0 14px #06b6d4, 0 0 6px #ffffff',
+                      animation: 'scanLaser 2.2s ease-in-out infinite alternate',
+                      pointerEvents: 'none',
+                    }} />
+
+                    {/* Successful Detection Green Flash */}
+                    {scanFlash && (
+                      <div style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: 'rgba(16, 185, 129, 0.45)',
+                        boxShadow: 'inset 0 0 30px #10b981',
+                        pointerEvents: 'none',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#ffffff',
+                        fontWeight: 800,
+                        fontSize: '1.1rem',
+                        letterSpacing: '1px',
+                        textShadow: '0 2px 8px rgba(0,0,0,0.6)'
+                      }}>
+                        ✓ SCANNED
+                      </div>
+                    )}
+
+                    {/* Camera HUD Indicator */}
+                    <div style={{
+                      position: 'absolute',
+                      top: '12px',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      background: 'rgba(15, 23, 42, 0.75)',
+                      backdropFilter: 'blur(6px)',
+                      border: '1px solid rgba(6, 182, 212, 0.3)',
+                      padding: '2px 10px',
+                      borderRadius: '999px',
+                      fontSize: '0.68rem',
+                      color: '#38bdf8',
+                      fontFamily: 'var(--font-mono)',
+                      pointerEvents: 'none'
+                    }}>
+                      {cameraFacingMode === 'environment' ? 'REAR CAMERA' : 'FRONT CAMERA'} • AI SCANNER
+                    </div>
+                  </>
+                )}
               </div>
+
+              {/* Camera Controls Toolbar */}
+              <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '14px' }}>
+                {isCameraActive ? (
+                  <button
+                    onClick={stopCameraStream}
+                    className="btn-secondary"
+                    style={{
+                      fontSize: '0.8rem',
+                      padding: '6px 14px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      color: '#ef4444',
+                      borderColor: 'rgba(239, 68, 68, 0.3)',
+                      background: 'rgba(239, 68, 68, 0.05)'
+                    }}
+                  >
+                    <CameraOff size={14} />
+                    <span>Stop Camera</span>
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => startCameraStream()}
+                    className="btn-primary"
+                    style={{
+                      fontSize: '0.8rem',
+                      padding: '6px 14px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                    }}
+                  >
+                    <Camera size={14} />
+                    <span>Start Camera</span>
+                  </button>
+                )}
+
+                <button
+                  onClick={flipCamera}
+                  className="btn-secondary"
+                  title="Switch Camera (Front / Rear)"
+                  style={{
+                    fontSize: '0.8rem',
+                    padding: '6px 12px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                  }}
+                >
+                  <SwitchCamera size={14} />
+                  <span>{cameraFacingMode === 'environment' ? 'Rear' : 'Front'}</span>
+                </button>
+
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="btn-secondary"
+                  title="Upload image containing QR code"
+                  style={{
+                    fontSize: '0.8rem',
+                    padding: '6px 12px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                  }}
+                >
+                  <Upload size={14} />
+                  <span>Upload QR</span>
+                </button>
+
+                <button
+                  onClick={() => setIsSoundEnabled(!isSoundEnabled)}
+                  className="btn-secondary"
+                  title={isSoundEnabled ? 'Chime sound enabled' : 'Chime sound muted'}
+                  style={{
+                    fontSize: '0.8rem',
+                    padding: '6px 10px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    color: isSoundEnabled ? '#10b981' : 'var(--text-muted)'
+                  }}
+                >
+                  {isSoundEnabled ? <Volume2 size={14} /> : <VolumeX size={14} />}
+                </button>
+              </div>
+
+              {/* Camera Error Banner (e.g. Permission Denied) */}
+              {cameraError && (
+                <div style={{
+                  marginBottom: '14px',
+                  padding: '10px 14px',
+                  borderRadius: '10px',
+                  background: 'rgba(239, 68, 68, 0.08)',
+                  border: '1px solid rgba(239, 68, 68, 0.25)',
+                  color: '#ef4444',
+                  fontSize: '0.8rem',
+                  textAlign: 'left',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '8px'
+                }}>
+                  <AlertTriangle size={16} style={{ flexShrink: 0, marginTop: '2px' }} />
+                  <div>{cameraError}</div>
+                </div>
+              )}
+
+              {/* Last Scanned Code Banner */}
+              {lastScannedCode && (
+                <div style={{
+                  marginBottom: '12px',
+                  fontSize: '0.75rem',
+                  color: '#10b981',
+                  background: 'rgba(16, 185, 129, 0.08)',
+                  border: '1px solid rgba(16, 185, 129, 0.2)',
+                  padding: '4px 10px',
+                  borderRadius: '8px',
+                  fontFamily: 'var(--font-mono)',
+                  display: 'inline-block'
+                }}>
+                  Last Scanned: <strong>{lastScannedCode}</strong>
+                </div>
+              )}
 
               {/* Input & Scan CTA */}
               <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
@@ -1824,7 +2313,7 @@ export const ClubAdminPage: React.FC = () => {
               </div>
 
               {/* Quick Demo Test Buttons */}
-              <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <button
                   onClick={() => handleScanGatePass('CS-2026-HACK-8492')}
                   className="btn-secondary"

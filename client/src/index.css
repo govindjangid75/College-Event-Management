@@ -1013,3 +1013,17 @@ h1, h2, h3, h4, h5, h6 {
     text-align: left;
   }
 }
+
+@keyframes scanLaser {
+  0% {
+    top: 6%;
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 92%;
+    opacity: 0.85;
+  }
+}
