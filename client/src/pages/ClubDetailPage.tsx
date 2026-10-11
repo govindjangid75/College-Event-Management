@@ -27,16 +27,28 @@ import {
   Lock,
   Globe,
   Sliders,
-  AlertCircle
+  AlertCircle,
+  Video,
+  Bell,
+  FileText,
+  CheckSquare,
+  ShieldAlert,
+  BookOpen
 } from 'lucide-react';
 
 export const ClubDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  const { getClubBySlug, submitJoinApplication } = useClub();
+  const { 
+    getClubBySlug, 
+    submitJoinApplication,
+    getClubMembers,
+    getClubMeetings,
+    isUserMemberOfClub
+  } = useClub();
   const { currentUser } = useAuth();
 
-  const [activeTab, setActiveTab] = useState<'OVERVIEW' | 'LEADERSHIP' | 'EVENTS' | 'TREASURY'>('OVERVIEW');
+  const [activeTab, setActiveTab] = useState<'OVERVIEW' | 'LEADERSHIP' | 'EVENTS' | 'TREASURY' | 'MEMBERS_HUB'>('OVERVIEW');
   const [showApplyModal, setShowApplyModal] = useState(false);
   const [applicationSuccess, setApplicationSuccess] = useState(false);
   const [selectedEventForModal, setSelectedEventForModal] = useState<Event | null>(null);
@@ -80,6 +92,27 @@ export const ClubDetailPage: React.FC = () => {
   const isClubAdmin = currentUser?.role === 'CLUB_ADMIN' && currentUser?.administeredClubId === club.slug;
   const isSuperAdmin = currentUser?.role === 'SUPER_ADMIN';
   const canManageTreasury = isClubAdmin || isSuperAdmin;
+
+  // Membership & Meeting Segregation
+  const userRoll = currentUser?.studentProfile?.rollNo;
+  const userEmail = currentUser?.email;
+  const isMember = club ? (
+    isUserMemberOfClub(club.id, userRoll, userEmail) ||
+    (currentUser?.role === 'CLUB_ADMIN' && currentUser?.administeredClubId === club.slug) ||
+    currentUser?.role === 'SUPER_ADMIN'
+  ) : false;
+
+  const clubMeetings = club ? getClubMeetings(club.id) : [];
+  const clubMembersList = club ? getClubMembers(club.id) : [];
+
+  const todayYMD = new Date().toISOString().split('T')[0];
+  const todayMeetings = clubMeetings.filter(m => {
+    return m.meetingDateTime.split('T')[0] === todayYMD && m.status === 'SCHEDULED';
+  });
+  const upcomingMeetings = clubMeetings.filter(m => {
+    return m.status === 'SCHEDULED' && m.meetingDateTime.split('T')[0] !== todayYMD;
+  });
+  const concludedMeetings = clubMeetings.filter(m => m.status === 'CONCLUDED' || !!m.summary);
 
   const handleApply = (e: React.FormEvent) => {
     e.preventDefault();
@@ -345,6 +378,13 @@ export const ClubDetailPage: React.FC = () => {
             { id: 'OVERVIEW', label: 'Club Overview & Manifesto', icon: Building2 },
             { id: 'LEADERSHIP', label: 'Faculty & Student Leads', icon: Users },
             { id: 'EVENTS', label: `Club Events (${clubEvents.length})`, icon: Calendar },
+            { 
+              id: 'MEMBERS_HUB', 
+              label: isMember 
+                ? `🔒 Internal Members Hub (${clubMeetings.length})` 
+                : '🔒 Internal Members Hub (Locked)', 
+              icon: Lock 
+            },
             ...(canManageTreasury ? [{ id: 'TREASURY', label: 'Treasury & Financial Audit (Admin)', icon: Coins }] : []),
           ].map(tab => {
             const Icon = tab.icon;
@@ -831,6 +871,450 @@ export const ClubDetailPage: React.FC = () => {
               <strong>Institutional Split-Accounting Guarantee:</strong> All event registration fees processed via Razorpay gateway credit directly to this club's verified account. No pooling across other clubs. Dean Dr. Sharma maintains centralized read-only audit log.
             </div>
           </div>
+        </div>
+      )}
+
+      {/* TAB: INTERNAL CLUB MEMBERS HUB & MoM ARCHIVE */}
+      {activeTab === 'MEMBERS_HUB' && (
+        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+          {!isMember ? (
+            /* ACCESS LOCKED FOR REGULAR / NON-INDUCTED STUDENTS */
+            <div className="glass-panel" style={{ padding: '48px 32px', textAlign: 'center', border: '1px solid rgba(239, 68, 68, 0.35)', position: 'relative' }}>
+              <div style={{
+                width: '68px',
+                height: '68px',
+                borderRadius: '50%',
+                background: 'rgba(239, 68, 68, 0.12)',
+                border: '1px solid rgba(239, 68, 68, 0.35)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 20px',
+              }}>
+                <Lock size={32} color="#f87171" />
+              </div>
+
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '4px 14px',
+                borderRadius: '20px',
+                background: 'rgba(239, 68, 68, 0.15)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
+                color: '#f87171',
+                fontSize: '0.75rem',
+                fontWeight: 800,
+                letterSpacing: '0.05em',
+                textTransform: 'uppercase',
+                marginBottom: '14px',
+              }}>
+                <ShieldAlert size={14} /> Confidential Internal Governance
+              </div>
+
+              <h3 style={{ fontSize: '1.7rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '10px' }}>
+                Restricted to Inducted {club.name} Members Only
+              </h3>
+
+              <p style={{ color: '#94a3b8', fontSize: '0.92rem', lineHeight: 1.6, maxWidth: '640px', margin: '0 auto 24px' }}>
+                Internal club meetings, confidential sprint agendas, today's meeting notification alerts, and Minutes of Meeting (MoM) summaries are strictly reserved for verified inducted members of {club.name}. Normal students and non-members are not permitted to view internal club proceedings.
+              </p>
+
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.02)',
+                border: '1px solid rgba(255, 255, 255, 0.06)',
+                borderRadius: '14px',
+                padding: '20px 24px',
+                textAlign: 'left',
+                maxWidth: '600px',
+                margin: '0 auto 28px',
+                fontSize: '0.84rem',
+                color: '#cbd5e1',
+                lineHeight: 1.6,
+              }}>
+                <div style={{ fontWeight: 800, color: '#fbbf24', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <ShieldCheck size={16} /> How to gain authorized member access:
+                </div>
+                <div>
+                  1. <strong>Already an inducted member?</strong> Verify that you are logged into CampusSphere using your University Roll No (<code>{userRoll || 'Not logged in'}</code>) or your institutional email (<code>{userEmail || 'Not logged in'}</code>).
+                </div>
+                <div style={{ marginTop: '8px' }}>
+                  2. <strong>Want to join {club.name}?</strong> Submit an application through the recruitment window or ask your Club Admin to induct your Roll Number into the active roster.
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
+                <button
+                  onClick={() => setShowApplyModal(true)}
+                  className="btn-gold"
+                  style={{ padding: '10px 24px', fontSize: '0.88rem' }}
+                >
+                  Apply to Join {club.name}
+                </button>
+                <button
+                  onClick={() => setActiveTab('OVERVIEW')}
+                  className="btn-secondary"
+                  style={{ padding: '10px 20px', fontSize: '0.88rem' }}
+                >
+                  Back to Public Overview
+                </button>
+              </div>
+            </div>
+          ) : (
+            /* UNLOCKED FOR INDUCTED CLUB MEMBERS & ADMINS */
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+              {/* Member Verification Badge & Top Hub Banner */}
+              <div className="glass-panel" style={{ padding: '28px', borderLeft: '4px solid #10b981' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+                  <div>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#10b981', fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '6px' }}>
+                      <CheckCircle2 size={15} /> Verified Inducted Member Console
+                    </div>
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                      {club.name} Internal Members Hub
+                    </h3>
+                    <p style={{ color: '#94a3b8', fontSize: '0.84rem', marginTop: '4px' }}>
+                      Logged in as <strong>{currentUser?.name}</strong> ({userRoll || userEmail}) • You have access to internal meetings, today's alerts, and MoM summaries.
+                    </p>
+                  </div>
+
+                  <span style={{
+                    background: 'rgba(16, 185, 129, 0.15)',
+                    border: '1px solid rgba(16, 185, 129, 0.3)',
+                    color: '#34d399',
+                    padding: '6px 14px',
+                    borderRadius: '20px',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                  }}>
+                    Member Access Active
+                  </span>
+                </div>
+              </div>
+
+              {/* TODAY'S MEETING NOTIFICATION ALERT BANNER */}
+              {todayMeetings.length > 0 && (
+                <div style={{
+                  padding: '24px',
+                  borderRadius: '16px',
+                  background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.1) 100%)',
+                  border: '2px solid #f59e0b',
+                  boxShadow: '0 8px 30px rgba(245, 158, 11, 0.15)',
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
+                    <div style={{
+                      width: '36px',
+                      height: '36px',
+                      borderRadius: '50%',
+                      background: '#f59e0b',
+                      color: '#0b132b',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      animation: 'pulse 2s infinite',
+                    }}>
+                      <Bell size={20} />
+                    </div>
+                    <div>
+                      <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#fbbf24', margin: 0 }}>
+                        🚨 TODAY'S INTERNAL CLUB MEETING NOTIFICATION!
+                      </h4>
+                      <p style={{ fontSize: '0.78rem', color: '#cbd5e1', margin: 0 }}>
+                        All inducted members are requested to attend today's scheduled session.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {todayMeetings.map(meeting => {
+                      const meetDate = new Date(meeting.meetingDateTime);
+                      return (
+                        <div
+                          key={meeting.id}
+                          style={{
+                            background: 'rgba(15, 23, 42, 0.7)',
+                            border: '1px solid rgba(245, 158, 11, 0.3)',
+                            borderRadius: '12px',
+                            padding: '18px',
+                          }}
+                        >
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '10px' }}>
+                            <div>
+                              <h5 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                                {meeting.title}
+                              </h5>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginTop: '6px', fontSize: '0.82rem', color: '#fbbf24', flexWrap: 'wrap' }}>
+                                <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                  <Clock size={14} /> Today at {meetDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
+                                </span>
+                                <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                  {meeting.isOnline ? <Video size={14} /> : <MapPin size={14} />} {meeting.location}
+                                </span>
+                              </div>
+                            </div>
+
+                            {meeting.isOnline && meeting.meetingLink && (
+                              <a
+                                href={meeting.meetingLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-gold"
+                                style={{
+                                  fontSize: '0.82rem',
+                                  padding: '8px 16px',
+                                  textDecoration: 'none',
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: '6px',
+                                }}
+                              >
+                                <Video size={14} /> Join Meeting Now <ExternalLink size={12} />
+                              </a>
+                            )}
+                          </div>
+
+                          <div style={{ fontSize: '0.82rem', color: '#cbd5e1', marginTop: '12px', lineHeight: 1.5 }}>
+                            <strong>Agenda:</strong> {meeting.agenda}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* UPCOMING SCHEDULED MEETINGS */}
+              {upcomingMeetings.length > 0 && (
+                <div className="glass-panel" style={{ padding: '24px' }}>
+                  <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Calendar size={18} color="#38bdf8" /> Upcoming Internal Meetings ({upcomingMeetings.length})
+                  </h4>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '14px' }}>
+                    {upcomingMeetings.map(meeting => {
+                      const meetDate = new Date(meeting.meetingDateTime);
+                      return (
+                        <div
+                          key={meeting.id}
+                          className="glass-card"
+                          style={{ padding: '16px', border: '1px solid rgba(255, 255, 255, 0.08)' }}
+                        >
+                          <h5 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 6px 0' }}>
+                            {meeting.title}
+                          </h5>
+                          <div style={{ fontSize: '0.78rem', color: '#38bdf8', display: 'flex', alignItems: 'center', gap: '5px', marginBottom: '4px' }}>
+                            <Clock size={13} /> {meetDate.toLocaleDateString('en-IN', { weekday: 'short', month: 'short', day: 'numeric' })} at {meetDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
+                          </div>
+                          <div style={{ fontSize: '0.75rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '5px', marginBottom: '8px' }}>
+                            {meeting.isOnline ? <Video size={13} /> : <MapPin size={13} />} {meeting.location}
+                          </div>
+                          <p style={{ fontSize: '0.76rem', color: '#cbd5e1', lineHeight: 1.4, margin: 0 }}>
+                            {meeting.agenda}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* MINUTES OF MEETING (MoM) ARCHIVE FOR ABSENT MEMBERS */}
+              <div className="glass-panel" style={{ padding: '28px' }}>
+                <div style={{ marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#34d399', fontSize: '0.8rem', fontWeight: 800, marginBottom: '4px' }}>
+                    <BookOpen size={16} />
+                    <span>MINUTES OF MEETING (MoM) ARCHIVE</span>
+                  </div>
+                  <h4 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                    Meeting Summaries for Absent & Attending Members
+                  </h4>
+                  <p style={{ color: '#94a3b8', fontSize: '0.84rem', marginTop: '4px' }}>
+                    Did you miss a recent meeting? Review the official discussion points, finalized resolutions, and assigned tasks below so you stay completely up to date with club proceedings.
+                  </p>
+                </div>
+
+                {concludedMeetings.length === 0 ? (
+                  <div style={{ padding: '36px 16px', textAlign: 'center', color: '#94a3b8', background: 'rgba(255, 255, 255, 0.02)', borderRadius: '12px' }}>
+                    <FileText size={32} color="#64748b" style={{ margin: '0 auto 8px', opacity: 0.6 }} />
+                    <p style={{ fontSize: '0.85rem' }}>No past meeting summaries recorded yet. The Club Admin will publish MoM summaries here after each session concludes.</p>
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    {concludedMeetings.map(meeting => {
+                      const meetDate = new Date(meeting.meetingDateTime);
+                      const summary = meeting.summary;
+
+                      return (
+                        <div
+                          key={meeting.id}
+                          className="glass-card"
+                          style={{
+                            padding: '24px',
+                            border: '1px solid rgba(52, 211, 153, 0.3)',
+                            background: 'rgba(15, 23, 42, 0.75)',
+                            borderRadius: '16px',
+                          }}
+                        >
+                          {/* MoM Header */}
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '10px', marginBottom: '14px', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '12px' }}>
+                            <div>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                                <h5 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                                  {meeting.title}
+                                </h5>
+                                <span style={{
+                                  fontSize: '0.7rem',
+                                  fontWeight: 800,
+                                  color: '#34d399',
+                                  background: 'rgba(16, 185, 129, 0.15)',
+                                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                                  padding: '2px 8px',
+                                  borderRadius: '6px',
+                                }}>
+                                  MoM Concluded
+                                </span>
+                              </div>
+                              <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '4px' }}>
+                                Held on {meetDate.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} • {meeting.location}
+                              </div>
+                            </div>
+
+                            {summary && (
+                              <div style={{
+                                background: 'rgba(56, 189, 248, 0.1)',
+                                border: '1px solid rgba(56, 189, 248, 0.25)',
+                                color: '#38bdf8',
+                                padding: '4px 12px',
+                                borderRadius: '12px',
+                                fontSize: '0.75rem',
+                                fontWeight: 700,
+                              }}>
+                                👥 {summary.attendanceCount} Members Attended
+                              </div>
+                            )}
+                          </div>
+
+                          {summary ? (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                              {/* 1. Key Discussions */}
+                              <div style={{
+                                background: 'rgba(255, 255, 255, 0.02)',
+                                border: '1px solid rgba(255, 255, 255, 0.05)',
+                                borderRadius: '12px',
+                                padding: '16px',
+                              }}>
+                                <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#fbbf24', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                  📌 Key Discussions Covered
+                                </div>
+                                <div style={{ fontSize: '0.84rem', color: '#cbd5e1', lineHeight: 1.6, whiteSpace: 'pre-line' }}>
+                                  {Array.isArray(summary.keyDiscussions) ? summary.keyDiscussions.join('\n') : summary.keyDiscussions}
+                                </div>
+                              </div>
+
+                              {/* 2. Decisions Finalized */}
+                              <div style={{
+                                background: 'rgba(16, 185, 129, 0.06)',
+                                border: '1px solid rgba(16, 185, 129, 0.2)',
+                                borderRadius: '12px',
+                                padding: '16px',
+                              }}>
+                                <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#34d399', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                  ⚖️ Finalized Decisions & Resolutions
+                                </div>
+                                <div style={{ fontSize: '0.84rem', color: '#e2e8f0', lineHeight: 1.6, whiteSpace: 'pre-line' }}>
+                                  {Array.isArray(summary.decisionsFinalized) ? summary.decisionsFinalized.join('\n') : summary.decisionsFinalized}
+                                </div>
+                              </div>
+
+                              {/* 3. Action Items / Tasks Assigned */}
+                              {summary.actionItems && summary.actionItems.length > 0 && (
+                                <div style={{
+                                  background: 'rgba(99, 102, 241, 0.06)',
+                                  border: '1px solid rgba(99, 102, 241, 0.2)',
+                                  borderRadius: '12px',
+                                  padding: '16px',
+                                }}>
+                                  <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#a78bfa', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    ✅ Assigned Action Items & Next Tasks ({summary.actionItems.length})
+                                  </div>
+
+                                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '10px' }}>
+                                    {summary.actionItems.map(item => (
+                                      <div
+                                        key={item.id}
+                                        style={{
+                                          background: 'rgba(15, 23, 42, 0.7)',
+                                          border: '1px solid rgba(255, 255, 255, 0.08)',
+                                          borderRadius: '8px',
+                                          padding: '10px 14px',
+                                          display: 'flex',
+                                          justifyContent: 'space-between',
+                                          alignItems: 'center',
+                                          gap: '8px',
+                                        }}
+                                      >
+                                        <div>
+                                          <div style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                                            {item.task}
+                                          </div>
+                                          <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '2px' }}>
+                                            Assignee: <strong style={{ color: '#38bdf8' }}>{item.assignee || 'Core Member'}</strong>
+                                          </div>
+                                        </div>
+
+                                        <span style={{
+                                          fontSize: '0.7rem',
+                                          fontWeight: 700,
+                                          fontFamily: 'var(--font-mono)',
+                                          color: '#fbbf24',
+                                          background: 'rgba(245, 158, 11, 0.1)',
+                                          padding: '2px 6px',
+                                          borderRadius: '4px',
+                                          whiteSpace: 'nowrap',
+                                        }}>
+                                          Due: {item.dueDate}
+                                        </span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+
+                              {/* 4. Document / Drive Link */}
+                              {summary.documentUrl && (
+                                <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '4px' }}>
+                                  <a
+                                    href={summary.documentUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{
+                                      display: 'inline-flex',
+                                      alignItems: 'center',
+                                      gap: '6px',
+                                      color: '#38bdf8',
+                                      fontSize: '0.78rem',
+                                      fontWeight: 700,
+                                      textDecoration: 'none',
+                                    }}
+                                  >
+                                    <ExternalLink size={13} /> Open Official MoM Document / Drive Notes
+                                  </a>
+                                </div>
+                              )}
+                            </div>
+                          ) : (
+                            <div style={{ fontSize: '0.82rem', color: '#94a3b8', fontStyle: 'italic' }}>
+                              Meeting agenda: {meeting.agenda} (Detailed MoM summary pending publication by admin)
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       )}
 

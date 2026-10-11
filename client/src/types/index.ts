@@ -80,6 +80,73 @@ export interface ClubApplication {
   reviewerNotes?: string;
 }
 
+export interface ClubMember {
+  id: string;
+  clubId: string;
+  clubSlug: string;
+  userId?: string;
+  name: string;
+  email: string;
+  rollNo: string;
+  department: string;
+  year?: number;
+  batch?: number;
+  clubRole: string;
+  joinedAt: string;
+  status: 'ACTIVE' | 'INACTIVE';
+  phone?: string;
+}
+
+export interface MeetingActionItem {
+  id: string;
+  task: string;
+  assignee?: string;
+  assigneeName?: string;
+  assigneeRollNo?: string;
+  status?: 'PENDING' | 'IN_PROGRESS' | 'COMPLETED';
+  completed?: boolean;
+  dueDate?: string;
+}
+
+export interface ClubMeetingSummary {
+  meetingId?: string;
+  meetingTitle?: string;
+  publishedAt?: string;
+  publishedBy?: string;
+  publishedByAdminName?: string;
+  attendanceCount?: number;
+  totalEligibleMembers?: number;
+  keyDiscussions: string[] | string;
+  decisionsFinalized: string[] | string;
+  actionItems: MeetingActionItem[];
+  notesMarkdown?: string;
+  documentUrl?: string;
+}
+
+export interface ClubMeeting {
+  id: string;
+  clubId: string;
+  clubSlug: string;
+  clubName: string;
+  title: string;
+  agenda: string;
+  meetingDateTime: string; // ISO String
+  venueOrLink?: string;    // In-person venue or Google Meet / Zoom URL
+  location?: string;
+  meetingLink?: string;
+  isOnline: boolean;
+  meetingType?: 'GENERAL_BODY' | 'CORE_TEAM' | 'SPRINT_PLANNING' | 'EMERGENCY_BRIEFING' | string;
+  status: 'SCHEDULED' | 'CONCLUDED' | 'CANCELLED';
+  createdByAdminId?: string;
+  createdByAdminName?: string;
+  scheduledBy?: {
+    adminId: string;
+    adminName: string;
+  };
+  summary?: ClubMeetingSummary;
+  createdAt: string;
+}
+
 export interface PayoutSettlementRequest {
   id: string;
   clubId: string;

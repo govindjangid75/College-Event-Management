@@ -4,13 +4,18 @@ import {
   ClubLedgerEntry, 
   ClubApplication, 
   PayoutSettlementRequest, 
-  ClubCoordinator 
+  ClubCoordinator,
+  ClubMember,
+  ClubMeeting,
+  ClubMeetingSummary
 } from '../types';
 import { 
   SEED_CLUBS, 
   SEED_LEDGER_ENTRIES, 
   SEED_CLUB_APPLICATIONS, 
-  SEED_PAYOUT_REQUESTS 
+  SEED_PAYOUT_REQUESTS,
+  SEED_CLUB_MEMBERS,
+  SEED_CLUB_MEETINGS
 } from '../data/seedData';
 import { fetchClubs } from '../services/api';
 
@@ -38,6 +43,8 @@ interface ClubContextType {
   ledgerEntries: ClubLedgerEntry[];
   clubApplications: ClubApplication[];
   payoutRequests: PayoutSettlementRequest[];
+  clubMembers: ClubMember[];
+  clubMeetings: ClubMeeting[];
   getClubBySlug: (slug: string) => Club | undefined;
   getClubById: (id: string) => Club | undefined;
   updateClubProfile: (clubIdOrSlug: string, updates: Partial<Club>) => { success: boolean; message: string };
@@ -57,6 +64,16 @@ interface ClubContextType {
   reviewJoinApplication: (appId: string, status: 'ACCEPTED' | 'REJECTED', notes?: string) => { success: boolean; message: string };
   getCentralTreasuryStats: () => CentralTreasuryStats;
   resetToDefaultData: () => void;
+  // Internal Club Member & Meeting Features
+  getClubMembers: (clubIdOrSlug: string) => ClubMember[];
+  addClubMember: (memberData: Omit<ClubMember, 'id' | 'joinedAt' | 'status'>) => { success: boolean; message: string; member?: ClubMember };
+  removeClubMember: (memberId: string) => { success: boolean; message: string };
+  getClubMeetings: (clubIdOrSlug: string) => ClubMeeting[];
+  scheduleClubMeeting: (meetingData: Omit<ClubMeeting, 'id' | 'createdAt' | 'status'>) => { success: boolean; message: string; meeting?: ClubMeeting };
+  publishMeetingSummary: (meetingId: string, summary: ClubMeetingSummary) => { success: boolean; message: string };
+  deleteClubMeeting: (meetingId: string) => { success: boolean; message: string };
+  getTodayMeetingsForUser: (userRollNo?: string, userEmail?: string) => ClubMeeting[];
+  isUserMemberOfClub: (clubIdOrSlug: string, userRollNo?: string, userEmail?: string) => boolean;
 }
 
 const STORAGE_KEYS = {
@@ -64,6 +81,8 @@ const STORAGE_KEYS = {
   LEDGER: 'campussphere_ledger_v3',
   APPLICATIONS: 'campussphere_club_apps_v3',
   PAYOUTS: 'campussphere_payout_reqs_v3',
+  MEMBERS: 'campussphere_club_members_v4',
+  MEETINGS: 'campussphere_club_meetings_v4',
 };
 
 const ClubContext = createContext<ClubContextType | undefined>(undefined);
@@ -107,6 +126,26 @@ export const ClubProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.warn('Failed to load payouts from localStorage:', e);
     }
     return SEED_PAYOUT_REQUESTS;
+  });
+
+  const [clubMembers, setClubMembers] = useState<ClubMember[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.MEMBERS);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.warn('Failed to load club members from localStorage:', e);
+    }
+    return SEED_CLUB_MEMBERS;
+  });
+
+  const [clubMeetings, setClubMeetings] = useState<ClubMeeting[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.MEETINGS);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.warn('Failed to load club meetings from localStorage:', e);
+    }
+    return SEED_CLUB_MEETINGS;
   });
   
   // Load live clubs from MongoDB Atlas on mount
@@ -152,6 +191,22 @@ export const ClubProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.error('Error saving payouts to storage', e);
     }
   }, [payoutRequests]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.MEMBERS, JSON.stringify(clubMembers));
+    } catch (e) {
+      console.error('Error saving club members to storage', e);
+    }
+  }, [clubMembers]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.MEETINGS, JSON.stringify(clubMeetings));
+    } catch (e) {
+      console.error('Error saving club meetings to storage', e);
+    }
+  }, [clubMeetings]);
 
   const getClubBySlug = (slug: string): Club | undefined => {
     return clubs.find(c => c.slug.toLowerCase() === slug.toLowerCase());
@@ -487,10 +542,169 @@ export const ClubProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.removeItem(STORAGE_KEYS.LEDGER);
     localStorage.removeItem(STORAGE_KEYS.APPLICATIONS);
     localStorage.removeItem(STORAGE_KEYS.PAYOUTS);
+    localStorage.removeItem(STORAGE_KEYS.MEMBERS);
+    localStorage.removeItem(STORAGE_KEYS.MEETINGS);
     setClubs(SEED_CLUBS);
     setLedgerEntries(SEED_LEDGER_ENTRIES);
     setClubApplications(SEED_CLUB_APPLICATIONS);
     setPayoutRequests(SEED_PAYOUT_REQUESTS);
+    setClubMembers(SEED_CLUB_MEMBERS);
+    setClubMeetings(SEED_CLUB_MEETINGS);
+  };
+
+  // --- INTERNAL CLUB MEMBERS & MEETINGS METHODS ---
+  const getClubMembers = (clubIdOrSlug: string): ClubMember[] => {
+    const slug = clubIdOrSlug.toLowerCase();
+    return clubMembers.filter(m => m.clubId === clubIdOrSlug || m.clubSlug.toLowerCase() === slug);
+  };
+
+  const addClubMember = (memberData: Omit<ClubMember, 'id' | 'joinedAt' | 'status'>) => {
+    const slug = memberData.clubSlug?.toLowerCase() || '';
+    const roll = memberData.rollNo ? memberData.rollNo.trim().toUpperCase() : '';
+    const email = memberData.email ? memberData.email.trim().toLowerCase() : '';
+
+    // Check duplicate
+    const exists = clubMembers.some(m => 
+      (m.clubId === memberData.clubId || m.clubSlug.toLowerCase() === slug) &&
+      ((roll && m.rollNo.toUpperCase() === roll) || (email && m.email.toLowerCase() === email))
+    );
+
+    if (exists) {
+      return { success: false, message: `Student (${roll || email}) is already an active member of this club chapter!` };
+    }
+
+    const newMember: ClubMember = {
+      ...memberData,
+      id: `mem_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
+      rollNo: roll,
+      email: email,
+      joinedAt: new Date().toISOString(),
+      status: 'ACTIVE'
+    };
+
+    setClubMembers(prev => [newMember, ...prev]);
+
+    // Increment member count in club
+    setClubs(prev => prev.map(c => {
+      if (c.id === memberData.clubId || c.slug.toLowerCase() === slug) {
+        return { ...c, memberCount: (c.memberCount || 0) + 1 };
+      }
+      return c;
+    }));
+
+    return { 
+      success: true, 
+      message: `Successfully inducted ${newMember.name} (${newMember.rollNo || newMember.email}) as ${memberData.clubRole}!`,
+      member: newMember 
+    };
+  };
+
+  const removeClubMember = (memberId: string) => {
+    const target = clubMembers.find(m => m.id === memberId);
+    if (!target) return { success: false, message: 'Member not found.' };
+
+    setClubMembers(prev => prev.filter(m => m.id !== memberId));
+    setClubs(prev => prev.map(c => {
+      if (c.id === target.clubId || c.slug.toLowerCase() === target.clubSlug.toLowerCase()) {
+        return { ...c, memberCount: Math.max(0, (c.memberCount || 1) - 1) };
+      }
+      return c;
+    }));
+
+    return { success: true, message: `Removed ${target.name} from club roster.` };
+  };
+
+  const getClubMeetings = (clubIdOrSlug: string): ClubMeeting[] => {
+    const slug = clubIdOrSlug.toLowerCase();
+    return clubMeetings
+      .filter(m => m.clubId === clubIdOrSlug || m.clubSlug.toLowerCase() === slug)
+      .sort((a, b) => new Date(b.meetingDateTime).getTime() - new Date(a.meetingDateTime).getTime());
+  };
+
+  const scheduleClubMeeting = (meetingData: Omit<ClubMeeting, 'id' | 'createdAt' | 'status'>) => {
+    const newMeeting: ClubMeeting = {
+      ...meetingData,
+      id: `meet_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
+      status: 'SCHEDULED',
+      createdAt: new Date().toISOString()
+    };
+
+    setClubMeetings(prev => [newMeeting, ...prev]);
+    return { 
+      success: true, 
+      message: `Meeting "${newMeeting.title}" scheduled! Club members will receive instant meeting notifications.`,
+      meeting: newMeeting 
+    };
+  };
+
+  const publishMeetingSummary = (meetingId: string, summary: ClubMeetingSummary) => {
+    const meeting = clubMeetings.find(m => m.id === meetingId);
+    if (!meeting) return { success: false, message: 'Meeting not found.' };
+
+    setClubMeetings(prev => prev.map(m => {
+      if (m.id === meetingId) {
+        return {
+          ...m,
+          status: 'CONCLUDED',
+          summary: {
+            ...summary,
+            publishedAt: new Date().toISOString()
+          }
+        };
+      }
+      return m;
+    }));
+
+    return { 
+      success: true, 
+      message: 'Meeting summary (MoM) & action items published! Absent and attending members can now review key takeaways.' 
+    };
+  };
+
+  const deleteClubMeeting = (meetingId: string) => {
+    setClubMeetings(prev => prev.filter(m => m.id !== meetingId));
+    return { success: true, message: 'Meeting record deleted.' };
+  };
+
+  const isUserMemberOfClub = (clubIdOrSlug: string, userRollNo?: string, userEmail?: string): boolean => {
+    if (!userRollNo && !userEmail) return false;
+    const target = clubIdOrSlug.toLowerCase();
+    const roll = userRollNo?.trim().toLowerCase();
+    const email = userEmail?.trim().toLowerCase();
+
+    return clubMembers.some(m => {
+      const matchClub = m.clubId.toLowerCase() === target || m.clubSlug.toLowerCase() === target;
+      if (!matchClub) return false;
+      const matchRoll = roll && m.rollNo.trim().toLowerCase() === roll;
+      const matchEmail = email && m.email.trim().toLowerCase() === email;
+      return matchRoll || matchEmail;
+    });
+  };
+
+  const getTodayMeetingsForUser = (userRollNo?: string, userEmail?: string): ClubMeeting[] => {
+    if (!userRollNo && !userEmail) return [];
+    const roll = userRollNo?.trim().toLowerCase();
+    const email = userEmail?.trim().toLowerCase();
+
+    // Find club slugs where user is active member
+    const userClubs = new Set(
+      clubMembers
+        .filter(m => (roll && m.rollNo.trim().toLowerCase() === roll) || (email && m.email.trim().toLowerCase() === email))
+        .map(m => m.clubSlug.toLowerCase())
+    );
+
+    if (userClubs.size === 0) return [];
+
+    const now = new Date();
+    const todayYMD = now.toISOString().split('T')[0];
+
+    return clubMeetings.filter(m => {
+      if (!userClubs.has(m.clubSlug.toLowerCase())) return false;
+      if (m.status !== 'SCHEDULED') return false;
+      const meetDate = new Date(m.meetingDateTime);
+      const meetYMD = meetDate.toISOString().split('T')[0];
+      return meetYMD === todayYMD;
+    });
   };
 
   return (
@@ -499,6 +713,8 @@ export const ClubProvider: React.FC<{ children: React.ReactNode }> = ({ children
       ledgerEntries,
       clubApplications,
       payoutRequests,
+      clubMembers,
+      clubMeetings,
       getClubBySlug,
       getClubById,
       updateClubProfile,
@@ -512,6 +728,15 @@ export const ClubProvider: React.FC<{ children: React.ReactNode }> = ({ children
       reviewJoinApplication,
       getCentralTreasuryStats,
       resetToDefaultData,
+      getClubMembers,
+      addClubMember,
+      removeClubMember,
+      getClubMeetings,
+      scheduleClubMeeting,
+      publishMeetingSummary,
+      deleteClubMeeting,
+      getTodayMeetingsForUser,
+      isUserMemberOfClub,
     }}>
       {children}
     </ClubContext.Provider>

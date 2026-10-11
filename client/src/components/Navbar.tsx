@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useClub } from '../context/ClubContext';
 import { useTheme } from '../context/ThemeContext';
 import { 
   Compass, 
@@ -17,15 +18,23 @@ import {
   ShieldCheck,
   Star,
   Sun,
-  Moon
+  Moon,
+  Bell,
+  Clock
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const { currentUser, isAuthenticated, logout, isStudent, isClubAdmin, isSuperAdmin } = useAuth();
+  const { getTodayMeetingsForUser } = useClub();
   const { isDark, toggleTheme } = useTheme();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [meetingAlertOpen, setMeetingAlertOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const userRoll = currentUser?.studentProfile?.rollNo;
+  const userEmail = currentUser?.email;
+  const todayMeetings = (isAuthenticated && currentUser) ? getTodayMeetingsForUser(userRoll, userEmail) : [];
 
   const handleLogout = () => {
     logout();
@@ -319,6 +328,99 @@ export const Navbar: React.FC = () => {
               <Star size={12} fill={isDark ? 'var(--acid)' : 'var(--ink)'} />
               <span>{currentUser.studentProfile.activityPointsTotal} / 100 PTS</span>
             </Link>
+          )}
+
+          {/* Today's Meeting Alert Pill for Inducted Club Members Only */}
+          {todayMeetings.length > 0 && (
+            <div style={{ position: 'relative' }}>
+              <button
+                onClick={() => setMeetingAlertOpen(!meetingAlertOpen)}
+                style={{
+                  background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.2))',
+                  border: '1px solid #f59e0b',
+                  padding: '5px 10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  cursor: 'pointer',
+                  color: '#fbbf24',
+                  fontSize: '11px',
+                  fontWeight: 800,
+                  fontFamily: 'var(--font-mono)',
+                  boxShadow: '0 0 14px rgba(245, 158, 11, 0.3)',
+                }}
+                title="Internal Club Meeting Scheduled Today!"
+              >
+                <Bell size={13} />
+                <span>{todayMeetings.length} MEETING TODAY</span>
+              </button>
+
+              {/* Dropdown Card */}
+              {meetingAlertOpen && (
+                <div style={{
+                  position: 'absolute',
+                  top: '115%',
+                  right: 0,
+                  width: '330px',
+                  background: isDark ? '#181816' : '#ffffff',
+                  border: '1px solid #f59e0b',
+                  borderRadius: '12px',
+                  boxShadow: '0 14px 40px rgba(0,0,0,0.5)',
+                  padding: '16px',
+                  zIndex: 200,
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#fbbf24', fontWeight: 800, fontSize: '0.82rem' }}>
+                      <Bell size={14} /> Today's Club Meeting Alert
+                    </div>
+                    <span style={{ fontSize: '0.68rem', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 700 }}>
+                      Inducted Member
+                    </span>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    {todayMeetings.map(meeting => (
+                      <div
+                        key={meeting.id}
+                        style={{
+                          background: isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(0, 0, 0, 0.03)',
+                          border: '1px solid rgba(245, 158, 11, 0.3)',
+                          borderRadius: '8px',
+                          padding: '10px 12px',
+                        }}
+                      >
+                        <div style={{ fontSize: '0.72rem', color: '#f59e0b', fontWeight: 700, textTransform: 'uppercase' }}>
+                          {meeting.clubName}
+                        </div>
+                        <div style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--text-primary)', marginTop: '2px' }}>
+                          {meeting.title}
+                        </div>
+                        <div style={{ fontSize: '0.74rem', color: '#94a3b8', marginTop: '4px' }}>
+                          Time: {new Date(meeting.meetingDateTime).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })} • {meeting.location}
+                        </div>
+                        <div style={{ marginTop: '8px' }}>
+                          <Link
+                            to={`/clubs/${meeting.clubSlug || 'arya_cipher'}`}
+                            onClick={() => setMeetingAlertOpen(false)}
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                              fontSize: '0.74rem',
+                              fontWeight: 700,
+                              color: '#38bdf8',
+                              textDecoration: 'none',
+                            }}
+                          >
+                            Open Members Hub & MoM →
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           )}
 
           {isAuthenticated && currentUser ? (

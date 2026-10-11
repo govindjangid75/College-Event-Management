@@ -11,7 +11,9 @@ import {
   ClubLedgerEntry,
   ClubApplication,
   PayoutSettlementRequest,
-  ClubCoordinator
+  ClubCoordinator,
+  ClubMember,
+  ClubMeeting
 } from '../types';
 
 export const SEED_USERS: User[] = [
@@ -1074,3 +1076,162 @@ export const SEED_PAYOUT_REQUESTS: PayoutSettlementRequest[] = [
     deanApprovalStatus: 'PENDING',
   },
 ];
+
+export const SEED_CLUB_MEMBERS: ClubMember[] = [
+  {
+    id: 'mem_1',
+    clubId: 'club_2',
+    clubSlug: 'arya_cipher',
+    userId: 'user_student_1',
+    name: 'Govind Jangid',
+    email: 'govind@aryacollege.in',
+    rollNo: '22EACIT089',
+    department: 'Computer Science & Engineering',
+    batch: 2026,
+    clubRole: 'Executive Lead',
+    joinedAt: '2026-01-15T09:00:00Z',
+    status: 'ACTIVE',
+    phone: '+91 9829012345'
+  },
+  {
+    id: 'mem_2',
+    clubId: 'club_2',
+    clubSlug: 'arya_cipher',
+    userId: 'user_student_2',
+    name: 'Ananya Gupta',
+    email: 'ananya@aryacollege.in',
+    rollNo: '22EACIT045',
+    department: 'Information Technology',
+    batch: 2026,
+    clubRole: 'Technical Coordinator',
+    joinedAt: '2026-01-20T10:00:00Z',
+    status: 'ACTIVE',
+    phone: '+91 9829054321'
+  },
+  {
+    id: 'mem_3',
+    clubId: 'club_2',
+    clubSlug: 'arya_cipher',
+    name: 'Aarav Mathur',
+    email: 'aarav.it26@aryacollege.in',
+    rollNo: '22EACIT012',
+    department: 'Information Technology',
+    batch: 2026,
+    clubRole: 'Core Member',
+    joinedAt: '2026-02-01T11:00:00Z',
+    status: 'ACTIVE'
+  },
+  {
+    id: 'mem_4',
+    clubId: 'club_2',
+    clubSlug: 'arya_cipher',
+    name: 'Kavita Joshi',
+    email: 'kavita.ece26@aryacollege.in',
+    rollNo: '22EAECE033',
+    department: 'Electronics & Communication',
+    batch: 2026,
+    clubRole: 'PR & Outreach',
+    joinedAt: '2026-02-10T14:30:00Z',
+    status: 'ACTIVE'
+  },
+  {
+    id: 'mem_5',
+    clubId: 'club_3',
+    clubSlug: 'arya_aceit_hack',
+    userId: 'user_student_1',
+    name: 'Govind Jangid',
+    email: 'govind@aryacollege.in',
+    rollNo: '22EACIT089',
+    department: 'Computer Science & Engineering',
+    batch: 2026,
+    clubRole: 'Technical Coordinator',
+    joinedAt: '2026-01-18T10:00:00Z',
+    status: 'ACTIVE'
+  }
+];
+
+export const SEED_CLUB_MEETINGS: ClubMeeting[] = [
+  {
+    id: 'meet_today_1',
+    clubId: 'club_2',
+    clubSlug: 'arya_cipher',
+    clubName: 'Arya Cipher Coding Club',
+    title: 'Urgent Core Team Sprint: Hackathon 2026 Problem Statements & Lab Setup',
+    agenda: '1. Finalize AI and algorithmic problem tracks for the upcoming national sprint\n2. Block B overnight computing lab permissions and power backup\n3. Volunteer badge distribution and catering checklist for 300+ attendees',
+    meetingDateTime: new Date().toISOString().split('T')[0] + 'T16:30:00.000Z', // Today's meeting!
+    venueOrLink: 'Turing Advanced Computing Lab (Block B, 2nd Floor)',
+    location: 'Turing Advanced Computing Lab (Block B, 2nd Floor)',
+    isOnline: false,
+    meetingType: 'CORE_TEAM',
+    status: 'SCHEDULED',
+    scheduledBy: {
+      adminId: 'admin_cipher',
+      adminName: 'Priya Verma (President - Arya Cipher)'
+    },
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'meet_concluded_1',
+    clubId: 'club_2',
+    clubSlug: 'arya_cipher',
+    clubName: 'Arya Cipher Coding Club',
+    title: 'Weekly Sync: Git Workflow, Pull Requests Review & Dean Approvals MoM',
+    agenda: 'Review pull requests submitted by junior members, assign repository maintenance tasks, and adhere strictly to Dean 30-min venue collision buffer policies.',
+    meetingDateTime: '2026-10-09T17:00:00.000Z',
+    venueOrLink: 'Google Meet (meet.google.com/cip-hera-ace)',
+    location: 'Online Google Meet',
+    meetingLink: 'https://meet.google.com/cip-hera-ace',
+    isOnline: true,
+    meetingType: 'GENERAL_BODY',
+    status: 'CONCLUDED',
+    scheduledBy: {
+      adminId: 'admin_cipher',
+      adminName: 'Priya Verma (President - Arya Cipher)'
+    },
+    summary: {
+      publishedAt: '2026-10-09T18:30:00.000Z',
+      publishedBy: 'Priya Verma',
+      attendanceCount: 19,
+      totalEligibleMembers: 22,
+      keyDiscussions: [
+        'Evaluated 14 student pull requests submitted on the CampusSphere open-source portal.',
+        'Clarified RTU / AICTE activity point accreditation standards with Dean Academics office (10-25 pts per verified attendance).',
+        'Finalized technical workshop curriculum for 1st and 2nd year students on Next.js, Docker, and MongoDB Atlas.'
+      ],
+      decisionsFinalized: [
+        'Enforce strict pre-commit linting and commit message format on club GitHub repositories.',
+        'Approved ₹15,000 disbursement request from dedicated club treasury for hackathon server hosting & domain registrations.',
+        'Selected 5 student leads for upcoming CodeSprint gate dynamic QR verification.'
+      ],
+      actionItems: [
+        {
+          id: 'act_1',
+          task: 'Setup GitHub Actions CI/CD deployment pipeline for the event registration platform',
+          assigneeName: 'Govind Jangid',
+          assigneeRollNo: '22EACIT089',
+          status: 'IN_PROGRESS',
+          dueDate: '2026-10-14'
+        },
+        {
+          id: 'act_2',
+          task: 'Draft club sponsorship brochure and email to Jaipur tech hub partners',
+          assigneeName: 'Ananya Gupta',
+          assigneeRollNo: '22EACIT045',
+          status: 'PENDING',
+          dueDate: '2026-10-15'
+        },
+        {
+          id: 'act_3',
+          task: 'Procure gate scanner lanyards and venue setup supplies from campus store',
+          assigneeName: 'Aarav Mathur',
+          assigneeRollNo: '22EACIT012',
+          status: 'COMPLETED',
+          dueDate: '2026-10-12'
+        }
+      ],
+      notesMarkdown: 'All absent members are requested to review the action items and key decisions above. Next internal sprint assembly will take place in Turing Lab.'
+    },
+    createdAt: '2026-10-08T10:00:00Z'
+  }
+];
+

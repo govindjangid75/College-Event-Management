@@ -36,9 +36,25 @@ import {
   ThumbsUp,
   Star,
   CheckSquare,
-  ArrowRightCircle
+  ArrowRightCircle,
+  Video,
+  ExternalLink,
+  Bell,
+  BookOpen,
+  Plus
 } from 'lucide-react';
-import { Event, Registration, StudentSuggestion, VerifiedFeedback, EventFeedbackSummary, SuggestionStatus } from '../types';
+import { 
+  Event, 
+  Registration, 
+  StudentSuggestion, 
+  VerifiedFeedback, 
+  EventFeedbackSummary, 
+  SuggestionStatus,
+  ClubMember,
+  ClubMeeting,
+  ClubMeetingSummary,
+  MeetingActionItem
+} from '../types';
 import { 
   fetchEvents, 
   verifyGateTicket, 
@@ -64,7 +80,14 @@ export const ClubAdminPage: React.FC = () => {
     removeClubCoordinator,
     clubApplications,
     reviewJoinApplication,
-    payoutRequests
+    payoutRequests,
+    getClubMembers,
+    addClubMember,
+    removeClubMember,
+    getClubMeetings,
+    scheduleClubMeeting,
+    publishMeetingSummary,
+    deleteClubMeeting
   } = useClub();
 
   // Super Admin can switch clubs to audit, Club Admin is strictly locked to their assigned club
@@ -72,7 +95,7 @@ export const ClubAdminPage: React.FC = () => {
     currentUser?.administeredClubId || 'arya_cipher'
   );
 
-  const [activeTab, setActiveTab] = useState<'TREASURY' | 'EVENTS' | 'SCANNER' | 'FEEDBACK' | 'PROFILE' | 'ROSTER' | 'APPLICATIONS'>('TREASURY');
+  const [activeTab, setActiveTab] = useState<'TREASURY' | 'MEMBERS_MEETINGS' | 'EVENTS' | 'SCANNER' | 'FEEDBACK' | 'PROFILE' | 'ROSTER' | 'APPLICATIONS'>('TREASURY');
   const [ledgerFilter, setLedgerFilter] = useState<'ALL' | 'TICKET_SALE' | 'PAYOUT_DISBURSEMENT' | 'REFUND'>('ALL');
   const [ledgerSearch, setLedgerSearch] = useState('');
 
@@ -134,6 +157,36 @@ export const ClubAdminPage: React.FC = () => {
   });
 
   const [notificationMsg, setNotificationMsg] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
+
+  // Internal Club Member Inductions & Roster State
+  const [newMemberName, setNewMemberName] = useState('');
+  const [newMemberRoll, setNewMemberRoll] = useState('');
+  const [newMemberEmail, setNewMemberEmail] = useState('');
+  const [newMemberRole, setNewMemberRole] = useState('Core Technical Coordinator');
+  const [newMemberDept, setNewMemberDept] = useState('Computer Science & Engineering');
+  const [newMemberYear, setNewMemberYear] = useState(3);
+  const [memberSearchQuery, setMemberSearchQuery] = useState('');
+  const [isInductingMember, setIsInductingMember] = useState(false);
+
+  // Internal Meetings Scheduler State
+  const [showScheduleMeetingModal, setShowScheduleMeetingModal] = useState(false);
+  const [meetTitle, setMeetTitle] = useState('');
+  const [meetDateTime, setMeetDateTime] = useState('');
+  const [meetLocationMode, setMeetLocationMode] = useState<'VENUE' | 'ONLINE'>('VENUE');
+  const [meetVenue, setMeetVenue] = useState('Arya CS Lab 2');
+  const [meetLink, setMeetLink] = useState('https://meet.google.com/ary-cipher-meet');
+  const [meetAgenda, setMeetAgenda] = useState('');
+
+  // Meeting Summary (MoM) Modal State
+  const [showMoMModal, setShowMoMModal] = useState(false);
+  const [selectedMeetingForMoM, setSelectedMeetingForMoM] = useState<ClubMeeting | null>(null);
+  const [momKeyDiscussions, setMomKeyDiscussions] = useState('');
+  const [momDecisions, setMomDecisions] = useState('');
+  const [momAttendanceCount, setMomAttendanceCount] = useState<number>(18);
+  const [momDocLink, setMomDocLink] = useState('');
+  const [momActionItems, setMomActionItems] = useState<MeetingActionItem[]>([
+    { id: 'act_1', task: 'Finalize Hackathon problem statements and rubrics', assignee: 'Govind Jangid', dueDate: '2026-10-15', completed: false }
+  ]);
 
   const showNotification = (text: string, type: 'success' | 'error' = 'success') => {
     setNotificationMsg({ text, type });
@@ -403,6 +456,154 @@ export const ClubAdminPage: React.FC = () => {
     }
   };
 
+  // Club Members & Meetings Handlers
+  const activeClubMembers = getClubMembers(activeClub.id);
+  const activeClubMeetings = getClubMeetings(activeClub.id);
+
+  const filteredClubMembers = activeClubMembers.filter(m => {
+    const q = memberSearchQuery.toLowerCase().trim();
+    if (!q) return true;
+    return (
+      m.name.toLowerCase().includes(q) ||
+      m.rollNo.toLowerCase().includes(q) ||
+      m.email.toLowerCase().includes(q) ||
+      m.clubRole.toLowerCase().includes(q) ||
+      m.department.toLowerCase().includes(q)
+    );
+  });
+
+  // Handle Induct Member by Roll No / Email
+  const handleInductMember = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newMemberName.trim() || (!newMemberRoll.trim() && !newMemberEmail.trim())) {
+      showNotification('Please enter student name and either Roll No or Institutional Email!', 'error');
+      return;
+    }
+
+    const roll = newMemberRoll.trim() || ('22EACIT' + Math.floor(100 + Math.random() * 900));
+    const email = newMemberEmail.trim() || `${roll.toLowerCase()}@aryacollege.in`;
+
+    const res = addClubMember({
+      clubId: activeClub.id,
+      clubSlug: activeClub.slug,
+      name: newMemberName.trim(),
+      rollNo: roll,
+      email: email,
+      clubRole: newMemberRole,
+      department: newMemberDept,
+      year: Number(newMemberYear),
+    });
+
+    if (res.success) {
+      showNotification(res.message, 'success');
+      setNewMemberName('');
+      setNewMemberRoll('');
+      setNewMemberEmail('');
+      setIsInductingMember(false);
+    } else {
+      showNotification(res.message, 'error');
+    }
+  };
+
+  // Handle Remove Member
+  const handleRemoveMember = (memberId: string, memberName: string) => {
+    if (window.confirm(`Are you sure you want to remove ${memberName} from active club roster?`)) {
+      const res = removeClubMember(memberId);
+      if (res.success) {
+        showNotification(res.message, 'success');
+      } else {
+        showNotification(res.message, 'error');
+      }
+    }
+  };
+
+  // Handle Schedule Meeting
+  const handleScheduleMeeting = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!meetTitle.trim() || !meetDateTime) {
+      showNotification('Please specify meeting title and scheduled date/time!', 'error');
+      return;
+    }
+
+    const res = scheduleClubMeeting({
+      clubId: activeClub.id,
+      clubSlug: activeClub.slug,
+      clubName: activeClub.name,
+      title: meetTitle.trim(),
+      meetingDateTime: meetDateTime,
+      location: meetLocationMode === 'VENUE' ? (meetVenue.trim() || 'Arya CS Lab 2') : 'Online Google Meet',
+      isOnline: meetLocationMode === 'ONLINE',
+      meetingLink: meetLocationMode === 'ONLINE' ? meetLink.trim() : undefined,
+      agenda: meetAgenda.trim() || 'Internal sprint planning, agenda items and execution.',
+      createdByAdminId: currentUser?.id || 'admin',
+      createdByAdminName: currentUser?.name || 'Club Admin'
+    });
+
+    if (res.success) {
+      showNotification(res.message, 'success');
+      setShowScheduleMeetingModal(false);
+      setMeetTitle('');
+      setMeetDateTime('');
+      setMeetAgenda('');
+    } else {
+      showNotification(res.message, 'error');
+    }
+  };
+
+  // Open MoM Editor Modal
+  const handleOpenMoMModal = (meeting: ClubMeeting) => {
+    setSelectedMeetingForMoM(meeting);
+    if (meeting.summary) {
+      const kd = Array.isArray(meeting.summary.keyDiscussions)
+        ? meeting.summary.keyDiscussions.join('\n')
+        : (meeting.summary.keyDiscussions || '');
+      const dec = Array.isArray(meeting.summary.decisionsFinalized)
+        ? meeting.summary.decisionsFinalized.join('\n')
+        : (meeting.summary.decisionsFinalized || '');
+      setMomKeyDiscussions(kd);
+      setMomDecisions(dec);
+      setMomAttendanceCount(meeting.summary.attendanceCount || 15);
+      setMomDocLink(meeting.summary.documentUrl || '');
+      setMomActionItems(meeting.summary.actionItems || []);
+    } else {
+      setMomKeyDiscussions('• Discussed team delegation for the upcoming hackathon sprint.\n• Evaluated sponsorship proposals and lab booking.\n• Assigned technical documentation tasks.');
+      setMomDecisions('• Finalized event schedule for 2nd week of November.\n• Approved budget requirement of ₹15,000 for refreshments.\n• Set daily scrum at 4:30 PM in CS Lab 2.');
+      setMomAttendanceCount(activeClubMembers.length > 0 ? Math.max(1, activeClubMembers.length - 2) : 16);
+      setMomDocLink('');
+      setMomActionItems([
+        { id: `act_${Date.now()}_1`, task: 'Draft problem statements and rubric criteria', assignee: 'Govind Jangid', dueDate: '2026-10-16', completed: false },
+        { id: `act_${Date.now()}_2`, task: 'Coordinate with Arya IT department for server hosting', assignee: 'Ananya Gupta', dueDate: '2026-10-18', completed: false },
+        { id: `act_${Date.now()}_3`, task: 'Design social media posters and brochure', assignee: 'Aarav Mathur', dueDate: '2026-10-17', completed: false }
+      ]);
+    }
+    setShowMoMModal(true);
+  };
+
+  // Save MoM Modal
+  const handleSaveMoM = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedMeetingForMoM) return;
+
+    const res = publishMeetingSummary(selectedMeetingForMoM.id, {
+      meetingId: selectedMeetingForMoM.id,
+      meetingTitle: selectedMeetingForMoM.title,
+      publishedByAdminName: currentUser?.name || 'Club Admin',
+      keyDiscussions: momKeyDiscussions.trim(),
+      decisionsFinalized: momDecisions.trim(),
+      actionItems: momActionItems.filter(item => item.task.trim() !== ''),
+      attendanceCount: Number(momAttendanceCount),
+      documentUrl: momDocLink.trim() || undefined,
+    });
+
+    if (res.success) {
+      showNotification(res.message, 'success');
+      setShowMoMModal(false);
+      setSelectedMeetingForMoM(null);
+    } else {
+      showNotification(res.message, 'error');
+    }
+  };
+
   return (
     <div style={{ maxWidth: '1360px', margin: '0 auto', padding: '32px 24px' }}>
       {/* Toast Notification */}
@@ -586,6 +787,7 @@ export const ClubAdminPage: React.FC = () => {
       }}>
         {[
           { id: 'TREASURY', label: 'Dedicated Split-Ledger', icon: Coins },
+          { id: 'MEMBERS_MEETINGS', label: `Club Members & Meetings (${activeClubMembers.length})`, icon: Users },
           { id: 'EVENTS', label: `Events & 30m Buffer Scheduler (${clubEvents.length})`, icon: Calendar },
           { id: 'SCANNER', label: `Live Gate QR Scanner & Attendees`, icon: QrCode },
           { id: 'FEEDBACK', label: `You Said, We Did & Reviews (${clubSuggestions.length})`, icon: MessageSquarePlus },
@@ -763,6 +965,592 @@ export const ClubAdminPage: React.FC = () => {
                 )}
               </tbody>
             </table>
+          </div>
+        </div>
+      )}
+
+      {/* TAB: CLUB MEMBERS & INTERNAL MEETINGS (MoM) */}
+      {activeTab === 'MEMBERS_MEETINGS' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          {/* Header & Controls */}
+          <div className="glass-panel" style={{ padding: '28px' }}>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: '16px',
+              marginBottom: '24px',
+            }}>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#f59e0b', fontSize: '0.8rem', fontWeight: 700, marginBottom: '4px' }}>
+                  <Users size={16} />
+                  <span>INTERNAL MEMBERSHIP & GOVERNANCE CONSOLE</span>
+                </div>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                  {activeClub.name} Internal Members & Meeting Governance
+                </h3>
+                <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginTop: '4px', maxWidth: '750px' }}>
+                  Induct verified Arya College students via their University Roll No or Email ID. Schedule internal team meetings with automated "Today's Meeting" member alerts, and publish comprehensive Minutes of Meeting (MoM) summaries for absent members.
+                </p>
+              </div>
+
+              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                <button
+                  onClick={() => setIsInductingMember(!isInductingMember)}
+                  className="btn-primary"
+                  style={{ fontSize: '0.85rem', padding: '10px 18px', display: 'flex', alignItems: 'center', gap: '8px' }}
+                >
+                  <UserPlus size={16} />
+                  <span>{isInductingMember ? 'Close Induction Form' : 'Induct Member by Roll / Email'}</span>
+                </button>
+
+                <button
+                  onClick={() => setShowScheduleMeetingModal(true)}
+                  className="btn-gold"
+                  style={{ fontSize: '0.85rem', padding: '10px 18px', display: 'flex', alignItems: 'center', gap: '8px' }}
+                >
+                  <Calendar size={16} />
+                  <span>Schedule Internal Meeting</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Quick Metrics Bar */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gap: '16px',
+              padding: '16px 20px',
+              background: 'rgba(255, 255, 255, 0.02)',
+              borderRadius: '14px',
+              border: '1px solid rgba(255, 255, 255, 0.06)',
+            }}>
+              <div>
+                <span style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Inducted Members
+                </span>
+                <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#38bdf8', fontFamily: 'var(--font-mono)' }}>
+                  {activeClubMembers.length} Students
+                </div>
+              </div>
+
+              <div>
+                <span style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Meetings Scheduled
+                </span>
+                <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fbbf24', fontFamily: 'var(--font-mono)' }}>
+                  {activeClubMeetings.filter(m => m.status === 'SCHEDULED').length} Active
+                </div>
+              </div>
+
+              <div>
+                <span style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  MoM Summaries Published
+                </span>
+                <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#34d399', fontFamily: 'var(--font-mono)' }}>
+                  {activeClubMeetings.filter(m => !!m.summary).length} Archived
+                </div>
+              </div>
+
+              <div>
+                <span style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Today's Meeting Notification
+                </span>
+                {(() => {
+                  const todayYMD = new Date().toISOString().split('T')[0];
+                  const hasToday = activeClubMeetings.some(m => m.meetingDateTime.split('T')[0] === todayYMD && m.status === 'SCHEDULED');
+                  return (
+                    <div style={{
+                      fontSize: '0.85rem',
+                      fontWeight: 700,
+                      color: hasToday ? '#fbbf24' : '#94a3b8',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      marginTop: '4px',
+                    }}>
+                      <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: hasToday ? '#f59e0b' : '#64748b', display: 'inline-block' }} />
+                      {hasToday ? "🚨 Meeting Today — Active Alert" : "No Meeting Today"}
+                    </div>
+                  );
+                })()}
+              </div>
+            </div>
+          </div>
+
+          {/* INDUCTION FORM (Collapsible or Open on Click) */}
+          {isInductingMember && (
+            <div className="glass-panel" style={{ padding: '28px', border: '1px solid rgba(245, 158, 11, 0.4)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <UserPlus size={20} color="#f59e0b" />
+                  <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                    Induct New Student into {activeClub.name}
+                  </h4>
+                </div>
+                <button
+                  onClick={() => setIsInductingMember(false)}
+                  style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <p style={{ color: '#94a3b8', fontSize: '0.82rem', marginBottom: '20px' }}>
+                Enter the student's University Roll Number (e.g. <code>22EACIT089</code>) or institutional email. Once inducted, the student gains private access to the internal meetings hub, meeting notifications, and MoM summaries.
+              </p>
+
+              <form onSubmit={handleInductMember} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                      Student Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Govind Jangid"
+                      value={newMemberName}
+                      onChange={e => setNewMemberName(e.target.value)}
+                      className="glass-input"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                      University Roll Number *
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. 22EACIT089"
+                      value={newMemberRoll}
+                      onChange={e => setNewMemberRoll(e.target.value.toUpperCase())}
+                      className="glass-input"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                      Institutional Email Address
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="e.g. govind.jangid@aryacollege.in"
+                      value={newMemberEmail}
+                      onChange={e => setNewMemberEmail(e.target.value)}
+                      className="glass-input"
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                      Club Role / Designation *
+                    </label>
+                    <select
+                      value={newMemberRole}
+                      onChange={e => setNewMemberRole(e.target.value)}
+                      className="glass-input"
+                    >
+                      <option value="Core Technical Coordinator">Core Technical Coordinator</option>
+                      <option value="Executive Lead">Executive Lead</option>
+                      <option value="Event Logistics Coordinator">Event Logistics Coordinator</option>
+                      <option value="UI/UX & Creative Head">UI/UX & Creative Head</option>
+                      <option value="Media & PR Coordinator">Media & PR Coordinator</option>
+                      <option value="Competitive Programming Lead">Competitive Programming Lead</option>
+                      <option value="Active Member">Active Member</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                      Academic Department
+                    </label>
+                    <select
+                      value={newMemberDept}
+                      onChange={e => setNewMemberDept(e.target.value)}
+                      className="glass-input"
+                    >
+                      <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+                      <option value="Artificial Intelligence & Data Science">Artificial Intelligence & Data Science</option>
+                      <option value="Information Technology">Information Technology</option>
+                      <option value="Electronics & Communication">Electronics & Communication</option>
+                      <option value="Electrical Engineering">Electrical Engineering</option>
+                      <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                      Year of Study
+                    </label>
+                    <select
+                      value={newMemberYear}
+                      onChange={e => setNewMemberYear(Number(e.target.value))}
+                      className="glass-input"
+                    >
+                      <option value={1}>1st Year (Fresher)</option>
+                      <option value={2}>2nd Year (Sophomore)</option>
+                      <option value={3}>3rd Year (Junior)</option>
+                      <option value={4}>4th Year (Senior Lead)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '6px' }}>
+                  <button
+                    type="button"
+                    onClick={() => setIsInductingMember(false)}
+                    className="btn-secondary"
+                    style={{ padding: '8px 16px', fontSize: '0.82rem' }}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn-gold"
+                    style={{ padding: '8px 22px', fontSize: '0.85rem' }}
+                  >
+                    + Induct Student to Club
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+
+          {/* TWO MAIN SECTIONS: ROSTER TABLE & MEETINGS SCHEDULER */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: '24px' }}>
+            {/* LEFT COLUMN: ACTIVE INDUCTED MEMBERS ROSTER */}
+            <div className="glass-panel" style={{ padding: '24px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
+                <div>
+                  <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                    Inducted Club Members ({activeClubMembers.length})
+                  </h4>
+                  <p style={{ color: '#94a3b8', fontSize: '0.78rem', marginTop: '2px' }}>
+                    Inducted via Roll No or Email. Authorized for private internal meetings & MoM.
+                  </p>
+                </div>
+
+                {/* Member Search */}
+                <div style={{ position: 'relative' }}>
+                  <Search size={14} color="#94a3b8" style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)' }} />
+                  <input
+                    type="text"
+                    value={memberSearchQuery}
+                    onChange={e => setMemberSearchQuery(e.target.value)}
+                    placeholder="Search roll, name, email..."
+                    className="glass-input"
+                    style={{ paddingLeft: '30px', fontSize: '0.78rem', width: '190px' }}
+                  />
+                </div>
+              </div>
+
+              {filteredClubMembers.length === 0 ? (
+                <div style={{ padding: '36px 16px', textAlign: 'center', color: '#94a3b8', background: 'rgba(255, 255, 255, 0.02)', borderRadius: '12px' }}>
+                  <Users size={32} color="#64748b" style={{ margin: '0 auto 8px', opacity: 0.6 }} />
+                  <p style={{ fontSize: '0.85rem' }}>No club members found matching your search.</p>
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxHeight: '560px', overflowY: 'auto', paddingRight: '4px' }}>
+                  {filteredClubMembers.map(member => (
+                    <div
+                      key={member.id}
+                      className="glass-card"
+                      style={{
+                        padding: '14px 16px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '12px',
+                        border: '1px solid rgba(255, 255, 255, 0.07)',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '10px',
+                          background: 'linear-gradient(135deg, #0ea5e9, #38bdf8)',
+                          color: '#041727',
+                          fontWeight: 800,
+                          fontSize: '1rem',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                        }}>
+                          {member.name.charAt(0)}
+                        </div>
+                        <div style={{ minWidth: 0 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                            <span style={{ fontWeight: 700, fontSize: '0.88rem', color: 'var(--text-primary)' }}>
+                              {member.name}
+                            </span>
+                            <span style={{
+                              fontFamily: 'var(--font-mono)',
+                              fontSize: '0.7rem',
+                              fontWeight: 700,
+                              color: '#fbbf24',
+                              background: 'rgba(245, 158, 11, 0.12)',
+                              padding: '1px 6px',
+                              borderRadius: '4px',
+                              border: '1px solid rgba(245, 158, 11, 0.25)',
+                            }}>
+                              {member.rollNo}
+                            </span>
+                          </div>
+                          <div style={{ fontSize: '0.75rem', color: '#06b6d4', fontWeight: 600, marginTop: '2px' }}>
+                            {member.clubRole}
+                          </div>
+                          <div style={{ fontSize: '0.7rem', color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            {member.email} • Yr {member.year} ({member.department})
+                          </div>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => handleRemoveMember(member.id, member.name)}
+                        title="Remove member from club"
+                        style={{
+                          background: 'rgba(239, 68, 68, 0.1)',
+                          border: '1px solid rgba(239, 68, 68, 0.25)',
+                          color: '#f87171',
+                          padding: '6px 8px',
+                          borderRadius: '6px',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          fontSize: '0.72rem',
+                          flexShrink: 0,
+                        }}
+                      >
+                        <Trash2 size={13} />
+                        <span>Remove</span>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* RIGHT COLUMN: INTERNAL MEETINGS & MOM (MINUTES OF MEETING) */}
+            <div className="glass-panel" style={{ padding: '24px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
+                <div>
+                  <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                    Internal Meetings & Minutes (MoM)
+                  </h4>
+                  <p style={{ color: '#94a3b8', fontSize: '0.78rem', marginTop: '2px' }}>
+                    Scheduled meetings notify members today. Concluded meetings host MoM summaries for absent members.
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => setShowScheduleMeetingModal(true)}
+                  className="btn-gold"
+                  style={{ padding: '6px 14px', fontSize: '0.78rem', display: 'flex', alignItems: 'center', gap: '6px' }}
+                >
+                  <Plus size={14} /> Schedule Meeting
+                </button>
+              </div>
+
+              {activeClubMeetings.length === 0 ? (
+                <div style={{ padding: '36px 16px', textAlign: 'center', color: '#94a3b8', background: 'rgba(255, 255, 255, 0.02)', borderRadius: '12px' }}>
+                  <Calendar size={32} color="#64748b" style={{ margin: '0 auto 8px', opacity: 0.6 }} />
+                  <p style={{ fontSize: '0.85rem', marginBottom: '12px' }}>No internal club meetings scheduled yet.</p>
+                  <button
+                    onClick={() => setShowScheduleMeetingModal(true)}
+                    className="btn-gold"
+                    style={{ fontSize: '0.78rem', padding: '6px 14px' }}
+                  >
+                    Schedule First Meeting
+                  </button>
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', maxHeight: '560px', overflowY: 'auto', paddingRight: '4px' }}>
+                  {activeClubMeetings.map(meeting => {
+                    const meetDate = new Date(meeting.meetingDateTime);
+                    const todayYMD = new Date().toISOString().split('T')[0];
+                    const isToday = meeting.meetingDateTime.split('T')[0] === todayYMD;
+
+                    return (
+                      <div
+                        key={meeting.id}
+                        className="glass-card"
+                        style={{
+                          padding: '16px',
+                          border: isToday ? '1px solid #f59e0b' : '1px solid rgba(255, 255, 255, 0.08)',
+                          background: isToday ? 'rgba(245, 158, 11, 0.05)' : 'rgba(15, 23, 42, 0.6)',
+                          borderRadius: '12px',
+                        }}
+                      >
+                        {/* Header & Badges */}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px', marginBottom: '8px' }}>
+                          <div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                              <h5 style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                                {meeting.title}
+                              </h5>
+                              {isToday && (
+                                <span style={{
+                                  fontSize: '0.68rem',
+                                  fontWeight: 800,
+                                  color: '#fbbf24',
+                                  background: 'rgba(245, 158, 11, 0.2)',
+                                  border: '1px solid #f59e0b',
+                                  padding: '1px 7px',
+                                  borderRadius: '10px',
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: '4px'
+                                }}>
+                                  <Bell size={10} /> TODAY'S MEETING ALERT
+                                </span>
+                              )}
+                              <span style={{
+                                fontSize: '0.68rem',
+                                fontWeight: 700,
+                                padding: '1px 6px',
+                                borderRadius: '4px',
+                                background: meeting.status === 'CONCLUDED' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(56, 189, 248, 0.15)',
+                                color: meeting.status === 'CONCLUDED' ? '#34d399' : '#38bdf8',
+                              }}>
+                                {meeting.status}
+                              </span>
+                            </div>
+
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.75rem', color: '#cbd5e1', marginTop: '6px', flexWrap: 'wrap' }}>
+                              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                <Clock size={12} color="#f59e0b" />
+                                {meetDate.toLocaleDateString('en-IN', { weekday: 'short', month: 'short', day: 'numeric' })} at {meetDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
+                              </span>
+
+                              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                {meeting.isOnline ? <Video size={12} color="#06b6d4" /> : <MapPin size={12} color="#10b981" />}
+                                {meeting.location}
+                              </span>
+                            </div>
+                          </div>
+
+                          <button
+                            onClick={() => {
+                              if (window.confirm(`Delete meeting record "${meeting.title}"?`)) {
+                                deleteClubMeeting(meeting.id);
+                                showNotification('Meeting record deleted.', 'success');
+                              }
+                            }}
+                            title="Delete meeting"
+                            style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', padding: '4px' }}
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+
+                        {/* Agenda */}
+                        <div style={{ fontSize: '0.78rem', color: '#94a3b8', lineHeight: 1.45, marginBottom: '12px' }}>
+                          <strong>Agenda:</strong> {meeting.agenda}
+                        </div>
+
+                        {/* Online Meet Link Button if available */}
+                        {meeting.isOnline && meeting.meetingLink && (
+                          <div style={{ marginBottom: '12px' }}>
+                            <a
+                              href={meeting.meetingLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '6px',
+                                padding: '5px 12px',
+                                borderRadius: '6px',
+                                background: 'rgba(6, 182, 212, 0.15)',
+                                border: '1px solid rgba(6, 182, 212, 0.3)',
+                                color: '#38bdf8',
+                                fontSize: '0.74rem',
+                                fontWeight: 700,
+                                textDecoration: 'none',
+                              }}
+                            >
+                              <Video size={12} />
+                              Join Google Meet Link
+                              <ExternalLink size={10} />
+                            </a>
+                          </div>
+                        )}
+
+                        {/* MoM Summary Box or MoM Write Button */}
+                        {meeting.summary ? (
+                          <div style={{
+                            padding: '12px',
+                            borderRadius: '8px',
+                            background: 'rgba(255, 255, 255, 0.03)',
+                            border: '1px dashed rgba(52, 211, 153, 0.4)',
+                            marginBottom: '8px',
+                          }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                              <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#34d399', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                <FileText size={12} /> Minutes of Meeting (MoM) Published
+                              </span>
+                              <span style={{ fontSize: '0.7rem', color: '#94a3b8' }}>
+                                {meeting.summary.attendanceCount} Attended
+                              </span>
+                            </div>
+
+                            <div style={{ fontSize: '0.72rem', color: '#cbd5e1', lineHeight: 1.4, marginBottom: '6px' }}>
+                              <strong>Decisions:</strong> {(Array.isArray(meeting.summary.decisionsFinalized) ? meeting.summary.decisionsFinalized.join(', ') : (meeting.summary.decisionsFinalized || '')).substring(0, 110)}...
+                            </div>
+
+                            <div style={{ fontSize: '0.7rem', color: '#a78bfa' }}>
+                              ✅ {meeting.summary.actionItems.length} Action Items assigned to members
+                            </div>
+
+                            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
+                              <button
+                                onClick={() => handleOpenMoMModal(meeting)}
+                                style={{
+                                  background: 'rgba(52, 211, 153, 0.15)',
+                                  border: '1px solid rgba(52, 211, 153, 0.3)',
+                                  color: '#34d399',
+                                  padding: '4px 10px',
+                                  borderRadius: '6px',
+                                  fontSize: '0.72rem',
+                                  fontWeight: 700,
+                                  cursor: 'pointer',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  gap: '4px',
+                                }}
+                              >
+                                <Edit3 size={11} /> Edit Full MoM Summary
+                              </button>
+                            </div>
+                          </div>
+                        ) : (
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '6px', borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}>
+                            <span style={{ fontSize: '0.72rem', color: '#94a3b8', fontStyle: 'italic' }}>
+                              MoM summary not published yet
+                            </span>
+                            <button
+                              onClick={() => handleOpenMoMModal(meeting)}
+                              className="btn-gold"
+                              style={{ padding: '5px 12px', fontSize: '0.74rem', display: 'flex', alignItems: 'center', gap: '5px' }}
+                            >
+                              <BookOpen size={12} /> Publish MoM (For Absent Members)
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
@@ -2425,6 +3213,350 @@ export const ClubAdminPage: React.FC = () => {
                 </button>
                 <button type="submit" className="btn-primary" style={{ padding: '10px 22px', fontSize: '0.85rem' }}>
                   Appoint Lead
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* SCHEDULE MEETING MODAL */}
+      {showScheduleMeetingModal && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0, 0, 0, 0.82)',
+          backdropFilter: 'blur(8px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+          padding: '20px',
+        }}>
+          <div className="glass-panel" style={{ maxWidth: '580px', width: '100%', padding: '32px', position: 'relative', border: '1px solid rgba(245, 158, 11, 0.4)' }}>
+            <button
+              onClick={() => setShowScheduleMeetingModal(false)}
+              style={{ position: 'absolute', top: '16px', right: '16px', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}
+            >
+              <X size={20} />
+            </button>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+              <Calendar size={22} color="#f59e0b" />
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                Schedule Internal Club Meeting
+              </h3>
+            </div>
+            <p style={{ color: '#94a3b8', fontSize: '0.82rem', marginBottom: '20px' }}>
+              Schedule a session for <strong>{activeClub.name}</strong> inducted members. On the scheduled date, all active members will receive an urgent notification alert.
+            </p>
+
+            <form onSubmit={handleScheduleMeeting} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                  Meeting Title / Purpose *
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. Sprints Kickoff & Flagship Hackathon Delegation"
+                  value={meetTitle}
+                  onChange={e => setMeetTitle(e.target.value)}
+                  className="glass-input"
+                  required
+                />
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                    Scheduled Date & Time *
+                  </label>
+                  <input
+                    type="datetime-local"
+                    value={meetDateTime}
+                    onChange={e => setMeetDateTime(e.target.value)}
+                    className="glass-input"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                    Mode of Meeting
+                  </label>
+                  <select
+                    value={meetLocationMode}
+                    onChange={e => setMeetLocationMode(e.target.value as any)}
+                    className="glass-input"
+                  >
+                    <option value="VENUE">Physical Campus Venue</option>
+                    <option value="ONLINE">Online (Google Meet)</option>
+                  </select>
+                </div>
+              </div>
+
+              {meetLocationMode === 'VENUE' ? (
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                    Campus Venue / Room
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Arya Computer Science Lab 2, Main Block"
+                    value={meetVenue}
+                    onChange={e => setMeetVenue(e.target.value)}
+                    className="glass-input"
+                  />
+                </div>
+              ) : (
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                    Google Meet / Video Call URL
+                  </label>
+                  <input
+                    type="url"
+                    placeholder="https://meet.google.com/ary-xxx-yyy"
+                    value={meetLink}
+                    onChange={e => setMeetLink(e.target.value)}
+                    className="glass-input"
+                  />
+                </div>
+              )}
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                  Meeting Agenda & Discussion Topics
+                </label>
+                <textarea
+                  rows={3}
+                  placeholder="Outline key agenda items so members can prepare beforehand..."
+                  value={meetAgenda}
+                  onChange={e => setMeetAgenda(e.target.value)}
+                  className="glass-input"
+                  style={{ resize: 'vertical' }}
+                />
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '10px' }}>
+                <button
+                  type="button"
+                  onClick={() => setShowScheduleMeetingModal(false)}
+                  className="btn-secondary"
+                  style={{ padding: '8px 16px', fontSize: '0.82rem' }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn-gold"
+                  style={{ padding: '8px 22px', fontSize: '0.85rem' }}
+                >
+                  Schedule & Notify Members
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* MINUTES OF MEETING (MoM) & SUMMARY MODAL */}
+      {showMoMModal && selectedMeetingForMoM && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0, 0, 0, 0.85)',
+          backdropFilter: 'blur(8px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+          padding: '20px',
+        }}>
+          <div className="glass-panel" style={{ maxWidth: '680px', width: '100%', maxHeight: '90vh', overflowY: 'auto', padding: '32px', position: 'relative', border: '1px solid rgba(52, 211, 153, 0.4)' }}>
+            <button
+              onClick={() => {
+                setShowMoMModal(false);
+                setSelectedMeetingForMoM(null);
+              }}
+              style={{ position: 'absolute', top: '16px', right: '16px', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}
+            >
+              <X size={20} />
+            </button>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+              <FileText size={24} color="#34d399" />
+              <div>
+                <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                  Meeting Summary & Minutes of Meeting (MoM)
+                </h3>
+                <span style={{ fontSize: '0.8rem', color: '#38bdf8' }}>
+                  {selectedMeetingForMoM.title}
+                </span>
+              </div>
+            </div>
+            <p style={{ color: '#94a3b8', fontSize: '0.82rem', marginBottom: '20px' }}>
+              Record key discussions, finalized decisions, and assigned action items. Inducted members who missed or were absent from this session can read this summary to stay synchronized.
+            </p>
+
+            <form onSubmit={handleSaveMoM} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                  Total Attendance Count (Members Present)
+                </label>
+                <input
+                  type="number"
+                  min={1}
+                  max={activeClubMembers.length || 50}
+                  value={momAttendanceCount}
+                  onChange={e => setMomAttendanceCount(Number(e.target.value))}
+                  className="glass-input"
+                  style={{ width: '140px' }}
+                  required
+                />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                  📌 Key Discussion Points
+                </label>
+                <textarea
+                  rows={4}
+                  placeholder="Detail the discussion points covered during the meeting..."
+                  value={momKeyDiscussions}
+                  onChange={e => setMomKeyDiscussions(e.target.value)}
+                  className="glass-input"
+                  style={{ resize: 'vertical' }}
+                  required
+                />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                  ⚖️ Final Decisions Agreed Upon
+                </label>
+                <textarea
+                  rows={3}
+                  placeholder="What resolutions or consensus were finalized? e.g. Budgets, timelines, dates..."
+                  value={momDecisions}
+                  onChange={e => setMomDecisions(e.target.value)}
+                  className="glass-input"
+                  style={{ resize: 'vertical' }}
+                  required
+                />
+              </div>
+
+              {/* ACTION ITEMS / TASK ASSIGNMENTS */}
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <label style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600 }}>
+                    ✅ Assigned Action Items & Tasks ({momActionItems.length})
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMomActionItems([
+                        ...momActionItems,
+                        { id: `act_${Date.now()}`, task: '', assignee: '', dueDate: '2026-10-20', completed: false }
+                      ]);
+                    }}
+                    style={{
+                      background: 'rgba(52, 211, 153, 0.15)',
+                      border: '1px solid rgba(52, 211, 153, 0.3)',
+                      color: '#34d399',
+                      padding: '2px 8px',
+                      borderRadius: '4px',
+                      fontSize: '0.72rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    + Add Task Row
+                  </button>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {momActionItems.map((item, idx) => (
+                    <div key={item.id} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr auto', gap: '8px', alignItems: 'center' }}>
+                      <input
+                        type="text"
+                        placeholder="Task description..."
+                        value={item.task}
+                        onChange={e => {
+                          const updated = [...momActionItems];
+                          updated[idx].task = e.target.value;
+                          setMomActionItems(updated);
+                        }}
+                        className="glass-input"
+                        style={{ fontSize: '0.78rem', padding: '6px 10px' }}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Assignee (Roll/Name)"
+                        value={item.assignee}
+                        onChange={e => {
+                          const updated = [...momActionItems];
+                          updated[idx].assignee = e.target.value;
+                          setMomActionItems(updated);
+                        }}
+                        className="glass-input"
+                        style={{ fontSize: '0.78rem', padding: '6px 10px' }}
+                      />
+                      <input
+                        type="date"
+                        value={item.dueDate}
+                        onChange={e => {
+                          const updated = [...momActionItems];
+                          updated[idx].dueDate = e.target.value;
+                          setMomActionItems(updated);
+                        }}
+                        className="glass-input"
+                        style={{ fontSize: '0.78rem', padding: '6px 10px' }}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setMomActionItems(momActionItems.filter((_, i) => i !== idx));
+                        }}
+                        style={{ background: 'none', border: 'none', color: '#f87171', cursor: 'pointer', padding: '4px' }}
+                      >
+                        <Trash2 size={14} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, marginBottom: '4px' }}>
+                  Official MoM Document / Drive Recording Link (Optional)
+                </label>
+                <input
+                  type="url"
+                  placeholder="https://drive.google.com/file/d/..."
+                  value={momDocLink}
+                  onChange={e => setMomDocLink(e.target.value)}
+                  className="glass-input"
+                />
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '10px' }}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowMoMModal(false);
+                    setSelectedMeetingForMoM(null);
+                  }}
+                  className="btn-secondary"
+                  style={{ padding: '8px 16px', fontSize: '0.82rem' }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn-gold"
+                  style={{ padding: '8px 22px', fontSize: '0.85rem' }}
+                >
+                  Publish MoM to Club Members
                 </button>
               </div>
             </form>
