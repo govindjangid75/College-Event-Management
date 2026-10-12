@@ -133,7 +133,7 @@ export const CampusConciergeChat: React.FC = () => {
     <>
       {/* Floating Chat Launcher Button */}
       {!isOpen && (
-        <div style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 1000 }}>
+        <div style={{ position: 'fixed', bottom: 'clamp(14px, 3vh, 24px)', right: 'clamp(14px, 3vw, 24px)', zIndex: 1000 }}>
           <button
             onClick={() => {
               setIsOpen(true);
@@ -145,7 +145,7 @@ export const CampusConciergeChat: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '12px',
-              padding: '12px 20px',
+              padding: '10px 18px',
               borderRadius: '999px',
               background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%)',
               color: '#ffffff',
@@ -182,10 +182,10 @@ export const CampusConciergeChat: React.FC = () => {
           className="sphere-ai-chat-modal"
           style={{
             position: 'fixed',
-            bottom: '24px',
-            right: '24px',
+            bottom: 'clamp(12px, 3vh, 24px)',
+            right: 'clamp(12px, 3vw, 24px)',
             width: '410px',
-            maxWidth: 'calc(100vw - 32px)',
+            maxWidth: 'calc(100vw - 24px)',
             height: isMinimized ? '56px' : '580px',
             maxHeight: 'calc(100vh - 48px)',
             zIndex: 1001,

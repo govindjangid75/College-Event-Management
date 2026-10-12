@@ -1036,6 +1036,8 @@ export const ClubAdminPage: React.FC = () => {
                 fontSize: '0.85rem',
                 cursor: 'pointer',
                 transition: 'all 0.15s',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
               }}
             >
               <Icon size={16} />

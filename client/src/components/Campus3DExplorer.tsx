@@ -419,6 +419,29 @@ export const Campus3DExplorer: React.FC = () => {
       }
     };
 
+    // Touch Interaction: Drag to Rotate Orbit on Mobile/Tablets
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        isDragging.current = true;
+        prevMousePos.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!isDragging.current || e.touches.length !== 1) return;
+      const dx = e.touches[0].clientX - prevMousePos.current.x;
+      const dy = e.touches[0].clientY - prevMousePos.current.y;
+      prevMousePos.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+
+      spherical.current.theta -= dx * 0.006;
+      spherical.current.phi = Math.max(0.1, Math.min(Math.PI / 2.2, spherical.current.phi - dy * 0.006));
+      updateCameraPosition();
+    };
+
+    const onTouchEnd = () => {
+      isDragging.current = false;
+    };
+
     // Resize Handler
     const handleResize = () => {
       if (!container || !renderer || !camera) return;
@@ -432,6 +455,9 @@ export const Campus3DExplorer: React.FC = () => {
     window.addEventListener('mouseup', onMouseUp);
     container.addEventListener('wheel', onWheel, { passive: false });
     container.addEventListener('click', onCanvasClick);
+    container.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+    window.addEventListener('touchend', onTouchEnd);
     window.addEventListener('resize', handleResize);
 
     return () => {
@@ -441,6 +467,9 @@ export const Campus3DExplorer: React.FC = () => {
       window.removeEventListener('mouseup', onMouseUp);
       container.removeEventListener('wheel', onWheel);
       container.removeEventListener('click', onCanvasClick);
+      container.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
       window.removeEventListener('resize', handleResize);
       renderer.dispose();
       container.innerHTML = '';
@@ -539,8 +568,31 @@ export const Campus3DExplorer: React.FC = () => {
       </div>
 
       {/* Preset Landmark Jump Buttons (Bottom-Left Pills) */}
-      <div className="campus-3d-presets" style={{ position: 'absolute', bottom: '16px', left: '16px', zIndex: 10, display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px', maxWidth: '75%' }}>
-        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94a3b8', padding: '6px 12px', background: 'rgba(11, 19, 43, 0.85)', backdropFilter: 'blur(8px)', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+      <div className="campus-3d-presets" style={{
+        position: 'absolute',
+        bottom: '14px',
+        left: '14px',
+        right: '14px',
+        zIndex: 10,
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        overflowX: 'auto',
+        WebkitOverflowScrolling: 'touch',
+        paddingBottom: '4px'
+      }}>
+        <span style={{
+          fontSize: '0.72rem',
+          fontWeight: 700,
+          color: '#94a3b8',
+          padding: '6px 10px',
+          background: 'rgba(11, 19, 43, 0.85)',
+          backdropFilter: 'blur(8px)',
+          borderRadius: '8px',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          whiteSpace: 'nowrap',
+          flexShrink: 0
+        }}>
           Focus Landmark:
         </span>
         {VENUE_LOCATIONS.map((loc) => {
@@ -551,18 +603,20 @@ export const Campus3DExplorer: React.FC = () => {
               onClick={() => focusOnVenue(loc)}
               className="campus-3d-pill"
               style={{
-                padding: '6px 14px',
+                padding: '6px 12px',
                 borderRadius: '20px',
                 background: isSelected ? 'rgba(6, 182, 212, 0.3)' : 'rgba(11, 19, 43, 0.85)',
                 border: isSelected ? '1px solid #06b6d4' : '1px solid rgba(255, 255, 255, 0.12)',
                 color: isSelected ? '#38bdf8' : '#e2e8f0',
-                fontSize: '0.78rem',
+                fontSize: '0.75rem',
                 fontWeight: 600,
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '6px',
                 backdropFilter: 'blur(10px)',
+                whiteSpace: 'nowrap',
+                flexShrink: 0
               }}
             >
               <span
@@ -583,7 +637,8 @@ export const Campus3DExplorer: React.FC = () => {
       {/* 3D WebGL Canvas */}
       <div
         ref={mountRef}
-        style={{ width: '100%', height: '560px', cursor: 'grab', outline: 'none', display: 'block' }}
+        className="campus-3d-canvas-wrap"
+        style={{ width: '100%', height: 'clamp(360px, 50vh, 560px)', minHeight: '360px', cursor: 'grab', outline: 'none', display: 'block' }}
       />
 
       {/* Interactive Venue Inspection Drawer (When Clicked) */}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useClub } from '../context/ClubContext';
@@ -20,7 +20,9 @@ import {
   Sun,
   Moon,
   Bell,
-  Clock
+  Clock,
+  Menu,
+  X
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
@@ -29,8 +31,15 @@ export const Navbar: React.FC = () => {
   const { isDark, toggleTheme } = useTheme();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [meetingAlertOpen, setMeetingAlertOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setDropdownOpen(false);
+    setMeetingAlertOpen(false);
+  }, [location.pathname]);
 
   const userRoll = currentUser?.studentProfile?.rollNo;
   const userEmail = currentUser?.email;
@@ -123,8 +132,8 @@ export const Navbar: React.FC = () => {
           </div>
         </Link>
 
-        {/* Navigation Links */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        {/* Navigation Links (Desktop) */}
+        <div className="navbar-desktop-links" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <Link
             to="/"
             style={{
@@ -601,8 +610,376 @@ export const Navbar: React.FC = () => {
               </Link>
             </div>
           )}
+
+          {/* Mobile Hamburger Menu Toggle Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="navbar-mobile-toggle"
+            aria-label="Toggle Navigation Menu"
+            style={{
+              width: '38px',
+              height: '38px',
+              background: mobileMenuOpen ? (isDark ? '#292925' : '#e6e0d3') : 'transparent',
+              border: `1px solid ${isDark ? '#393934' : 'var(--ink)'}`,
+              placeItems: 'center',
+              cursor: 'pointer',
+              color: isDark ? 'var(--acid)' : 'var(--ink)',
+              transition: 'all 0.2s',
+            }}
+          >
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Navigation Drawer */}
+      {mobileMenuOpen && (
+        <div
+          className="navbar-mobile-drawer"
+          style={{
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            right: 0,
+            background: isDark ? 'rgba(17, 17, 15, 0.98)' : 'rgba(255, 255, 255, 0.98)',
+            backdropFilter: 'blur(20px)',
+            borderBottom: `2px solid ${isDark ? 'var(--acid)' : 'var(--ink)'}`,
+            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5)',
+            padding: '16px 5vw 24px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            maxHeight: 'calc(100vh - 120px)',
+            overflowY: 'auto',
+            zIndex: 99,
+          }}
+        >
+          {/* User profile card in mobile drawer */}
+          {isAuthenticated && currentUser ? (
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '12px 14px',
+              background: isDark ? '#191917' : 'var(--paper2)',
+              border: `1px solid ${isDark ? '#353531' : 'var(--line)'}`,
+              borderRadius: '8px',
+              marginBottom: '4px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <img
+                  src={(!currentUser.avatarUrl || currentUser.avatarUrl.includes('dicebear')) ? '/avatars/govind.jpg' : currentUser.avatarUrl}
+                  alt={currentUser.name}
+                  style={{ width: '38px', height: '38px', objectFit: 'cover', border: `1px solid ${isDark ? '#353531' : 'var(--ink)'}` }}
+                />
+                <div>
+                  <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-primary)' }}>{currentUser.name}</div>
+                  <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: 'var(--muted)' }}>
+                    {currentUser.role === 'STUDENT' && (currentUser.studentProfile?.rollNo || 'Student')}
+                    {currentUser.role === 'CLUB_ADMIN' && 'Club Lead'}
+                    {currentUser.role === 'SUPER_ADMIN' && 'Dean Office'}
+                  </div>
+                </div>
+              </div>
+              {isStudent && currentUser.studentProfile && (
+                <div style={{
+                  fontSize: '10px',
+                  fontFamily: 'var(--font-mono)',
+                  fontWeight: 800,
+                  color: 'var(--acid)',
+                  background: 'rgba(16, 185, 129, 0.1)',
+                  padding: '3px 8px',
+                  borderRadius: '12px',
+                  border: '1px solid rgba(16, 185, 129, 0.3)'
+                }}>
+                  {currentUser.studentProfile.activityPointsTotal} PTS
+                </div>
+              )}
+            </div>
+          ) : (
+            <div style={{ display: 'flex', gap: '10px', marginBottom: '8px' }}>
+              <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="btn ghost" style={{ flex: 1, textAlign: 'center' }}>
+                Sign In
+              </Link>
+              <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="btn acid" style={{ flex: 1, textAlign: 'center' }}>
+                Register
+              </Link>
+            </div>
+          )}
+
+          {/* Today's Meeting Alert in Mobile Drawer */}
+          {todayMeetings.length > 0 && (
+            <div style={{
+              background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.15))',
+              border: '1px solid #f59e0b',
+              padding: '12px',
+              borderRadius: '8px',
+              marginBottom: '4px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#fbbf24', fontWeight: 800, fontSize: '0.8rem' }}>
+                <Bell size={14} /> {todayMeetings.length} Meeting Today for You
+              </div>
+              <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-primary)', marginTop: '4px' }}>
+                {todayMeetings[0].title} ({todayMeetings[0].clubName})
+              </div>
+              <Link
+                to={`/clubs/${todayMeetings[0].clubSlug || 'arya_cipher'}`}
+                onClick={() => setMobileMenuOpen(false)}
+                style={{ fontSize: '0.74rem', color: '#38bdf8', fontWeight: 700, display: 'inline-block', marginTop: '6px', textDecoration: 'none' }}
+              >
+                Open Club Hub & MoM →
+              </Link>
+            </div>
+          )}
+
+          {/* Mobile Links List */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <Link
+              to="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mobile-nav-item"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                padding: '10px 14px',
+                fontSize: '12px',
+                fontWeight: 800,
+                fontFamily: 'var(--font-mono)',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                color: isActive('/') ? (isDark ? 'var(--acid)' : 'var(--ink)') : 'var(--text-primary)',
+                background: isActive('/') ? (isDark ? '#232320' : 'var(--paper2)') : 'transparent',
+                borderLeft: isActive('/') ? `4px solid ${isDark ? 'var(--acid)' : 'var(--ink)'}` : '4px solid transparent',
+              }}
+            >
+              <Compass size={16} />
+              <span>Explore Campus</span>
+            </Link>
+
+            <Link
+              to="/events"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mobile-nav-item"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                padding: '10px 14px',
+                fontSize: '12px',
+                fontWeight: 800,
+                fontFamily: 'var(--font-mono)',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                color: isActive('/events') ? (isDark ? 'var(--acid)' : 'var(--ink)') : 'var(--text-primary)',
+                background: isActive('/events') ? (isDark ? '#232320' : 'var(--paper2)') : 'transparent',
+                borderLeft: isActive('/events') ? `4px solid ${isDark ? 'var(--acid)' : 'var(--ink)'}` : '4px solid transparent',
+              }}
+            >
+              <Calendar size={16} />
+              <span>Events & Schedulers</span>
+            </Link>
+
+            <Link
+              to="/clubs"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mobile-nav-item"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                padding: '10px 14px',
+                fontSize: '12px',
+                fontWeight: 800,
+                fontFamily: 'var(--font-mono)',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                color: isActive('/clubs') ? (isDark ? 'var(--acid)' : 'var(--ink)') : 'var(--text-primary)',
+                background: isActive('/clubs') ? (isDark ? '#232320' : 'var(--paper2)') : 'transparent',
+                borderLeft: isActive('/clubs') ? `4px solid ${isDark ? 'var(--acid)' : 'var(--ink)'}` : '4px solid transparent',
+              }}
+            >
+              <Users size={16} />
+              <span>15 Arya Societies</span>
+            </Link>
+
+            {isStudent && (
+              <>
+                <Link
+                  to="/my-passes"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="mobile-nav-item"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '10px 14px',
+                    fontSize: '12px',
+                    fontWeight: 800,
+                    fontFamily: 'var(--font-mono)',
+                    textTransform: 'uppercase',
+                    textDecoration: 'none',
+                    color: isActive('/my-passes') ? '#38bdf8' : 'var(--text-primary)',
+                    background: isActive('/my-passes') ? 'rgba(6, 182, 212, 0.1)' : 'transparent',
+                    borderLeft: isActive('/my-passes') ? '4px solid #38bdf8' : '4px solid transparent',
+                  }}
+                >
+                  <Ticket size={16} />
+                  <span>My Rolling QR Passes</span>
+                </Link>
+
+                <Link
+                  to="/my-certificates"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="mobile-nav-item"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '10px 14px',
+                    fontSize: '12px',
+                    fontWeight: 800,
+                    fontFamily: 'var(--font-mono)',
+                    textTransform: 'uppercase',
+                    textDecoration: 'none',
+                    color: isActive('/my-certificates') ? '#38bdf8' : 'var(--text-primary)',
+                    background: isActive('/my-certificates') ? 'rgba(6, 182, 212, 0.1)' : 'transparent',
+                    borderLeft: isActive('/my-certificates') ? '4px solid #38bdf8' : '4px solid transparent',
+                  }}
+                >
+                  <Award size={16} />
+                  <span>Verified Certificates</span>
+                </Link>
+
+                <Link
+                  to="/profile"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="mobile-nav-item"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    padding: '10px 14px',
+                    fontSize: '12px',
+                    fontWeight: 800,
+                    fontFamily: 'var(--font-mono)',
+                    textTransform: 'uppercase',
+                    textDecoration: 'none',
+                    color: isActive('/profile') ? '#38bdf8' : 'var(--text-primary)',
+                    background: isActive('/profile') ? 'rgba(6, 182, 212, 0.1)' : 'transparent',
+                    borderLeft: isActive('/profile') ? '4px solid #38bdf8' : '4px solid transparent',
+                  }}
+                >
+                  <UserCircle size={16} />
+                  <span>AICTE Transcript & Profile</span>
+                </Link>
+              </>
+            )}
+
+            {isClubAdmin && (
+              <Link
+                to="/club-admin"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mobile-nav-item"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  padding: '10px 14px',
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  fontFamily: 'var(--font-mono)',
+                  textTransform: 'uppercase',
+                  textDecoration: 'none',
+                  color: '#fbbf24',
+                  background: 'rgba(245, 158, 11, 0.12)',
+                  borderLeft: '4px solid #f59e0b',
+                }}
+              >
+                <LayoutDashboard size={16} />
+                <span>Club Command & Scanner</span>
+              </Link>
+            )}
+
+            {isSuperAdmin && (
+              <Link
+                to="/admin"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mobile-nav-item"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  padding: '10px 14px',
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  fontFamily: 'var(--font-mono)',
+                  textTransform: 'uppercase',
+                  textDecoration: 'none',
+                  color: '#c084fc',
+                  background: 'rgba(139, 92, 246, 0.12)',
+                  borderLeft: '4px solid #8b5cf6',
+                }}
+              >
+                <ShieldCheck size={16} />
+                <span>Dean Academic Directorate</span>
+              </Link>
+            )}
+          </div>
+
+          {/* Theme & Sign Out Footer in Mobile Drawer */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingTop: '12px',
+            borderTop: `1px solid ${isDark ? '#292926' : 'var(--line)'}`,
+            marginTop: '6px'
+          }}>
+            <button
+              onClick={toggleTheme}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                background: 'transparent',
+                border: `1px solid ${isDark ? '#393934' : 'var(--ink)'}`,
+                padding: '6px 12px',
+                fontSize: '11px',
+                fontFamily: 'var(--font-mono)',
+                fontWeight: 700,
+                color: isDark ? 'var(--acid)' : 'var(--ink)',
+                cursor: 'pointer',
+              }}
+            >
+              {isDark ? <Sun size={14} /> : <Moon size={14} />}
+              <span>{isDark ? 'Day Paper' : 'Night Obsidian'}</span>
+            </button>
+
+            {isAuthenticated && (
+              <button
+                onClick={handleLogout}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'var(--red)',
+                  fontSize: '11px',
+                  fontFamily: 'var(--font-mono)',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                }}
+              >
+                <LogOut size={14} />
+                <span>Sign Out</span>
+              </button>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
+
